@@ -1,0 +1,16 @@
+{% load static core_extras %}
+<article>
+  <span class="image">
+    {% with primary=movie.images.first %}
+      {% if primary and primary.image %}
+        <img src="{{ primary.image.url }}" alt="{{ primary.alt_text }}" loading="lazy" />
+      {% else %}
+        <img src="{% static 'img/placeholder.svg' %}" alt="No image" loading="lazy" />
+      {% endif %}
+    {% endwith %}
+  </span>
+  <header class="major">
+    <h3><a href="{% url 'movies:detail' movie.slug %}" class="link">{{ movie.title }}</a></h3>
+    <p>{{ movie.release_year }} ? {{ movie.duration_minutes }} min ? {{ movie.average_rating|rating_badge }}</p>
+  </header>
+</article>

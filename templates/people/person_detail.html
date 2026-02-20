@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}{{ person.full_name }} | CineVerse{% endblock %}
+{% block content %}
+<section><div class="inner"><header class="major"><h1>{{ person.full_name }}</h1></header><p>{{ person.bio }}</p><ul>{% for credit in person.credits.all %}<li>{{ credit.role }} - <a href="{% url 'movies:detail' credit.movie.slug %}">{{ credit.movie.title }}</a></li>{% empty %}<li>No credits.</li>{% endfor %}</ul></div></section>
+{% endblock %}

@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}Genres | CineVerse{% endblock %}
+{% block content %}
+<section><div class="inner"><header class="major"><h1>Genres</h1></header><div class="genre-grid">{% for genre in genres %}<a class="button" href="{% url 'genres:detail' genre.slug %}">{{ genre.name }}</a>{% empty %}<p>No genres.</p>{% endfor %}</div></div></section>
+{% endblock %}

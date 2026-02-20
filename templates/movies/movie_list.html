@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Movies | CineVerse{% endblock %}
+{% block content %}
+<section>
+  <div class="inner">
+    <header class="major"><h1>Movie Catalog</h1></header>
+    <form id="movie-filter-form" method="get">
+      <div class="fields">
+        <div class="field"><label for="q">Search</label><input id="q" name="q" value="{{ filters.q }}" type="text" placeholder="Title or synopsis" /></div>
+        <div class="field"><label for="year">Year</label><input id="year" name="year" value="{{ filters.year }}" type="number" /></div>
+        <div class="field"><label for="genre">Genre slug</label><input id="genre" name="genre" value="{{ filters.genre }}" type="text" /></div>
+        <div class="field"><label for="ordering">Ordering</label>
+          <select id="ordering" name="ordering">
+            <option value="-release_year" {% if filters.ordering == '-release_year' %}selected{% endif %}>Newest</option>
+            <option value="release_year" {% if filters.ordering == 'release_year' %}selected{% endif %}>Oldest</option>
+            <option value="title" {% if filters.ordering == 'title' %}selected{% endif %}>Title A-Z</option>
+          </select>
+        </div>
+      </div>
+      <ul class="actions"><li><button class="button primary" type="submit">Apply</button></li></ul>
+    </form>
+  </div>
+</section>
+<section class="tiles">
+  {% for movie in page_obj %}
+    {% include 'includes/movie_card.html' with movie=movie %}
+  {% empty %}
+    <article><header class="major"><h3>No movies found</h3></header></article>
+  {% endfor %}
+</section>
+{% include 'includes/pagination.html' %}
+{% endblock %}

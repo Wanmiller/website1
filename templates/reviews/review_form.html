@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}Review Form | CineVerse{% endblock %}
+{% block content %}
+<section><div class="inner"><header class="major"><h1>Create Review</h1></header><form method="post">{% csrf_token %}{{ form.as_p }}<ul class="actions"><li><button class="button primary" type="submit">Save</button></li></ul></form></div></section>
+{% endblock %}

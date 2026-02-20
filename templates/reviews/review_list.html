@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}Reviews | CineVerse{% endblock %}
+{% block content %}
+<section><div class="inner"><header class="major"><h1>Reviews</h1></header><ul class="actions"><li><a class="button primary" href="{% url 'reviews:create' %}">Write Review</a></li></ul>{% for review in reviews %}<div class="box"><h3>{{ review.title }}</h3><p>{{ review.body }}</p><p>{{ review.rating }}/5 for {{ review.movie.title }}</p></div>{% empty %}<p>No reviews yet.</p>{% endfor %}</div></section>
+{% endblock %}

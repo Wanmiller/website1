@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard | CineVerse{% endblock %}
+{% block content %}
+<section><div class="inner"><header class="major"><h1>Dashboard</h1></header><div class="stats-grid"><div class="box"><h3>Total Movies</h3><p>{{ movies_total }}</p></div><div class="box"><h3>Total Reviews</h3><p>{{ reviews_total }}</p></div></div><h3>Top Genres</h3><ul>{% for g in top_genres %}<li>{{ g.genres__name|default:'No Genre' }} - {{ g.total }}</li>{% empty %}<li>No data.</li>{% endfor %}</ul></div></section>
+{% endblock %}

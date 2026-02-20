@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}Stats | CineVerse{% endblock %}
+{% block content %}
+<section><div class="inner"><header class="major"><h1>Genre Statistics</h1></header><ul>{% for item in stats %}<li>{{ item.genres__name|default:'No Genre' }}: {{ item.total }}</li>{% empty %}<li>No stats yet</li>{% endfor %}</ul></div></section>
+{% endblock %}

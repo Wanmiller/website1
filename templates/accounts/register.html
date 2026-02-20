@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}Register | CineVerse{% endblock %}
+{% block content %}
+<section><div class="inner"><header class="major"><h1>Create Account</h1></header><form method="post">{% csrf_token %}<div class="fields">{% include 'includes/form_fields.html' with form=form %}</div><ul class="actions"><li><button class="button primary" type="submit">Register</button></li></ul></form></div></section>
+{% endblock %}

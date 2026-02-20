@@ -1,0 +1,9 @@
+{% if messages %}
+<section class="flash-wrap">
+  <div class="inner">
+    {% for message in messages %}
+      <div class="box flash {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
