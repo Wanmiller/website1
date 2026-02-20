@@ -1,27 +1,25 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block title %}Profile | CineVerse{% endblock %}
 {% block content %}
-<section>
-  <div class="inner">
-    <header class="major"><h1>Profile</h1></header>
-    <div class="box profile-box">
-      <div class="profile-avatar-wrap">
-        {% if profile_obj.avatar %}
-          <img class="profile-avatar" src="{{ profile_obj.avatar.url }}" alt="Profile avatar">
-        {% else %}
-          <img class="profile-avatar" src="{% static 'img/placeholder.svg' %}" alt="No avatar yet">
-        {% endif %}
-      </div>
-      <p><strong>Username:</strong> {{ request.user.username }}</p>
-      <p><strong>Name:</strong> {{ request.user.first_name }} {{ request.user.last_name }}</p>
-      <p><strong>Display name:</strong> {{ profile_obj.display_name|default:'-' }}</p>
-      <p><strong>Email:</strong> {{ request.user.email }}</p>
-      <ul class="actions">
-        <li><a class="button primary" href="{% url 'accounts:profile_edit' %}">Edit Profile</a></li>
-        <li><a class="button" href="{% url 'accounts:password_change' %}">Change Password</a></li>
-      </ul>
+<div class="cv-section">
+  <header class="style1"><h2>Profile</h2></header>
+  <div class="box profile-box">
+    <div class="profile-avatar-wrap">
+      {% if profile_obj.avatar %}
+        <img class="profile-avatar" src="{{ profile_obj.avatar.url }}" alt="Profile avatar">
+      {% else %}
+        <img class="profile-avatar" src="{% static 'img/placeholder.svg' %}" alt="No avatar yet">
+      {% endif %}
     </div>
+    <p><strong>Username:</strong> {{ request.user.username }}</p>
+    <p><strong>Name:</strong> {{ request.user.first_name }} {{ request.user.last_name }}</p>
+    <p><strong>Display name:</strong> {{ profile_obj.display_name|default:'-' }}</p>
+    <p><strong>Email:</strong> {{ request.user.email }}</p>
+    <ul class="actions">
+      <li><a class="button style1" href="{% url 'accounts:profile_edit' %}">Edit Profile</a></li>
+      <li><a class="button style2" href="{% url 'accounts:password_change' %}">Change Password</a></li>
+    </ul>
   </div>
-</section>
+</div>
 {% endblock %}

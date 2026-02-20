@@ -1,39 +1,35 @@
 {% extends 'base.html' %}
 {% block title %}Home | CineVerse{% endblock %}
-{% block header_class %}alt{% endblock %}
-{% block banner %}
-<section id="banner" class="major">
-  <div class="inner">
-    <header class="major">
-      <h1>CineVerse</h1>
-    </header>
-    <div class="content">
-      <p>Discover, review and save your favorite movies.</p>
-      <ul class="actions">
-        <li><a href="#featured" class="button next scrolly">Explore Featured</a></li>
-      </ul>
-    </div>
-  </div>
-</section>
-{% endblock %}
 {% block content %}
-<section id="featured" class="tiles">
-  {% for movie in featured_movies %}
-    {% include 'includes/movie_card.html' with movie=movie %}
-  {% empty %}
-    <article><header class="major"><h3>No featured movies yet</h3></header></article>
-  {% endfor %}
-</section>
-<section>
-  <div class="inner">
-    <header class="major"><h2>Latest Releases</h2></header>
-    <div class="latest-grid">
-      {% for movie in latest_movies %}
-        <div class="box"><h3><a href="{% url 'movies:detail' movie.slug %}">{{ movie.title }}</a></h3><p>{{ movie.release_year }}</p></div>
-      {% empty %}
-        <p>No movies added.</p>
-      {% endfor %}
-    </div>
+<div class="cv-section">
+  <header class="style1">
+    <h2>Discover, review, and save your favorite movies</h2>
+    <p>Explore featured titles and latest releases on CineVerse.</p>
+  </header>
+</div>
+
+<div class="cv-section">
+  <h2>Featured</h2>
+  <div class="cv-grid">
+    {% for movie in featured_movies %}
+      {% include 'includes/movie_card.html' with movie=movie %}
+    {% empty %}
+      <p>No featured movies yet.</p>
+    {% endfor %}
   </div>
-</section>
+</div>
+
+<div class="cv-section">
+  <h2>Latest Releases</h2>
+  <div class="cv-grid">
+    {% for movie in latest_movies %}
+      <div class="box">
+        <h3><a href="{% url 'movies:detail' movie.slug %}">{{ movie.title }}</a></h3>
+        <p>{{ movie.release_year }}</p>
+      </div>
+    {% empty %}
+      <p>No movies added.</p>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}

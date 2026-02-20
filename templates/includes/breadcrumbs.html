@@ -1,10 +1,8 @@
 {% if items %}
-<section class="crumbs">
-  <div class="inner">
-    {% for item in items %}
-      {% if item.url %}<a href="{{ item.url }}">{{ item.label }}</a>{% else %}<span>{{ item.label }}</span>{% endif %}
-      {% if not forloop.last %} / {% endif %}
-    {% endfor %}
-  </div>
-</section>
+<div class="crumbs">
+  {% for item in items %}
+    {% if item.url %}<a href="{{ item.url }}">{{ item.label }}</a>{% else %}<span>{{ item.label }}</span>{% endif %}
+    {% if not forloop.last %} / {% endif %}
+  {% endfor %}
+</div>
 {% endif %}

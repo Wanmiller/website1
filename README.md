@@ -112,15 +112,15 @@ isort .
 Project must be online and available by **01.06.2026** according to assignment rules.
 
 ## Template Source
-- Template: HTML5 UP Forty
-- Source path in project: `static/html5up-forty/`
-- License: Creative Commons Attribution 3.0 (`static/html5up-forty/LICENSE.txt`)
-- Adaptations made: Django base layout integration, dynamic menu/auth state, all project pages migrated to Forty sections, and custom project JS merged in `static/js/app.js`.
+- Template: HTML5 UP Escape Velocity
+- Source path in project: `static/html5up-escape-velocity/`
+- License: Creative Commons Attribution 3.0 (`static/html5up-escape-velocity/LICENSE.txt`)
+- Adaptations made: Django base layout integration, top navigation for desktop/mobile, all project pages migrated to Escape Velocity sections, and custom project JS merged in `static/js/app.js`.
 
 ## JS Scenarios Matrix (15+)
 | # | Scenario | Where |
 |---|---|---|
-| 1 | Theme toggle + localStorage | `static/js/app.js` (`#theme-toggle`) |
+| 1 | Theme toggle + localStorage | `static/js/app.js` (`[data-theme-picker]`) |
 | 2 | Flash auto-dismiss queue | `static/js/app.js` (`.flash`) |
 | 3 | Live search input listener | `static/js/app.js` (`#live-search-input`) |
 | 4 | Debounced query (300ms) | `static/js/app.js` |
@@ -134,26 +134,26 @@ Project must be online and available by **01.06.2026** according to assignment r
 | 12 | Keyboard shortcut Ctrl/Cmd+K | `static/js/app.js` |
 | 13 | Focus transfer to search input | `static/js/app.js` |
 | 14 | DOM utility wrappers (`qs`, `qsa`) | `static/js/app.js` |
-| 15 | Forty menu/open-close behavior | `static/html5up-forty/assets/js/main.js` |
+| 15 | Escape Velocity nav/dropotron behavior | `static/html5up-escape-velocity/assets/js/main.js` |
 
 ## CSS Effects Matrix (15+)
 | # | Effect | Where |
 |---|---|---|
-| 1 | Full-screen preload transition (`is-preload`) | `static/html5up-forty/assets/css/main.css` |
-| 2 | Sticky/overlay header state transitions | `static/html5up-forty/assets/css/main.css` |
-| 3 | Off-canvas menu animation | `static/html5up-forty/assets/css/main.css` |
-| 4 | Banner major hero styling | `static/html5up-forty/assets/css/main.css` |
-| 5 | Tile hover image scaling/overlay | `static/html5up-forty/assets/css/main.css` |
-| 6 | Button hover/active transitions | `static/html5up-forty/assets/css/main.css` |
-| 7 | Form field focus styles | `static/html5up-forty/assets/css/main.css` |
-| 8 | Section reveal/spacing rhythm | `static/html5up-forty/assets/css/main.css` |
-| 9 | Responsive breakpoints (desktop/tablet/mobile) | `static/html5up-forty/assets/css/main.css` |
-| 10 | Icon/font-awesome visual system | `static/html5up-forty/assets/css/fontawesome-all.min.css` |
-| 11 | Flash message accent borders | `static/css/cineverse-forty.css` |
-| 12 | Genre/rating chips rounded badges | `static/css/cineverse-forty.css` |
-| 13 | Inline rating control layout | `static/css/cineverse-forty.css` |
-| 14 | Grid layouts for latest/stats/genres | `static/css/cineverse-forty.css` |
-| 15 | Dark-theme visual inversion | `static/css/cineverse-forty.css` |
+| 1 | Full-screen preload transition (`is-preload`) | `static/html5up-escape-velocity/assets/css/main.css` |
+| 2 | Header/logo section styling | `static/html5up-escape-velocity/assets/css/main.css` |
+| 3 | Top nav hover/dropdown styling | `static/html5up-escape-velocity/assets/css/main.css` |
+| 4 | Wrapper section styles (`style1/2/3`) | `static/html5up-escape-velocity/assets/css/main.css` |
+| 5 | Highlight card and image presentation | `static/html5up-escape-velocity/assets/css/main.css` |
+| 6 | Button hover/active transitions | `static/html5up-escape-velocity/assets/css/main.css` |
+| 7 | Form field focus styles | `static/html5up-escape-velocity/assets/css/main.css` |
+| 8 | Responsive breakpoints (desktop/tablet/mobile) | `static/html5up-escape-velocity/assets/css/main.css` |
+| 9 | Icon/font-awesome visual system | `static/html5up-escape-velocity/assets/css/fontawesome-all.min.css` |
+| 10 | Theme variable switch (template/dark) | `static/css/cineverse-escape.css` |
+| 11 | Mobile top-nav horizontal scroll behavior | `static/css/cineverse-escape.css` |
+| 12 | Flash message accent borders | `static/css/cineverse-escape.css` |
+| 13 | Genre/rating chips rounded badges | `static/css/cineverse-escape.css` |
+| 14 | Inline rating control layout | `static/css/cineverse-escape.css` |
+| 15 | Grid layouts for cards/stats/genres | `static/css/cineverse-escape.css` |
 
 ## Deploy Smoke Checklist (Prod)
 - [x] Domain resolves to hosting and opens over HTTPS (`https://website1-uoa2.onrender.com`)

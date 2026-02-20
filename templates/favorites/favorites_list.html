@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}Favorites | CineVerse{% endblock %}
 {% block content %}
-<section><div class="inner"><header class="major"><h1>Favorites</h1></header><ul>{% for favorite in favorites %}<li><a href="{% url 'movies:detail' favorite.movie.slug %}">{{ favorite.movie.title }}</a></li>{% empty %}<li>No favorites yet.</li>{% endfor %}</ul></div></section>
+<div class="cv-section">
+  <header class="style1"><h2>Favorites</h2></header>
+  <ul>
+    {% for favorite in favorites %}
+      <li><a href="{% url 'movies:detail' favorite.movie.slug %}">{{ favorite.movie.title }}</a></li>
+    {% empty %}
+      <li>No favorites yet.</li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock %}

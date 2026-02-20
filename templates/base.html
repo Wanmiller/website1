@@ -1,103 +1,83 @@
-﻿{% load static %}
-<!doctype html>
-<html lang="en" data-theme="default">
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en" data-theme="template">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <title>{% block title %}CineVerse{% endblock %}</title>
   <link rel="icon" href="{% static 'img/favicon.svg' %}" />
-  <link rel="stylesheet" href="{% static 'html5up-forty/assets/css/main.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/cineverse-forty.css' %}" />
-  <noscript><link rel="stylesheet" href="{% static 'html5up-forty/assets/css/noscript.css' %}" /></noscript>
+  <link rel="stylesheet" href="{% static 'html5up-escape-velocity/assets/css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/cineverse-escape.css' %}" />
   {% block styles %}{% endblock %}
 </head>
-<body class="is-preload theme-default">
-  <div id="wrapper">
-    <header id="header" class="{% block header_class %}{% endblock %}">
-      <a href="{% url 'core:home' %}" class="logo"><strong>CineVerse</strong> <span>Online Cinema</span></a>
-      <nav class="top-nav" aria-label="Main">
-        <ul class="quick-links">
+<body class="homepage is-preload theme-template">
+  <div id="wrapper" class="page-wrapper">
+
+    <section id="header" class="wrapper">
+      <div id="logo">
+        <h1><a href="{% url 'core:home' %}">CineVerse</a></h1>
+        <p>Online Cinema Platform</p>
+      </div>
+
+      <nav id="nav" aria-label="Main Navigation">
+        <ul>
           <li><a href="{% url 'core:home' %}">Home</a></li>
           <li><a href="{% url 'movies:list' %}">Movies</a></li>
           <li><a href="{% url 'genres:list' %}">Genres</a></li>
+          <li><a href="{% url 'people:list' %}">People</a></li>
           <li><a href="{% url 'reviews:list' %}">Reviews</a></li>
           <li><a href="{% url 'favorites:list' %}">Favorites</a></li>
+          <li><a href="{% url 'search:page' %}">Search</a></li>
+          <li><a href="{% url 'core:about' %}">About</a></li>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
+            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'accounts:login' %}">Login</a></li>
+            <li><a href="{% url 'accounts:register' %}">Register</a></li>
+          {% endif %}
+          <li class="theme-picker-item">
+            <label for="theme-select">Theme</label>
+            <select id="theme-select" data-theme-picker>
+              <option value="template">Template</option>
+              <option value="dark">Dark</option>
+            </select>
+          </li>
         </ul>
-        <div class="top-controls">
-          <label class="theme-select-wrap" for="theme-select-top">Theme</label>
-          <select id="theme-select-top" class="theme-select" data-theme-picker>
-            <option value="default">Default</option>
-            <option value="dark">Dark</option>
-            <option value="ocean">Ocean</option>
-            <option value="sunset">Sunset</option>
-            <option value="mono">Mono</option>
-          </select>
-          <a href="#menu" class="menu-shortcut">More</a>
-        </div>
       </nav>
-    </header>
+    </section>
 
-    <nav id="menu">
-      <ul class="links">
-        <li><a href="{% url 'core:home' %}">Home</a></li>
-        <li><a href="{% url 'movies:list' %}">Movies</a></li>
-        <li><a href="{% url 'genres:list' %}">Genres</a></li>
-        <li><a href="{% url 'people:list' %}">People</a></li>
-        <li><a href="{% url 'reviews:list' %}">Reviews</a></li>
-        <li><a href="{% url 'favorites:list' %}">Favorites</a></li>
-        <li><a href="{% url 'search:page' %}">Search</a></li>
-        <li><a href="{% url 'core:about' %}">About</a></li>
-      </ul>
-      <div class="theme-menu-block">
-        <label class="theme-select-wrap" for="theme-select-menu">Theme</label>
-        <select id="theme-select-menu" class="theme-select" data-theme-picker>
-          <option value="default">Default</option>
-          <option value="dark">Dark</option>
-          <option value="ocean">Ocean</option>
-          <option value="sunset">Sunset</option>
-          <option value="mono">Mono</option>
-        </select>
+    {% include 'includes/messages.html' %}
+
+    <section id="main" class="wrapper style2">
+      <div class="container">
+        {% block content %}{% endblock %}
       </div>
-      <ul class="actions stacked">
-        {% if request.user.is_authenticated %}
-          <li><a href="{% url 'accounts:profile' %}" class="button primary fit">Profile</a></li>
-          <li><a href="{% url 'accounts:logout' %}" class="button fit">Logout</a></li>
-        {% else %}
-          <li><a href="{% url 'accounts:login' %}" class="button primary fit">Login</a></li>
-          <li><a href="{% url 'accounts:register' %}" class="button fit">Register</a></li>
-        {% endif %}
-      </ul>
-    </nav>
+    </section>
 
-    {% block banner %}{% endblock %}
-
-    <div id="main">
-      {% include 'includes/messages.html' %}
-      {% block content %}{% endblock %}
-    </div>
-
-    <footer id="footer">
-      <div class="inner">
-        <ul class="icons">
-          <li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-          <li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-        </ul>
-        <ul class="copyright">
-          <li>&copy; 2026 CineVerse</li>
-          <li>Template: <a href="https://html5up.net/forty">HTML5 UP Forty</a></li>
-        </ul>
+    <section id="footer" class="wrapper">
+      <div class="title">Contact & Links</div>
+      <div class="container">
+        <div id="copyright">
+          <ul>
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li>&copy; 2026 CineVerse</li>
+            <li>Template: <a href="https://html5up.net/escape-velocity" target="_blank" rel="noopener">HTML5 UP Escape Velocity</a></li>
+          </ul>
+        </div>
       </div>
-    </footer>
+    </section>
   </div>
 
   <form id="csrf-form" class="hidden-form">{% csrf_token %}</form>
-  <script src="{% static 'html5up-forty/assets/js/jquery.min.js' %}"></script>
-  <script src="{% static 'html5up-forty/assets/js/jquery.scrolly.min.js' %}"></script>
-  <script src="{% static 'html5up-forty/assets/js/jquery.scrollex.min.js' %}"></script>
-  <script src="{% static 'html5up-forty/assets/js/browser.min.js' %}"></script>
-  <script src="{% static 'html5up-forty/assets/js/breakpoints.min.js' %}"></script>
-  <script src="{% static 'html5up-forty/assets/js/util.js' %}"></script>
-  <script src="{% static 'html5up-forty/assets/js/main.js' %}"></script>
+
+  <script src="{% static 'html5up-escape-velocity/assets/js/jquery.min.js' %}"></script>
+  <script src="{% static 'html5up-escape-velocity/assets/js/jquery.dropotron.min.js' %}"></script>
+  <script src="{% static 'html5up-escape-velocity/assets/js/browser.min.js' %}"></script>
+  <script src="{% static 'html5up-escape-velocity/assets/js/breakpoints.min.js' %}"></script>
+  <script src="{% static 'html5up-escape-velocity/assets/js/util.js' %}"></script>
+  <script src="{% static 'html5up-escape-velocity/assets/js/main.js' %}"></script>
   <script src="{% static 'js/app.js' %}"></script>
   {% block scripts %}{% endblock %}
 </body>

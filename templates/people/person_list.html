@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}People | CineVerse{% endblock %}
 {% block content %}
-<section><div class="inner"><header class="major"><h1>People</h1></header><ul>{% for person in people %}<li><a href="{% url 'people:detail' person.pk %}">{{ person.full_name }}</a></li>{% empty %}<li>No people.</li>{% endfor %}</ul></div></section>
+<div class="cv-section">
+  <header class="style1"><h2>People</h2></header>
+  <ul>
+    {% for person in people %}
+      <li><a href="{% url 'people:detail' person.pk %}">{{ person.full_name }}</a></li>
+    {% empty %}
+      <li>No people.</li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock %}

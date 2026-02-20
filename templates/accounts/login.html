@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}Login | CineVerse{% endblock %}
 {% block content %}
-<section><div class="inner"><header class="major"><h1>Login</h1></header><form method="post">{% csrf_token %}<div class="fields">{% include 'includes/form_fields.html' with form=form %}</div><ul class="actions"><li><button class="button primary" type="submit">Login</button></li><li><a class="button" href="{% url 'accounts:password_reset' %}">Forgot Password</a></li></ul></form></div></section>
+<div class="cv-section">
+  <header class="style1"><h2>Login</h2></header>
+  <form method="post">
+    {% csrf_token %}
+    <div class="row gtr-50">{% include 'includes/form_fields.html' with form=form %}</div>
+    <ul class="actions">
+      <li><button class="button style1" type="submit">Login</button></li>
+      <li><a class="button style2" href="{% url 'accounts:password_reset' %}">Forgot Password</a></li>
+    </ul>
+  </form>
+</div>
 {% endblock %}

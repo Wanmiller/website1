@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Delete Movie | CineVerse{% endblock %}
 {% block content %}
-<section><div class="inner"><header class="major"><h1>Delete Movie</h1></header><form method="post">{% csrf_token %}<ul class="actions"><li><button class="button" type="submit">Confirm</button></li></ul></form></div></section>
+<div class="cv-section">
+  <header class="style1"><h2>Delete Movie</h2></header>
+  <p>Are you sure you want to delete this movie?</p>
+  <form method="post">
+    {% csrf_token %}
+    <ul class="actions"><li><button class="button style3" type="submit">Confirm</button></li></ul>
+  </form>
+</div>
 {% endblock %}

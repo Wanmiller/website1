@@ -1,32 +1,34 @@
 {% extends 'base.html' %}
 {% block title %}Movies | CineVerse{% endblock %}
 {% block content %}
-<section>
-  <div class="inner">
-    <header class="major"><h1>Movie Catalog</h1></header>
-    <form id="movie-filter-form" method="get">
-      <div class="fields">
-        <div class="field"><label for="q">Search</label><input id="q" name="q" value="{{ filters.q }}" type="text" placeholder="Title or synopsis" /></div>
-        <div class="field"><label for="year">Year</label><input id="year" name="year" value="{{ filters.year }}" type="number" /></div>
-        <div class="field"><label for="genre">Genre slug</label><input id="genre" name="genre" value="{{ filters.genre }}" type="text" /></div>
-        <div class="field"><label for="ordering">Ordering</label>
-          <select id="ordering" name="ordering">
-            <option value="-release_year" {% if filters.ordering == '-release_year' %}selected{% endif %}>Newest</option>
-            <option value="release_year" {% if filters.ordering == 'release_year' %}selected{% endif %}>Oldest</option>
-            <option value="title" {% if filters.ordering == 'title' %}selected{% endif %}>Title A-Z</option>
-          </select>
-        </div>
+<div class="cv-section">
+  <header class="style1"><h2>Movie Catalog</h2></header>
+  <form id="movie-filter-form" method="get">
+    <div class="row gtr-50">
+      <div class="col-3 col-12-medium field"><label for="q">Search</label><input id="q" name="q" value="{{ filters.q }}" type="text" placeholder="Title or synopsis" /></div>
+      <div class="col-2 col-6-medium col-12-small field"><label for="year">Year</label><input id="year" name="year" value="{{ filters.year }}" type="number" /></div>
+      <div class="col-3 col-6-medium col-12-small field"><label for="genre">Genre slug</label><input id="genre" name="genre" value="{{ filters.genre }}" type="text" /></div>
+      <div class="col-4 col-12-medium field">
+        <label for="ordering">Ordering</label>
+        <select id="ordering" name="ordering">
+          <option value="-release_year" {% if filters.ordering == '-release_year' %}selected{% endif %}>Newest</option>
+          <option value="release_year" {% if filters.ordering == 'release_year' %}selected{% endif %}>Oldest</option>
+          <option value="title" {% if filters.ordering == 'title' %}selected{% endif %}>Title A-Z</option>
+        </select>
       </div>
-      <ul class="actions"><li><button class="button primary" type="submit">Apply</button></li></ul>
-    </form>
+    </div>
+    <ul class="actions"><li><button class="button style1" type="submit">Apply</button></li></ul>
+  </form>
+</div>
+
+<div class="cv-section">
+  <div class="cv-grid">
+    {% for movie in page_obj %}
+      {% include 'includes/movie_card.html' with movie=movie %}
+    {% empty %}
+      <p>No movies found.</p>
+    {% endfor %}
   </div>
-</section>
-<section class="tiles">
-  {% for movie in page_obj %}
-    {% include 'includes/movie_card.html' with movie=movie %}
-  {% empty %}
-    <article><header class="major"><h3>No movies found</h3></header></article>
-  {% endfor %}
-</section>
+</div>
 {% include 'includes/pagination.html' %}
 {% endblock %}

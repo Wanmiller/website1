@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}Edit Profile | CineVerse{% endblock %}
 {% block content %}
-<section><div class="inner"><header class="major"><h1>Edit Profile</h1></header><form method="post" enctype="multipart/form-data">{% csrf_token %}<div class="fields">{% include 'includes/form_fields.html' with form=user_form %}{% include 'includes/form_fields.html' with form=profile_form %}</div><ul class="actions"><li><button class="button primary" type="submit">Save</button></li></ul></form></div></section>
+<div class="cv-section">
+  <header class="style1"><h2>Edit Profile</h2></header>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row gtr-50">
+      {% include 'includes/form_fields.html' with form=user_form %}
+      {% include 'includes/form_fields.html' with form=profile_form %}
+    </div>
+    <ul class="actions"><li><button class="button style1" type="submit">Save</button></li></ul>
+  </form>
+</div>
 {% endblock %}

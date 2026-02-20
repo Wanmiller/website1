@@ -1,4 +1,4 @@
-﻿(() => {
+(() => {
   const qs = (s, root = document) => root.querySelector(s);
   const qsa = (s, root = document) => [...root.querySelectorAll(s)];
 
@@ -6,10 +6,10 @@
     qs('#csrf-form input[name="csrfmiddlewaretoken"]')?.value || getCookie('csrftoken');
 
   const themePickers = qsa('[data-theme-picker]');
-  const themes = new Set(['default', 'dark', 'ocean', 'sunset', 'mono']);
+  const themes = new Set(['template', 'dark']);
 
   const applyTheme = (name) => {
-    const theme = themes.has(name) ? name : 'default';
+    const theme = themes.has(name) ? name : 'template';
     const classes = [...document.body.classList].filter((c) => c.startsWith('theme-'));
     classes.forEach((c) => document.body.classList.remove(c));
     document.body.classList.add(`theme-${theme}`);
@@ -21,7 +21,7 @@
   };
 
   if (themePickers.length) {
-    const stored = localStorage.getItem('theme') || 'default';
+    const stored = localStorage.getItem('theme') || 'template';
     applyTheme(stored);
     themePickers.forEach((picker) => {
       picker.addEventListener('change', () => applyTheme(picker.value));

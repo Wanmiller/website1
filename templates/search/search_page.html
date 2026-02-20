@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Search | CineVerse{% endblock %}
 {% block content %}
-<section><div class="inner"><header class="major"><h1>Live Search</h1></header><div class="fields"><div class="field"><label for="live-search-input">Movie title</label><input id="live-search-input" type="text" placeholder="Type movie name" /></div></div><ul id="live-search-results"></ul></div></section>
+<div class="cv-section">
+  <header class="style1"><h2>Live Search</h2></header>
+  <div class="field">
+    <label for="live-search-input">Movie title</label>
+    <input id="live-search-input" type="text" placeholder="Type movie name" />
+  </div>
+  <ul id="live-search-results"></ul>
+</div>
 {% endblock %}

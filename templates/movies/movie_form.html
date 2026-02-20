@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Movie Form | CineVerse{% endblock %}
 {% block content %}
-<section>
-  <div class="inner">
-    <header class="major"><h1>Movie Form</h1></header>
-    <form method="post">{% csrf_token %}{{ form.as_p }}<ul class="actions"><li><button class="button primary" type="submit">Save</button></li></ul></form>
-  </div>
-</section>
+<div class="cv-section">
+  <header class="style1"><h2>Movie Form</h2></header>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <ul class="actions"><li><button class="button style1" type="submit">Save</button></li></ul>
+  </form>
+</div>
 {% endblock %}

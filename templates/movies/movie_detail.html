@@ -1,43 +1,40 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load core_extras %}
 {% block title %}{{ movie.title }} | CineVerse{% endblock %}
 {% block content %}
-<section>
-  <div class="inner">
-    <header class="major"><h1>{{ movie.title }}</h1></header>
-    <p>{{ movie.synopsis }}</p>
-    <p><strong>Rating:</strong> {{ movie.average_rating|rating_badge }}</p>
-    <p><strong>Genres:</strong> {% for g in movie.genres.all %}<span class="chip">{{ g.name }}</span>{% empty %}No genres{% endfor %}</p>
-    <ul class="actions">
-      {% if request.user.is_authenticated %}
-      <li><button class="button primary" type="button" data-favorite-toggle data-slug="{{ movie.slug }}">Toggle Favorite</button></li>
-      <li>
-        <div class="inline-rate">
-          <label for="ajax-rating">Quick rate</label>
-          <select id="ajax-rating" data-movie-id="{{ movie.id }}"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
-          <button class="button" id="ajax-rate-btn" type="button">Send</button>
-        </div>
-      </li>
-      {% endif %}
-      {% if request.user.is_staff %}
-        <li><a class="button" href="{% url 'movies:edit' movie.slug %}">Edit</a></li>
-        <li><a class="button" href="{% url 'movies:delete' movie.slug %}">Delete</a></li>
-      {% endif %}
-    </ul>
-  </div>
-</section>
-<section>
-  <div class="inner">
-    <header class="major"><h2>Reviews</h2></header>
-    {% for review in movie.reviews.all %}
-      <div class="box">
-        <h3>{{ review.title }}</h3>
-        <p>{{ review.body }}</p>
-        <p>{{ review.rating }}/5 by {{ review.user.username }}</p>
+<div class="cv-section">
+  <header class="style1"><h2>{{ movie.title }}</h2></header>
+  <p>{{ movie.synopsis }}</p>
+  <p><strong>Rating:</strong> {{ movie.average_rating|rating_badge }}</p>
+  <p><strong>Genres:</strong> {% for g in movie.genres.all %}<span class="chip">{{ g.name }}</span>{% empty %}No genres{% endfor %}</p>
+  <ul class="actions">
+    {% if request.user.is_authenticated %}
+    <li><button class="button style1" type="button" data-favorite-toggle data-slug="{{ movie.slug }}">Toggle Favorite</button></li>
+    <li>
+      <div class="inline-rate">
+        <label for="ajax-rating">Quick rate</label>
+        <select id="ajax-rating" data-movie-id="{{ movie.id }}"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+        <button class="button style2" id="ajax-rate-btn" type="button">Send</button>
       </div>
-    {% empty %}
-      <p>No reviews yet.</p>
-    {% endfor %}
-  </div>
-</section>
+    </li>
+    {% endif %}
+    {% if request.user.is_staff %}
+      <li><a class="button style2" href="{% url 'movies:edit' movie.slug %}">Edit</a></li>
+      <li><a class="button style3" href="{% url 'movies:delete' movie.slug %}">Delete</a></li>
+    {% endif %}
+  </ul>
+</div>
+
+<div class="cv-section">
+  <header class="style1"><h2>Reviews</h2></header>
+  {% for review in movie.reviews.all %}
+    <div class="box">
+      <h3>{{ review.title }}</h3>
+      <p>{{ review.body }}</p>
+      <p>{{ review.rating }}/5 by {{ review.user.username }}</p>
+    </div>
+  {% empty %}
+    <p>No reviews yet.</p>
+  {% endfor %}
+</div>
 {% endblock %}
