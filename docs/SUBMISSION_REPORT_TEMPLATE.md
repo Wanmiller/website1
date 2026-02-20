@@ -2,9 +2,9 @@
 
 ## Project
 - Name: CineVerse
-- Domain: https://<your-domain>
-- Render URL: https://<service>.onrender.com
-- Verification date/time (UTC): <yyyy-mm-dd hh:mm>
+- Domain: https://website1-uoa2.onrender.com
+- Render URL: https://website1-uoa2.onrender.com
+- Verification date/time (UTC): 2026-02-20 20:09
 
 ## Team
 - Individual project
@@ -17,24 +17,24 @@
 - Auth/roles/forms/CRUD: done
 - API endpoints + filters + protected methods: done
 - Admin customizations: done
-- Deploy with domain + SSL: <pass/fail>
+- Deploy with domain + SSL: pass (onrender domain)
 
 ## Smoke results
-- Home `/`: <pass/fail>
-- Movies list `/movies/`: <pass/fail>
-- Movie detail `/movies/<slug>/`: <pass/fail>
-- About `/about/`: <pass/fail>
-- API `/api/v1/movies/`: <pass/fail>
-- API `/api/v1/search/`: <pass/fail>
-- Auth flow: <pass/fail>
-- Staff permissions: <pass/fail>
-- Static/media: <pass/fail>
+- Home `/`: pass
+- Movies list `/movies/`: pass
+- Movie detail `/movies/<slug>/`: pending manual seed/data check
+- About `/about/`: pass
+- API `/api/v1/movies/`: pass
+- API `/api/v1/search/`: pass
+- Auth flow: pending manual check
+- Staff permissions: pending manual check
+- Static/media: static pass, media pending
 
 ## Operations
 - Logs access: Render dashboard logs
 - Restart method: Render manual restart
 - Backup method: pg_dump via scripts in `scripts/`
-- Restore test: <pass/fail>
+- Restore test: pending manual check
 
 ## Evidence
 - Screenshot list:

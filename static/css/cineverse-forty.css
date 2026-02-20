@@ -103,6 +103,11 @@ body.theme-mono img, body.theme-mono .icon {
 @media (max-width: 980px) {
   .latest-grid, .stats-grid, .genre-grid { grid-template-columns: 1fr; }
   .theme-select-wrap,
-  #header .top-controls .theme-select,
-  #header .top-controls .menu-shortcut { display: none; }
+  #header .top-controls .theme-select { display: none; }
+  #header .top-controls .menu-shortcut {
+    display: inline-flex;
+    height: 2.1rem;
+    padding: 0 0.65rem;
+    font-size: 0.65rem;
+  }
 }

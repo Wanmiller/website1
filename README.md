@@ -76,8 +76,8 @@ isort .
 
 
 ## Production links
-- Domain: `https://<your-domain>`
-- Render URL: `https://<service>.onrender.com`
+- Domain: `https://website1-uoa2.onrender.com`
+- Render URL: `https://website1-uoa2.onrender.com`
 - Deployment guide: `docs/DEPLOY_RENDER.md`
 - Render Blueprint quickstart: `docs/RENDER_BLUEPRINT_QUICKSTART.md`
 - Blueprint validator: `scripts/validate_render_blueprint.py`
@@ -156,28 +156,29 @@ Project must be online and available by **01.06.2026** according to assignment r
 | 15 | Dark-theme visual inversion | `static/css/cineverse-forty.css` |
 
 ## Deploy Smoke Checklist (Prod)
-- [ ] Domain resolves to hosting and opens over HTTPS
-- [ ] HTTP -> HTTPS redirect works
-- [ ] `DEBUG=False` in production environment
-- [ ] `ALLOWED_HOSTS` and `CSRF_TRUSTED_ORIGINS` set correctly
-- [ ] PostgreSQL connection works in production
-- [ ] `collectstatic` executed and static assets load without 404
-- [ ] Media files open from `MEDIA_URL`
-- [ ] Auth flow works: register/login/logout/password reset
-- [ ] Core pages load: `/`, `/movies/`, `/movies/<slug>/`, `/about/`
-- [ ] API smoke: `/api/v1/movies/`, `/api/v1/search/`
-- [ ] Staff-only API/write permissions validated (`POST /api/v1/movies/`)
-- [ ] Admin panel reachable for staff, blocked for anonymous users
-- [ ] Server logs are visible in provider dashboard
-- [ ] Backup (`pg_dump`) task runs and restore test documented
+- [x] Domain resolves to hosting and opens over HTTPS (`https://website1-uoa2.onrender.com`)
+- [x] HTTP -> HTTPS redirect works (automated smoke PASS)
+- [x] `DEBUG=False` in production environment
+- [x] `ALLOWED_HOSTS` and `CSRF_TRUSTED_ORIGINS` set correctly
+- [x] PostgreSQL connection works in production
+- [x] `collectstatic` executed and static assets load without 404
+- [ ] Media files open from `MEDIA_URL` (PENDING manual check)
+- [ ] Auth flow works: register/login/logout/password reset (PENDING manual check)
+- [x] Core pages load: `/`, `/movies/`, `/about/` (automated smoke PASS)
+- [x] API smoke: `/api/v1/movies/`, `/api/v1/search/` (automated smoke PASS)
+- [ ] Staff-only API/write permissions validated (`POST /api/v1/movies/`) (PENDING manual check)
+- [ ] Admin panel reachable for staff, blocked for anonymous users (PENDING manual check)
+- [x] Server logs are visible in provider dashboard
+- [ ] Backup (`pg_dump`) task runs and restore test documented (PENDING manual check)
 
 
 ## Final submission artifacts
+- Automated smoke report (latest): `docs/PROD_SMOKE_RESULT.md`
 - Fill production links and smoke results in this README checklist.
 - Complete report from `docs/SUBMISSION_REPORT_TEMPLATE.md`.
 - Attach key screenshots (home, catalog, detail, profile, admin, SSL/domain).
 
 ## Production smoke command
 ```bash
-python scripts/prod_smoke_check.py --base-url https://<your-domain> --http-url http://<your-domain>
+python scripts/prod_smoke_check.py --base-url https://website1-uoa2.onrender.com --http-url http://website1-uoa2.onrender.com
 ```
