@@ -1,8 +1,9 @@
+{% load i18n %}
 {% if items %}
-<div class="crumbs">
+<nav class="crumbs" aria-label="{% trans 'Breadcrumbs' %}">
   {% for item in items %}
     {% if item.url %}<a href="{{ item.url }}">{{ item.label }}</a>{% else %}<span>{{ item.label }}</span>{% endif %}
-    {% if not forloop.last %} / {% endif %}
+    {% if not forloop.last %}<span aria-hidden="true">/</span>{% endif %}
   {% endfor %}
-</div>
+</nav>
 {% endif %}

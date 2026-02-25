@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Bookmarks" %} | PersonaVerse{% endblock %}
+{% block content %}
+<div class="cv-section box article-list">
+  <header class="style1"><h2>{% trans "My Bookmarks" %}</h2></header>
+  {% for bookmark in bookmarks %}
+    <div class="box">
+      <h3><a href="{% url 'threads:detail' bookmark.thread.slug %}">{{ bookmark.thread.title }}</a></h3>
+      <p>{% trans "Person:" %} <a href="{% url 'people:detail' bookmark.thread.person.slug %}">{{ bookmark.thread.person.full_name }}</a></p>
+      <p>{% blocktranslate with created=bookmark.created_at|date:'Y-m-d H:i' %}Saved {{ created }}{% endblocktranslate %}</p>
+    </div>
+  {% empty %}
+    <p>{% trans "You have no bookmarks yet." %}</p>
+  {% endfor %}
+</div>
+{% endblock %}

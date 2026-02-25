@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 
 from genres.models import Genre
 from movies.models import AgeRating, Country, Language, Movie, Studio, Tag
-from people.models import Person, RoleCredit
+from people.models import Person
 
 
 class Command(BaseCommand):
@@ -50,7 +50,8 @@ class Command(BaseCommand):
         person, _ = Person.objects.get_or_create(
             full_name="Aruzhan Bek", defaults={"bio": "Director and writer"}
         )
-        RoleCredit.objects.get_or_create(movie=movie, person=person, role="director")
+        person.bio = person.bio or "Director and writer"
+        person.save(update_fields=["bio"])
 
         if not User.objects.filter(username="staff").exists():
             User.objects.create_user(

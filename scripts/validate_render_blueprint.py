@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Render blueprint config for CineVerse."""
+"""Validate Render blueprint config for PersonaVerse."""
 
 from __future__ import annotations
 
@@ -30,7 +30,7 @@ def parse_lines(lines: list[str]) -> tuple[bool, bool, bool, set[str]]:
         line = raw.strip()
         if line == "- type: web":
             has_web = True
-        if line.startswith("- name: cineverse-db"):
+        if line.startswith("- name: personaverse-db"):
             has_db = True
         if line.startswith("startCommand:") and "gunicorn cineverse.wsgi:application" in line:
             has_start_cmd = True
@@ -60,7 +60,7 @@ def main() -> int:
         print("PASS: web service declaration found")
 
     if not has_db:
-        print("FAIL: missing database declaration for cineverse-db")
+        print("FAIL: missing database declaration for personaverse-db")
         failed = True
     else:
         print("PASS: database declaration found")

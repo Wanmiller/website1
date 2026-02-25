@@ -1,15 +1,46 @@
 {% extends 'base.html' %}
-{% block title %}{{ person.full_name }} | CineVerse{% endblock %}
+{% load i18n %}
+{% block title %}{{ person.full_name }} | PersonaVerse{% endblock %}
 {% block content %}
-<div class="cv-section">
-  <header class="style1"><h2>{{ person.full_name }}</h2></header>
-  <p>{{ person.bio }}</p>
-  <ul>
-    {% for credit in person.credits.all %}
-      <li>{{ credit.role }} - <a href="{% url 'movies:detail' credit.movie.slug %}">{{ credit.movie.title }}</a></li>
+<div class="pv-nx-page">
+  <section class="cv-section box">
+    <header class="style1">
+      <div class="pv-person-row pv-person-row-lg">
+        <div class="pv-person-thumb pv-person-thumb-lg" aria-hidden="{% if person.avatar %}false{% else %}true{% endif %}">
+          {% if person.avatar %}
+            <img class="pv-person-avatar pv-person-avatar-lg" src="{{ person.avatar.url }}" alt="{{ person.full_name }}" loading="lazy" />
+          {% else %}
+            <span class="pv-person-fallback pv-person-avatar pv-person-avatar-lg">{{ person.full_name|slice:":1"|upper }}</span>
+          {% endif %}
+        </div>
+        <div class="pv-person-meta">
+          <h2>{{ person.full_name }} {% if person.is_verified %}<span class="chip">{% trans "Verified" %}</span>{% endif %}</h2>
+        </div>
+      </div>
+    </header>
+    {% if person.bio %}
+      <p>{{ person.bio }}</p>
+    {% else %}
+      <p>{% trans "No bio yet." %}</p>
+    {% endif %}
+    {% if request.user.is_authenticated %}
+      <ul class="actions"><li><a class="button style1" href="{% url 'threads:create' %}?person={{ person.id }}">{% trans "Start thread about this person" %}</a></li></ul>
+    {% endif %}
+  </section>
+
+  <section class="pv-nx-thread-grid">
+    {% for thread in threads %}
+      <article class="box pv-nx-article excerpt">
+        <h3><a href="{% url 'threads:detail' thread.slug %}">{{ thread.title }}</a></h3>
+        <p class="pv-nx-meta-row">
+          <span class="pv-nx-meta-chip">{% blocktranslate with username=thread.author.username %}By {{ username }}{% endblocktranslate %}</span>
+          <span class="pv-nx-meta-chip">{% blocktranslate with score=thread.score %}Score {{ score }}{% endblocktranslate %}</span>
+        </p>
+        <p>{{ thread.body|truncatechars:150 }}</p>
+      </article>
     {% empty %}
-      <li>No credits.</li>
+      <p>{% trans "No discussions yet." %}</p>
     {% endfor %}
-  </ul>
+  </section>
 </div>
 {% endblock %}

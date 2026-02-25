@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
-{% block title %}500 | CineVerse{% endblock %}
+{% load i18n %}
+{% block title %}500 | PersonaVerse{% endblock %}
 {% block content %}
-<div class="cv-section">
-  <header class="style1"><h2>500</h2></header>
-  <p>Server error.</p>
+<div class="pv-nx-page">
+  <section class="cv-section box feature2">
+    <header class="style1"><h2>500</h2></header>
+    <p>{% trans "Server error." %}</p>
+    <ul class="actions"><li><a class="button style1" href="{% url 'core:home' %}">{% trans "Back to feed" %}</a></li></ul>
+  </section>
 </div>
 {% endblock %}

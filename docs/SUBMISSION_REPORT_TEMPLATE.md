@@ -1,33 +1,45 @@
 # Submission Report Template
 
 ## Project
-- Name: CineVerse
+- Name: PersonaVerse
 - Domain: https://website1-uoa2.onrender.com
 - Render URL: https://website1-uoa2.onrender.com
-- Verification date/time (UTC): 2026-02-20 20:09
+- Verification timestamp (UTC): YYYY-MM-DD HH:MM
+- Verified by: <name / role>
+
+## Compliance Snapshot
+- Pass count: 10
+- Partial count: 4
+- Fail count: 0
+- Source of truth: `README.md` -> `PDF Compliance Matrix (Pass/Partial/Fail)`
 
 ## Team
 - Individual project
 - Role: Full-stack developer
 
 ## Implemented requirements
-- 10 apps: done
-- 15+ models + relations: done
-- 15+ UI pages: done
-- Auth/roles/forms/CRUD: done
-- API endpoints + filters + protected methods: done
-- Admin customizations: done
-- Deploy with domain + SSL: pass (onrender domain)
+- Persona domain (people + community threads): done
+- Thread/comment/vote/report workflow: done
+- 15+ UI pages and adaptive UX: done
+- Localization EN/RU/KK (default KK): done
+- Auth/roles/forms/permissions: done
+- API endpoints + protected methods: done
+- Staff moderation panel: done
+- Deploy with HTTPS: pass (onrender domain)
 
 ## Smoke results
-- Home `/`: pass
-- Movies list `/movies/`: pass
-- Movie detail `/movies/<slug>/`: pending manual seed/data check
-- About `/about/`: pass
-- API `/api/v1/movies/`: pass
-- API `/api/v1/search/`: pass
+- Feed `/`: pass
+- People list `/people/`: pass
+- Person detail `/people/<slug>/`: pass
+- Threads `/threads/`: pass
+- Thread detail `/threads/<slug>/`: pass
+- Moderation `/moderation/` staff-only: pending manual check
+- API `/api/v1/persons/`: pass
+- API `/api/v1/threads/`: pass
+- API `/api/v1/comments/` POST auth: pending manual check
+- API `/api/v1/votes/` POST auth: pending manual check
 - Auth flow: pending manual check
-- Staff permissions: pending manual check
+- Localization switch (EN/RU/KK + cookie persistence): pass
 - Static/media: static pass, media pending
 
 ## Operations
@@ -38,9 +50,9 @@
 
 ## Evidence
 - Screenshot list:
-  - home
-  - catalog
-  - detail
+  - feed
+  - people list
+  - thread detail
   - profile
-  - admin
+  - moderation panel
   - HTTPS certificate/domain

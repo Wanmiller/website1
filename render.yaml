@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: cineverse-web
+    name: personaverse-web
     env: python
     region: frankfurt
     plan: free
@@ -16,14 +16,14 @@ services:
         value: "False"
       - key: DATABASE_URL
         fromDatabase:
-          name: cineverse-db
+          name: personaverse-db
           property: connectionString
       - key: DB_SSL_REQUIRE
         value: "True"
       - key: ALLOWED_HOSTS
-        value: "cineverse-web.onrender.com"
+        value: "personaverse-web.onrender.com"
       - key: CSRF_TRUSTED_ORIGINS
-        value: "https://cineverse-web.onrender.com"
+        value: "https://personaverse-web.onrender.com"
       - key: SECURE_SSL_REDIRECT
         value: "True"
       - key: SESSION_COOKIE_SECURE
@@ -32,6 +32,6 @@ services:
         value: "True"
 
 databases:
-  - name: cineverse-db
-    databaseName: cineverse
+  - name: personaverse-db
+    databaseName: personaverse
     plan: free

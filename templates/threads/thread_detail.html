@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load core_extras i18n %}
+{% block title %}{{ thread.title }} | PersonaVerse{% endblock %}
+{% block content %}
+<div class="pv-nx-page">
+  {% include 'includes/breadcrumbs.html' with items=breadcrumb_items %}
+  <section class="cv-section pv-nx-article box">
+    <header class="style1"><h2>{{ thread.title }}</h2></header>
+    <p class="pv-nx-meta-row">
+      <span class="pv-nx-meta-chip">{% trans "Person:" %} <a href="{% url 'people:detail' thread.person.slug %}">{{ thread.person.full_name }}</a></span>
+      <span class="pv-nx-meta-chip">{% blocktranslate with username=thread.author.username %}By {{ username }}{% endblocktranslate %}</span>
+      <span class="pv-nx-meta-chip">{% trans "Score" %} <span id="thread-score">{{ thread.score }}</span></span>
+    </p>
+    <p>
+      {% trans "Average rating:" %}
+      <strong><span id="thread-average-rating">{{ thread.average_rating|floatformat:1 }}</span>/5</strong>
+      <span id="thread-rating-badge">{{ thread.average_rating|rating_badge }}</span>
+    </p>
+    <p>{{ thread.body }}</p>
+    {% if request.user.is_authenticated %}
+      <ul class="actions">
+        <li><button class="button style2" data-vote-target="thread" data-target-id="{{ thread.id }}" data-value="1" data-loading-text="{% trans 'Voting...' %}" type="button">{% trans "Upvote" %}</button></li>
+        <li><button class="button style3" data-vote-target="thread" data-target-id="{{ thread.id }}" data-value="-1" data-loading-text="{% trans 'Voting...' %}" type="button">{% trans "Downvote" %}</button></li>
+        <li>
+          <button
+            class="button"
+            data-bookmark-toggle
+            data-slug="{{ thread.slug }}"
+            data-label-on="{% trans 'Bookmarked' %}"
+            data-label-off="{% trans 'Save' %}"
+            data-loading-text="{% trans 'Saving...' %}"
+            type="button"
+          >
+            {% if is_bookmarked %}{% trans "Bookmarked" %}{% else %}{% trans "Save" %}{% endif %}
+          </button>
+        </li>
+        {% if can_manage_thread %}
+          <li><a class="button" href="{% url 'threads:edit' thread.slug %}">{% trans "Edit" %}</a></li>
+          <li><a class="button style3" href="{% url 'threads:delete' thread.slug %}">{% trans "Delete" %}</a></li>
+        {% endif %}
+      </ul>
+      <div class="field">
+        <label for="ajax-rating">{% trans "Your rating" %}</label>
+        <div style="display:flex; gap:.5rem; align-items:center;">
+          <select id="ajax-rating" data-thread-slug="{{ thread.slug }}">
+            {% for n in rating_values %}
+              <option value="{{ n }}" {% if user_rating and user_rating.value == n %}selected{% endif %}>{{ n }}</option>
+            {% endfor %}
+          </select>
+          <button id="ajax-rate-btn" class="button small" data-loading-text="{% trans 'Saving...' %}" type="button">{% trans "Save rating" %}</button>
+        </div>
+      </div>
+      <form method="post" action="{% url 'moderation:create_report' %}" data-submit-lock data-client-validate>
+        {% csrf_token %}
+        <input type="hidden" name="target_type" value="thread" />
+        <input type="hidden" name="target_id" value="{{ thread.id }}" />
+        <input type="hidden" name="next" value="{% url 'threads:detail' thread.slug %}" />
+        <div class="field">
+          <label for="reason-thread">{% trans "Report reason" %}</label>
+          <input id="reason-thread" name="reason" type="text" placeholder="{% trans 'Reason' %}" required />
+        </div>
+        <ul class="actions"><li><button class="button small" type="submit" data-loading-text="{% trans 'Sending...' %}">{% trans "Report thread" %}</button></li></ul>
+      </form>
+    {% endif %}
+  </section>
+
+  <section class="cv-section pv-nx-comments box article-list">
+    <header class="style1"><h3>{% trans "Comments" %}</h3></header>
+    {% for comment in comments %}
+      <div class="box excerpt">
+        <p><strong>{{ comment.author.username }}</strong> | {% blocktranslate with score=comment.score %}score {{ score }}{% endblocktranslate %}</p>
+        <p>{{ comment.body }}</p>
+        {% if request.user.is_authenticated %}
+          <ul class="actions">
+            <li><a class="button small" href="{% url 'comments:reply' comment.id %}">{% trans "Reply" %}</a></li>
+            <li><button class="button small" data-vote-target="comment" data-target-id="{{ comment.id }}" data-value="1" data-loading-text="{% trans 'Voting...' %}" type="button">+1</button></li>
+            <li><button class="button small" data-vote-target="comment" data-target-id="{{ comment.id }}" data-value="-1" data-loading-text="{% trans 'Voting...' %}" type="button">-1</button></li>
+          </ul>
+          <form method="post" action="{% url 'moderation:create_report' %}" data-submit-lock data-client-validate>
+            {% csrf_token %}
+            <input type="hidden" name="target_type" value="comment" />
+            <input type="hidden" name="target_id" value="{{ comment.id }}" />
+            <input type="hidden" name="next" value="{% url 'threads:detail' thread.slug %}" />
+            <div class="field">
+              <input name="reason" type="text" placeholder="{% trans 'Report reason' %}" required />
+            </div>
+            <ul class="actions"><li><button class="button small" type="submit" data-loading-text="{% trans 'Sending...' %}">{% trans "Report comment" %}</button></li></ul>
+          </form>
+        {% endif %}
+        {% for reply in comment.replies.all %}
+          <div class="box pv-nx-reply excerpt">
+            <p><strong>{{ reply.author.username }}</strong></p>
+            <p>{{ reply.body }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% empty %}
+      <p>{% trans "No comments yet." %}</p>
+    {% endfor %}
+  </section>
+
+  {% if request.user.is_authenticated %}
+    <section class="cv-section box feature2">
+      <header class="style1"><h3>{% trans "Add comment" %}</h3></header>
+      <form method="post" action="{% url 'threads:comment_create' thread.slug %}" data-submit-lock data-client-validate>
+        {% csrf_token %}
+        <div class="fields">{% include 'includes/form_fields.html' with form=comment_form %}</div>
+        <ul class="actions"><li><button class="button style1" type="submit" data-loading-text="{% trans 'Posting...' %}">{% trans "Post comment" %}</button></li></ul>
+      </form>
+    </section>
+  {% endif %}
+</div>
+{% endblock %}

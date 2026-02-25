@@ -1,13 +1,21 @@
-﻿from django.conf import settings
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+
+from core.validators import image_extension_validator, validate_file_size
 
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     display_name = models.CharField(max_length=120, blank=True)
-    avatar = models.ImageField(upload_to="avatars/", blank=True, null=True)
+    avatar = models.ImageField(
+        upload_to="avatars/",
+        blank=True,
+        null=True,
+        validators=[image_extension_validator, validate_file_size],
+    )
     bio = models.TextField(blank=True)
+    reputation = models.IntegerField(default=0)
 
     def __str__(self):
         return self.display_name or self.user.username

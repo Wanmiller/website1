@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Threads" %} | PersonaVerse{% endblock %}
+{% block content %}
+<div class="pv-nx-page">
+  <section class="cv-section box feature2">
+    <header class="style1"><h2>{% trans "Threads" %}</h2></header>
+    <p class="pv-nx-lead">{% trans "Editorial feed of discussions" %}</p>
+    <form id="thread-filter-form" method="get">
+      <div class="row gtr-50">
+        <div class="col-4 col-12-medium field">
+          <label for="q">{% trans "Search" %}</label>
+          <input id="q" type="text" name="q" value="{{ filters.q }}" placeholder="{% trans 'Title or text' %}" />
+        </div>
+        <div class="col-4 col-12-medium field">
+          <label for="person">{% trans "Person" %}</label>
+          <select id="person" name="person">
+            <option value="">{% trans "All" %}</option>
+            {% for person in persons %}
+              <option value="{{ person.slug }}" {% if filters.person == person.slug %}selected{% endif %}>{{ person.full_name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-4 col-12-medium field">
+          <label for="ordering">{% trans "Ordering" %}</label>
+          <select id="ordering" name="ordering">
+            <option value="hot" {% if filters.ordering == 'hot' %}selected{% endif %}>{% trans "Hot" %}</option>
+            <option value="new" {% if filters.ordering == 'new' %}selected{% endif %}>{% trans "New" %}</option>
+            <option value="top" {% if filters.ordering == 'top' %}selected{% endif %}>{% trans "Top" %}</option>
+          </select>
+        </div>
+        <div class="col-4 col-12-medium field">
+          <label for="created_after">{% trans "Created after" %}</label>
+          <input id="created_after" type="date" name="created_after" value="{{ filters.created_after }}" />
+        </div>
+        <div class="col-4 col-12-medium field">
+          <label for="score_min">{% trans "Min score" %}</label>
+          <input id="score_min" type="number" name="score_min" value="{{ filters.score_min }}" />
+        </div>
+      </div>
+      <ul class="actions">
+        <li><button class="button style1" type="submit">{% trans "Apply" %}</button></li>
+        {% if request.user.is_authenticated %}<li><a class="button style2" href="{% url 'threads:create' %}">{% trans "Create Thread" %}</a></li>{% endif %}
+      </ul>
+    </form>
+  </section>
+
+  <section class="pv-nx-thread-grid">
+    {% for thread in page_obj %}
+      <article class="box pv-nx-article excerpt">
+        <h3><a href="{% url 'threads:detail' thread.slug %}">{{ thread.title }}</a></h3>
+        <p class="pv-nx-meta-row">
+          <span class="pv-nx-meta-chip">{% trans "Person:" %} <a href="{% url 'people:detail' thread.person.slug %}">{{ thread.person.full_name }}</a></span>
+          <span class="pv-nx-meta-chip">{% blocktranslate with username=thread.author.username %}By {{ username }}{% endblocktranslate %}</span>
+          <span class="pv-nx-meta-chip">{% blocktranslate with score=thread.vote_score|default:thread.score %}Score {{ score }}{% endblocktranslate %}</span>
+          <span class="pv-nx-meta-chip">{% blocktranslate with count=thread.comments.count %}{{ count }} comments{% endblocktranslate %}</span>
+        </p>
+        <p>{{ thread.body|truncatechars:180 }}</p>
+      </article>
+    {% empty %}
+      <p>{% trans "No threads found." %}</p>
+    {% endfor %}
+  </section>
+
+  {% include 'includes/pagination.html' with page_obj=page_obj filters=filters %}
+</div>
+{% endblock %}

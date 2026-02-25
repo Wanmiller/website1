@@ -1,83 +1,185 @@
-{% load static %}
+{% load static i18n %}
 <!DOCTYPE HTML>
-<html lang="en" data-theme="template">
+<html lang="{{ request.LANGUAGE_CODE|default:'kk' }}" data-theme="template">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <title>{% block title %}CineVerse{% endblock %}</title>
+  <title>{% block title %}{% trans "PersonaVerse" %}{% endblock %}</title>
   <link rel="icon" href="{% static 'img/favicon.svg' %}" />
-  <link rel="stylesheet" href="{% static 'html5up-escape-velocity/assets/css/main.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/cineverse-escape.css' %}" />
+  <link rel="stylesheet" href="{% static 'html5up-zerofour/assets/css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/personaverse-zerofour.css' %}" />
   {% block styles %}{% endblock %}
 </head>
-<body class="homepage is-preload theme-template">
-  <div id="wrapper" class="page-wrapper">
-
-    <section id="header" class="wrapper">
-      <div id="logo">
-        <h1><a href="{% url 'core:home' %}">CineVerse</a></h1>
-        <p>Online Cinema Platform</p>
-      </div>
-
-      <nav id="nav" aria-label="Main Navigation">
-        <ul>
-          <li><a href="{% url 'core:home' %}">Home</a></li>
-          <li><a href="{% url 'movies:list' %}">Movies</a></li>
-          <li><a href="{% url 'genres:list' %}">Genres</a></li>
-          <li><a href="{% url 'people:list' %}">People</a></li>
-          <li><a href="{% url 'reviews:list' %}">Reviews</a></li>
-          <li><a href="{% url 'favorites:list' %}">Favorites</a></li>
-          <li><a href="{% url 'search:page' %}">Search</a></li>
-          <li><a href="{% url 'core:about' %}">About</a></li>
-          {% if request.user.is_authenticated %}
-            <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
-            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-          {% else %}
-            <li><a href="{% url 'accounts:login' %}">Login</a></li>
-            <li><a href="{% url 'accounts:register' %}">Register</a></li>
-          {% endif %}
-          <li class="theme-picker-item">
-            <label for="theme-select">Theme</label>
-            <select id="theme-select" data-theme-picker>
-              <option value="template">Template</option>
-              <option value="dark">Dark</option>
-            </select>
-          </li>
-        </ul>
-      </nav>
-    </section>
-
-    {% include 'includes/messages.html' %}
-
-    <section id="main" class="wrapper style2">
+<body class="{% if request.path == '/' %}homepage{% else %}no-sidebar{% endif %} is-preload theme-template">
+  <div id="page-wrapper">
+    <div id="header-wrapper">
       <div class="container">
-        {% block content %}{% endblock %}
+        <header id="header">
+          <div class="inner">
+            <h1>
+              <a href="{% url 'core:home' %}" id="logo">PersonaVerse</a>
+            </h1>
+            <nav id="nav" aria-label="{% trans 'Main navigation' %}">
+              <ul>
+                <li class="{% if request.path == '/' %}current_page_item{% endif %}">
+                  <a href="{% url 'core:home' %}">{% trans "Feed" %}</a>
+                </li>
+                <li class="{% if '/people/' in request.path %}current_page_item{% endif %}">
+                  <a href="{% url 'people:list' %}">{% trans "People" %}</a>
+                </li>
+                <li class="{% if '/threads/' in request.path %}current_page_item{% endif %}">
+                  <a href="{% url 'threads:list' %}">{% trans "Threads" %}</a>
+                </li>
+                <li class="{% if '/search/' in request.path %}current_page_item{% endif %}">
+                  <a href="{% url 'search:page' %}">{% trans "Search" %}</a>
+                </li>
+                <li class="{% if '/about/' in request.path %}current_page_item{% endif %}">
+                  <a href="{% url 'core:about' %}">{% trans "About" %}</a>
+                </li>
+                {% if request.user.is_staff %}
+                  <li class="{% if '/moderation/' in request.path or '/dashboard/' in request.path %}current_page_item{% endif %}">
+                    <a href="#" class="pv-zf-nav-trigger" aria-haspopup="true" aria-expanded="false">{% trans "Staff" %}</a>
+                    <ul>
+                      <li><a href="{% url 'moderation:panel' %}">{% trans "Moderation" %}</a></li>
+                      <li><a href="{% url 'dashboard:panel' %}">{% trans "Dashboard" %}</a></li>
+                    </ul>
+                  </li>
+                {% endif %}
+                {% if request.user.is_authenticated %}
+                  <li class="{% if '/bookmarks/' in request.path or '/auth/profile/' in request.path %}current_page_item{% endif %}">
+                    <a href="#" class="pv-zf-nav-trigger" aria-haspopup="true" aria-expanded="false">{% trans "Account" %}</a>
+                    <ul>
+                      <li><a href="{% url 'engagement:list' %}">{% trans "Bookmarks" %}</a></li>
+                      <li><a href="{% url 'accounts:profile' %}">{% trans "Profile" %}</a></li>
+                      <li><a href="{% url 'accounts:logout' %}" data-logout-link>{% trans "Logout" %}</a></li>
+                    </ul>
+                  </li>
+                {% else %}
+                  <li class="{% if '/auth/login/' in request.path or '/auth/register/' in request.path %}current_page_item{% endif %}">
+                    <a href="#" class="pv-zf-nav-trigger" aria-haspopup="true" aria-expanded="false">{% trans "Account" %}</a>
+                    <ul>
+                      <li><a href="{% url 'accounts:login' %}">{% trans "Login" %}</a></li>
+                      <li><a href="{% url 'accounts:register' %}">{% trans "Register" %}</a></li>
+                    </ul>
+                  </li>
+                {% endif %}
+              </ul>
+            </nav>
+            <form action="{% url 'set_language' %}" method="post" class="pv-zf-lang-form">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+              <label for="lang-select-desktop">{% trans "Language" %}</label>
+              <select id="lang-select-desktop" name="language" onchange="this.form.submit()">
+                <option value="en" {% if request.LANGUAGE_CODE|slice:':2' == 'en' %}selected{% endif %}>EN</option>
+                <option value="ru" {% if request.LANGUAGE_CODE|slice:':2' == 'ru' %}selected{% endif %}>RU</option>
+                <option value="kk" {% if request.LANGUAGE_CODE|slice:':2' == 'kk' %}selected{% endif %}>KK</option>
+              </select>
+            </form>
+            <div class="pv-zf-theme-desktop">
+              <label for="theme-select">{% trans "Theme" %}</label>
+              <select id="theme-select" data-theme-picker>
+                <option value="template">{% trans "Template" %}</option>
+                <option value="dark">{% trans "Dark" %}</option>
+              </select>
+            </div>
+          </div>
+        </header>
+        {% if request.path == '/' %}
+          <div id="banner">
+            <h2><strong>PersonaVerse:</strong> {% trans "focused discussions about public personalities" %}</h2>
+            <p>{% trans "Threads, comments, votes, bookmarks, moderation" %}</p>
+            {% if request.user.is_authenticated %}
+              <a href="{% url 'threads:create' %}" class="button large icon solid fa-plus-circle">{% trans "Start Thread" %}</a>
+            {% else %}
+              <a href="{% url 'accounts:register' %}" class="button large icon solid fa-user-plus">{% trans "Join Community" %}</a>
+            {% endif %}
+          </div>
+        {% endif %}
       </div>
-    </section>
+    </div>
 
-    <section id="footer" class="wrapper">
-      <div class="title">Contact & Links</div>
-      <div class="container">
-        <div id="copyright">
-          <ul>
-            <li><a href="#">GitHub</a></li>
-            <li><a href="#">LinkedIn</a></li>
-            <li>&copy; 2026 CineVerse</li>
-            <li>Template: <a href="https://html5up.net/escape-velocity" target="_blank" rel="noopener">HTML5 UP Escape Velocity</a></li>
-          </ul>
+    <div class="pv-zf-mobile-theme">
+      <form action="{% url 'set_language' %}" method="post" class="pv-zf-lang-form">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+        <label for="lang-select-mobile">{% trans "Language" %}</label>
+        <select id="lang-select-mobile" name="language" onchange="this.form.submit()">
+          <option value="en" {% if request.LANGUAGE_CODE|slice:':2' == 'en' %}selected{% endif %}>EN</option>
+          <option value="ru" {% if request.LANGUAGE_CODE|slice:':2' == 'ru' %}selected{% endif %}>RU</option>
+          <option value="kk" {% if request.LANGUAGE_CODE|slice:':2' == 'kk' %}selected{% endif %}>KK</option>
+        </select>
+      </form>
+      <label for="theme-select-mobile">{% trans "Theme" %}</label>
+      <select id="theme-select-mobile" data-theme-picker>
+        <option value="template">{% trans "Template" %}</option>
+        <option value="dark">{% trans "Dark" %}</option>
+      </select>
+    </div>
+
+    <div id="main-wrapper">
+      <div class="wrapper style2">
+        <div class="inner">
+          <div class="container">
+            {% include 'includes/messages.html' %}
+            {% block content %}{% endblock %}
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+
+    <div id="footer-wrapper">
+      <footer id="footer" class="container">
+        <div class="row">
+          <div class="col-4 col-12-medium">
+            <section>
+              <h2>PersonaVerse</h2>
+              <p>{% trans "Community platform for public personality discussions." %}</p>
+            </section>
+          </div>
+          <div class="col-4 col-12-medium">
+            <section>
+              <h2>{% trans "Navigation" %}</h2>
+              <ul class="divided">
+                <li><a href="{% url 'core:about' %}">{% trans "About" %}</a></li>
+                <li><a href="{% url 'threads:list' %}">{% trans "Threads" %}</a></li>
+                <li><a href="{% url 'people:list' %}">{% trans "People" %}</a></li>
+              </ul>
+            </section>
+          </div>
+          <div class="col-4 col-12-medium">
+            <section>
+              <h2>{% trans "Technical" %}</h2>
+              <ul class="divided">
+                <li><a href="/api/v1/threads/">API</a></li>
+                <li><a href="/admin/">Admin</a></li>
+                <li><a href="https://html5up.net/zerofour" target="_blank" rel="noopener">{% trans "ZeroFour Template" %}</a></li>
+              </ul>
+            </section>
+          </div>
+          <div class="col-12">
+            <div id="copyright">
+              <ul class="menu">
+                <li>&copy; 2026 PersonaVerse</li>
+                <li>{% trans "Design" %}: {% trans "HTML5 UP ZeroFour (adapted)" %}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   </div>
 
   <form id="csrf-form" class="hidden-form">{% csrf_token %}</form>
+  <form id="logout-form" method="post" action="{% url 'accounts:logout' %}" class="hidden-form">
+    {% csrf_token %}
+  </form>
 
-  <script src="{% static 'html5up-escape-velocity/assets/js/jquery.min.js' %}"></script>
-  <script src="{% static 'html5up-escape-velocity/assets/js/jquery.dropotron.min.js' %}"></script>
-  <script src="{% static 'html5up-escape-velocity/assets/js/browser.min.js' %}"></script>
-  <script src="{% static 'html5up-escape-velocity/assets/js/breakpoints.min.js' %}"></script>
-  <script src="{% static 'html5up-escape-velocity/assets/js/util.js' %}"></script>
-  <script src="{% static 'html5up-escape-velocity/assets/js/main.js' %}"></script>
+  <script src="{% static 'html5up-zerofour/assets/js/jquery.min.js' %}"></script>
+  <script src="{% static 'html5up-zerofour/assets/js/jquery.dropotron.min.js' %}"></script>
+  <script src="{% static 'html5up-zerofour/assets/js/browser.min.js' %}"></script>
+  <script src="{% static 'html5up-zerofour/assets/js/breakpoints.min.js' %}"></script>
+  <script src="{% static 'html5up-zerofour/assets/js/util.js' %}"></script>
+  <script src="{% static 'html5up-zerofour/assets/js/main.js' %}"></script>
   <script src="{% static 'js/app.js' %}"></script>
   {% block scripts %}{% endblock %}
 </body>

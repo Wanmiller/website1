@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Moderation" %} | PersonaVerse{% endblock %}
+{% block content %}
+<div class="pv-nx-page">
+  {% include 'includes/breadcrumbs.html' with items=breadcrumb_items %}
+  <section class="cv-section box">
+    <header class="style1"><h2>{% trans "Moderation Queue" %}</h2></header>
+    <div class="pv-nx-moderation-grid">
+      {% for report in open_reports %}
+        <article class="box pv-nx-article">
+          <p><strong>{{ report.target_type }} #{{ report.target_id }}</strong> | {% trans "reason:" %} {{ report.reason }}</p>
+          <p>{% blocktranslate with username=report.reporter.username created=report.created_at %}reported by {{ username }} at {{ created }}{% endblocktranslate %}</p>
+          <form method="post" action="{% url 'moderation:report_action' report.id %}" data-submit-lock>
+            {% csrf_token %}
+            <ul class="actions">
+              <li><button name="action" value="hide" class="button style3" type="submit">{% trans "Hide" %}</button></li>
+              <li><button name="action" value="publish" class="button style2" type="submit">{% trans "Publish" %}</button></li>
+              <li><button name="action" value="dismiss" class="button" type="submit">{% trans "Dismiss" %}</button></li>
+            </ul>
+          </form>
+        </article>
+      {% empty %}
+        <p>{% trans "No open reports." %}</p>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="cv-section box">
+    <header class="style1"><h3>{% trans "Recent Resolved" %}</h3></header>
+    <div class="pv-nx-moderation-grid">
+      {% for report in resolved_reports %}
+        <div class="box">{{ report.target_type }} #{{ report.target_id }} - {{ report.status }}</div>
+      {% empty %}
+        <p>{% trans "No resolved reports yet." %}</p>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

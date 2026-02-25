@@ -1,4 +1,5 @@
-﻿from rest_framework.views import exception_handler
+from django.utils.translation import gettext as _
+from rest_framework.views import exception_handler
 
 
 def unified_exception_handler(exc, context):
@@ -6,7 +7,7 @@ def unified_exception_handler(exc, context):
     if response is None:
         return response
 
-    message = "Request failed."
+    message = _("Request failed.")
     details = response.data
     if isinstance(response.data, dict):
         message = response.data.get("detail") or message

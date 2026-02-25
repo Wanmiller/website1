@@ -1,101 +1,119 @@
 import json
+from datetime import timedelta
 
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
+from django.utils import timezone
 
-from movies.models import AgeRating, Country, Language, Movie, Studio
+from engagement.models import Bookmark, Rating
+from people.models import Person
+from threads.models import Thread
 
 
 class APITests(TestCase):
     def setUp(self):
-        self.country = Country.objects.create(name="AA", code="AA")
-        self.lang = Language.objects.create(name="LL", code="ll")
-        self.age = AgeRating.objects.create(code="16+", description="desc")
-        self.studio = Studio.objects.create(name="Studio2", country=self.country)
-        self.movie = Movie.objects.create(
-            title="API Film",
-            synopsis="desc",
-            release_year=2023,
-            duration_minutes=102,
-            age_rating=self.age,
-            studio=self.studio,
-            country=self.country,
-            language=self.lang,
-        )
-        self.user = User.objects.create_user(username="u2", password="Pass12345!")
+        self.user = User.objects.create_user(username="api_user", password="Pass12345!")
         self.staff = User.objects.create_user(
-            username="staff_api", password="Pass12345!", is_staff=True
+            username="api_staff", password="Pass12345!", is_staff=True
+        )
+        self.person = Person.objects.create(full_name="API Person", bio="bio")
+        self.thread = Thread.objects.create(
+            author=self.user,
+            person=self.person,
+            title="API Thread",
+            body="desc",
         )
 
-    def test_movie_list(self):
-        response = self.client.get(reverse("api:movies"))
+    def test_person_list(self):
+        response = self.client.get(reverse("api:persons"))
         self.assertEqual(response.status_code, 200)
 
-    def test_protected_favorites(self):
-        response = self.client.get(reverse("api:favorites"))
+    def test_thread_list(self):
+        response = self.client.get(reverse("api:threads"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_thread_filters(self):
+        response = self.client.get(
+            reverse("api:threads"),
+            {
+                "q": "API",
+                "person": self.person.slug,
+                "ordering": "hot",
+                "created_after": (timezone.now() - timedelta(days=1)).date().isoformat(),
+                "score_min": 0,
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_thread_create_requires_auth(self):
+        payload = {"title": "No auth", "body": "x", "person_id": self.person.id}
+        response = self.client.post(
+            reverse("api:threads"), data=json.dumps(payload), content_type="application/json"
+        )
         self.assertEqual(response.status_code, 403)
 
-    def test_create_review_auth(self):
-        self.client.login(username="u2", password="Pass12345!")
+    def test_thread_create_for_authenticated_user(self):
+        self.client.login(username="api_user", password="Pass12345!")
+        payload = {"title": "Auth thread", "body": "x", "person_id": self.person.id}
         response = self.client.post(
-            reverse("api:reviews"),
-            {"movie": self.movie.id, "title": "T", "body": "B", "rating": 4},
+            reverse("api:threads"), data=json.dumps(payload), content_type="application/json"
         )
         self.assertEqual(response.status_code, 201)
 
-    def test_movies_post_forbidden_for_anonymous(self):
-        payload = {
-            "title": "Anon Create",
-            "synopsis": "Denied",
-            "release_year": 2024,
-            "duration_minutes": 100,
-            "age_rating": self.age.id,
-            "studio": self.studio.id,
-            "country": self.country.id,
-            "language": self.lang.id,
-            "genres": [],
-            "is_featured": False,
-        }
-        response = self.client.post(
-            reverse("api:movies"), data=json.dumps(payload), content_type="application/json"
+    def test_thread_update_requires_staff(self):
+        self.client.login(username="api_user", password="Pass12345!")
+        response = self.client.patch(
+            reverse("api:thread_detail", kwargs={"slug": self.thread.slug}),
+            data=json.dumps({"title": "new"}),
+            content_type="application/json",
         )
         self.assertEqual(response.status_code, 403)
 
-    def test_movies_post_forbidden_for_non_staff(self):
-        self.client.login(username="u2", password="Pass12345!")
-        payload = {
-            "title": "User Create",
-            "synopsis": "Denied",
-            "release_year": 2024,
-            "duration_minutes": 100,
-            "age_rating": self.age.id,
-            "studio": self.studio.id,
-            "country": self.country.id,
-            "language": self.lang.id,
-            "genres": [],
-            "is_featured": False,
-        }
-        response = self.client.post(
-            reverse("api:movies"), data=json.dumps(payload), content_type="application/json"
+    def test_thread_update_for_staff(self):
+        self.client.login(username="api_staff", password="Pass12345!")
+        response = self.client.patch(
+            reverse("api:thread_detail", kwargs={"slug": self.thread.slug}),
+            data=json.dumps({"title": "Updated by staff"}),
+            content_type="application/json",
         )
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 200)
 
-    def test_movies_post_allowed_for_staff(self):
-        self.client.login(username="staff_api", password="Pass12345!")
-        payload = {
-            "title": "Staff Create",
-            "synopsis": "Allowed",
-            "release_year": 2024,
-            "duration_minutes": 100,
-            "age_rating": self.age.id,
-            "studio": self.studio.id,
-            "country": self.country.id,
-            "language": self.lang.id,
-            "genres": [],
-            "is_featured": True,
-        }
+    def test_comment_create_auth(self):
+        self.client.login(username="api_user", password="Pass12345!")
+        payload = {"thread": self.thread.id, "body": "comment"}
         response = self.client.post(
-            reverse("api:movies"), data=json.dumps(payload), content_type="application/json"
+            reverse("api:comments"), data=json.dumps(payload), content_type="application/json"
         )
         self.assertEqual(response.status_code, 201)
+
+    def test_vote_create_auth(self):
+        self.client.login(username="api_user", password="Pass12345!")
+        payload = {"thread": self.thread.id, "value": 1}
+        response = self.client.post(
+            reverse("api:votes"), data=json.dumps(payload), content_type="application/json"
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_bookmark_create_auth(self):
+        self.client.login(username="api_user", password="Pass12345!")
+        payload = {"thread": self.thread.id}
+        response = self.client.post(
+            reverse("api:bookmarks"), data=json.dumps(payload), content_type="application/json"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(Bookmark.objects.filter(user=self.user, thread=self.thread).exists())
+
+    def test_rating_create_auth(self):
+        self.client.login(username="api_user", password="Pass12345!")
+        payload = {"thread": self.thread.id, "value": 4}
+        response = self.client.post(
+            reverse("api:ratings"), data=json.dumps(payload), content_type="application/json"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Rating.objects.get(user=self.user, thread=self.thread).value, 4)
+
+    def test_unified_error_format(self):
+        response = self.client.get(reverse("api:thread_detail", kwargs={"slug": "missing-slug"}))
+        self.assertEqual(response.status_code, 404)
+        self.assertIn("error", response.json())

@@ -1,35 +1,132 @@
 {% extends 'base.html' %}
-{% block title %}Home | CineVerse{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Feed" %} | PersonaVerse{% endblock %}
+
 {% block content %}
-<div class="cv-section">
-  <header class="style1">
-    <h2>Discover, review, and save your favorite movies</h2>
-    <p>Explore featured titles and latest releases on CineVerse.</p>
-  </header>
-</div>
+<div class="pv-nx-page">
+  {% if hero_thread %}
+    <section class="home-mag-shell">
+      <header class="home-mag-hero box">
+        <p class="home-mag-kicker">{% trans "Community Feed | PersonaVerse" %}</p>
+        <h2 class="home-mag-headline">
+          <a href="{% url 'threads:detail' hero_thread.slug %}">{{ hero_thread.title }}</a>
+        </h2>
+        <p class="home-mag-subline">{{ hero_thread.body|truncatechars:260 }}</p>
+        <div class="home-mag-meta">
+          <span class="home-mag-chip">
+            {% trans "Person:" %}
+            <a href="{% url 'people:detail' hero_thread.person.slug %}">{{ hero_thread.person.full_name }}</a>
+          </span>
+          <span class="home-mag-chip">{% blocktranslate with username=hero_thread.author.username %}By {{ username }}{% endblocktranslate %}</span>
+          <span class="home-mag-chip">{% blocktranslate with score=hero_thread.vote_score|default:0 %}Score {{ score }}{% endblocktranslate %}</span>
+          <span class="home-mag-chip">{% blocktranslate with count=hero_thread.comments_count|default:0 %}{{ count }} comments{% endblocktranslate %}</span>
+        </div>
+        <div class="home-mag-actions">
+          <a class="home-mag-cta" href="{% url 'threads:detail' hero_thread.slug %}">{% trans "Read Discussion" %}</a>
+          {% if request.user.is_authenticated %}
+            <a class="home-mag-ghost" href="{% url 'threads:create' %}">{% trans "Start New Thread" %}</a>
+          {% else %}
+            <a class="home-mag-ghost" href="{% url 'accounts:login' %}">{% trans "Login to Post" %}</a>
+          {% endif %}
+        </div>
+      </header>
 
-<div class="cv-section">
-  <h2>Featured</h2>
-  <div class="cv-grid">
-    {% for movie in featured_movies %}
-      {% include 'includes/movie_card.html' with movie=movie %}
-    {% empty %}
-      <p>No featured movies yet.</p>
-    {% endfor %}
-  </div>
-</div>
-
-<div class="cv-section">
-  <h2>Latest Releases</h2>
-  <div class="cv-grid">
-    {% for movie in latest_movies %}
-      <div class="box">
-        <h3><a href="{% url 'movies:detail' movie.slug %}">{{ movie.title }}</a></h3>
-        <p>{{ movie.release_year }}</p>
+      <div class="home-mag-controls" aria-label="{% trans 'Feed ordering' %}">
+        <a class="home-mag-pill {% if ordering == 'hot' %}is-active{% endif %}" href="{% url 'core:home' %}?ordering=hot">{% trans "Hot" %}</a>
+        <a class="home-mag-pill {% if ordering == 'new' %}is-active{% endif %}" href="{% url 'core:home' %}?ordering=new">{% trans "New" %}</a>
+        <a class="home-mag-pill {% if ordering == 'top' %}is-active{% endif %}" href="{% url 'core:home' %}?ordering=top">{% trans "Top" %}</a>
       </div>
-    {% empty %}
-      <p>No movies added.</p>
-    {% endfor %}
-  </div>
+
+      <div class="home-mag-layout">
+        <section class="home-mag-block box article-list">
+          <h3>{% trans "Trending Discussions" %}</h3>
+          <div class="home-mag-trending">
+            {% for thread in trending_threads %}
+              <article class="home-mag-card excerpt">
+                <h4><a href="{% url 'threads:detail' thread.slug %}">{{ thread.title }}</a></h4>
+                <p>
+                  <a href="{% url 'people:detail' thread.person.slug %}">{{ thread.person.full_name }}</a>
+                  | {% blocktranslate with score=thread.vote_score|default:0 count=thread.comments_count|default:0 %}Score {{ score }} | {{ count }} comments{% endblocktranslate %}
+                </p>
+              </article>
+            {% empty %}
+              <p class="home-mag-subline">{% trans "No additional discussions yet. Create one and set the tone." %}</p>
+            {% endfor %}
+          </div>
+        </section>
+
+        <div class="home-mag-block box spotlight">
+          <h3>{% trans "Latest Posts" %}</h3>
+          <ul class="home-mag-list">
+            {% for thread in fresh_threads %}
+              <li>
+                <a href="{% url 'threads:detail' thread.slug %}">{{ thread.title }}</a>
+                <small>{% blocktranslate with created=thread.created_at|date:"M d, Y" username=thread.author.username %}{{ created }} | {{ username }}{% endblocktranslate %}</small>
+              </li>
+            {% empty %}
+              <li><small>{% trans "No latest posts yet." %}</small></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </section>
+  {% else %}
+    <section class="home-mag-empty box feature2">
+      <h2>{% trans "No discussions yet" %}</h2>
+      <p>{% trans "PersonaVerse is ready. Publish the first thread to start the community timeline." %}</p>
+      <div class="home-mag-actions">
+        {% if request.user.is_authenticated %}
+          <a class="home-mag-cta" href="{% url 'threads:create' %}">{% trans "Start First Thread" %}</a>
+        {% else %}
+          <a class="home-mag-cta" href="{% url 'accounts:login' %}">{% trans "Login to Start" %}</a>
+          <a class="home-mag-ghost" href="{% url 'accounts:register' %}">{% trans "Create Account" %}</a>
+        {% endif %}
+      </div>
+    </section>
+  {% endif %}
+
+  <section class="home-mag-layout">
+    <section class="home-mag-block box article-list">
+      <h3>{% trans "People Spotlight" %}</h3>
+      <div class="home-mag-people">
+        {% for person in spotlight_people %}
+          <article class="home-mag-person">
+            {% if person.avatar %}
+              <img class="home-mag-avatar" src="{{ person.avatar.url }}" alt="{{ person.full_name }}" />
+            {% else %}
+              <span class="home-mag-avatar-fallback">{{ person.full_name|slice:":1"|upper }}</span>
+            {% endif %}
+            <div>
+              <a href="{% url 'people:detail' person.slug %}">
+                {{ person.full_name }}
+                {% if person.is_verified %}<span class="home-mag-verified">{% trans "Verified" %}</span>{% endif %}
+              </a>
+              <p>{% blocktranslate with count=person.thread_count|default:0 %}{{ count }} active discussions{% endblocktranslate %}</p>
+            </div>
+          </article>
+        {% empty %}
+          <p class="home-mag-subline">{% trans "No spotlight personalities yet." %}</p>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="home-mag-block box feature2">
+      <h3>{% trans "Community At A Glance" %}</h3>
+      <div class="home-mag-stats">
+        <article class="home-mag-stat">
+          <strong>{{ stats.total_threads }}</strong>
+          <span>{% trans "Published Threads" %}</span>
+        </article>
+        <article class="home-mag-stat">
+          <strong>{{ stats.total_comments }}</strong>
+          <span>{% trans "Published Comments" %}</span>
+        </article>
+        <article class="home-mag-stat">
+          <strong>{{ stats.total_people }}</strong>
+          <span>{% trans "Tracked Personalities" %}</span>
+        </article>
+      </div>
+    </section>
+  </section>
 </div>
 {% endblock %}

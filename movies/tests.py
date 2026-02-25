@@ -1,90 +1,39 @@
-﻿from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from django.test import TestCase
-from django.urls import reverse
 
-from movies.models import AgeRating, Country, Language, Movie, Studio
-from reviews.models import Review
+from comments.models import Comment
+from people.models import Person
+from threads.models import Thread
+from votes.models import Vote
 
 
-class ModelsTests(TestCase):
+class PersonaModelsTests(TestCase):
     def setUp(self):
-        self.country = Country.objects.create(name="TestCountry", code="TC")
-        self.lang = Language.objects.create(name="TestLang", code="tl")
-        self.age = AgeRating.objects.create(code="12+", description="test")
-        self.studio = Studio.objects.create(name="Studio", country=self.country)
+        self.user = User.objects.create_user(username="model_user", password="Pass12345!")
+        self.person = Person.objects.create(full_name="Model Person", bio="bio")
 
-    def test_movie_slug_generated(self):
-        movie = Movie.objects.create(
-            title="My Film",
-            synopsis="x",
-            release_year=2024,
-            duration_minutes=100,
-            age_rating=self.age,
-            studio=self.studio,
-            country=self.country,
-            language=self.lang,
+    def test_person_slug_generated(self):
+        self.assertTrue(self.person.slug)
+
+    def test_thread_slug_generated(self):
+        thread = Thread.objects.create(
+            author=self.user,
+            person=self.person,
+            title="My first persona thread",
+            body="content",
         )
-        self.assertTrue(movie.slug)
+        self.assertTrue(thread.slug)
 
-    def test_review_bounds(self):
-        user = User.objects.create_user(username="r1", password="Pass12345!")
-        movie = Movie.objects.create(
-            title="Film 2",
-            synopsis="x",
-            release_year=2025,
-            duration_minutes=90,
-            age_rating=self.age,
-            studio=self.studio,
-            country=self.country,
-            language=self.lang,
-        )
-        review = Review(user=user, movie=movie, title="ok", body="good", rating=5)
-        review.full_clean()
+    def test_vote_unique_per_user_target(self):
+        thread = Thread.objects.create(author=self.user, person=self.person, title="t", body="b")
+        Vote.objects.create(user=self.user, thread=thread, value=1)
+        vote = Vote.objects.get(user=self.user, thread=thread)
+        vote.value = -1
+        vote.save()
+        self.assertEqual(Vote.objects.filter(user=self.user, thread=thread).count(), 1)
 
-
-class WebPermissionsTests(TestCase):
-    def setUp(self):
-        self.country = Country.objects.create(name="PermCountry", code="PC")
-        self.lang = Language.objects.create(name="PermLang", code="pl")
-        self.age = AgeRating.objects.create(code="15+", description="perm")
-        self.studio = Studio.objects.create(name="PermStudio", country=self.country)
-        self.movie = Movie.objects.create(
-            title="Perm Movie",
-            synopsis="perm",
-            release_year=2024,
-            duration_minutes=95,
-            age_rating=self.age,
-            studio=self.studio,
-            country=self.country,
-            language=self.lang,
-        )
-        self.user = User.objects.create_user(username="regular", password="Pass12345!")
-        self.staff = User.objects.create_user(
-            username="staff_web", password="Pass12345!", is_staff=True
-        )
-
-    def test_anonymous_restricted_pages_redirect(self):
-        response = self.client.get(reverse("movies:create"))
-        self.assertEqual(response.status_code, 302)
-
-        response = self.client.get(reverse("favorites:list"))
-        self.assertEqual(response.status_code, 302)
-
-        response = self.client.get(reverse("dashboard:panel"))
-        self.assertEqual(response.status_code, 302)
-
-    def test_regular_user_forbidden_on_staff_pages(self):
-        self.client.login(username="regular", password="Pass12345!")
-        response = self.client.get(reverse("movies:create"))
-        self.assertEqual(response.status_code, 403)
-
-        response = self.client.get(reverse("dashboard:panel"))
-        self.assertEqual(response.status_code, 302)
-
-    def test_staff_can_access_staff_pages(self):
-        self.client.login(username="staff_web", password="Pass12345!")
-        response = self.client.get(reverse("movies:create"))
-        self.assertEqual(response.status_code, 200)
-
-        response = self.client.get(reverse("dashboard:panel"))
-        self.assertEqual(response.status_code, 200)
+    def test_comment_reply(self):
+        thread = Thread.objects.create(author=self.user, person=self.person, title="t2", body="b2")
+        parent = Comment.objects.create(thread=thread, author=self.user, body="parent")
+        reply = Comment.objects.create(thread=thread, author=self.user, parent=parent, body="child")
+        self.assertEqual(reply.parent, parent)

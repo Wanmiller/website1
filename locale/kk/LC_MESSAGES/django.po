@@ -1,0 +1,878 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-25 12:30+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: KK\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: .\accounts\forms.py:10 .\accounts\forms.py:23
+msgid "Email"
+msgstr "Электрондық пошта"
+
+#: .\accounts\forms.py:22
+msgid "Username"
+msgstr "Пайдаланушы аты"
+
+#: .\accounts\forms.py:24
+msgid "First name"
+msgstr "Аты"
+
+#: .\accounts\forms.py:25
+msgid "Last name"
+msgstr "Фамилия"
+
+#: .\accounts\forms.py:34
+msgid "Display name"
+msgstr "Көрсетілетін атау"
+
+#: .\accounts\forms.py:35
+msgid "Bio"
+msgstr "Био"
+
+#: .\accounts\forms.py:36
+msgid "Avatar"
+msgstr "Аватар"
+
+#: .\accounts\views.py:30
+msgid "Registration successful."
+msgstr "Тіркелу сәтті өтті."
+
+#: .\accounts\views.py:32
+msgid "Please correct the errors below."
+msgstr "Төмендегі қателерді түзетіңіз."
+
+#: .\accounts\views.py:53
+msgid "Profile updated."
+msgstr "Профиль жаңартылды."
+
+#: .\accounts\views.py:69
+msgid "You have been logged out."
+msgstr "Сіз жүйеден шықтыңыз."
+
+#: .\api\exceptions.py:10
+msgid "Request failed."
+msgstr "Сұрау орындалмады."
+
+#: .\api\serializers.py:94
+msgid "Provide exactly one target: thread or comment."
+msgstr "Дәл бір мақсатты көрсетіңіз: ағын немесе түсініктеме."
+
+#: .\api\serializers.py:96
+msgid "Value must be -1 or 1."
+msgstr "Мән -1 немесе 1 болуы керек."
+
+#: .\comments\forms.py:11 .\engagement\models.py:100 .\moderation\models.py:9
+msgid "Comment"
+msgstr "Пікір"
+
+#: .\comments\models.py:10 .\threads\models.py:11
+msgid "Published"
+msgstr "Жарияланды"
+
+#: .\comments\models.py:11 .\threads\models.py:12
+msgid "Hidden"
+msgstr "Жасырын"
+
+#: .\comments\views.py:25
+msgid "Reply posted."
+msgstr "Жауап жарияланды."
+
+#: .\core\templatetags\core_extras.py:12
+msgid "N/A"
+msgstr "Жоқ"
+
+#: .\core\templatetags\core_extras.py:14 .\core\templatetags\core_extras.py:16
+#: .\core\templatetags\core_extras.py:17
+#, python-format
+msgid "%(level)s (%(rating).1f)"
+msgstr "%(level)s (%(rating).1f)"
+
+#: .\core\templatetags\core_extras.py:14
+msgid "Excellent"
+msgstr "Өте жақсы"
+
+#: .\core\templatetags\core_extras.py:16
+msgid "Good"
+msgstr "Жақсы"
+
+#: .\core\templatetags\core_extras.py:17
+msgid "Needs work"
+msgstr "Жұмыс керек"
+
+#: .\core\validators.py:17
+msgid "File size must be less than or equal to 3MB."
+msgstr "Файл өлшемі 3 МБ-тан аз немесе оған тең болуы керек."
+
+#: .\core\views.py:83
+msgid "Home"
+msgstr "Басты бет"
+
+#: .\core\views.py:83 .\templates\base.html:37 .\templates\base.html:148
+#: .\templates\core\about.html:3
+msgid "About"
+msgstr "Жоба туралы"
+
+#: .\engagement\models.py:101 .\templates\comments\reply_form.html:3
+#: .\templates\threads\thread_detail.html:69
+msgid "Reply"
+msgstr "Жауап беру"
+
+#: .\engagement\models.py:102
+msgid "Report"
+msgstr "Есеп беру"
+
+#: .\engagement\views.py:41
+msgid "Invalid rating"
+msgstr "Жарамсыз рейтинг"
+
+#: .\engagement\views.py:44
+msgid "Rating must be between 1 and 5"
+msgstr "Рейтинг 1 мен 5 арасында болуы керек"
+
+#: .\moderation\models.py:9 .\search\views.py:58
+msgid "Thread"
+msgstr "Талқылау"
+
+#: .\moderation\models.py:15
+msgid "Open"
+msgstr "Ашық"
+
+#: .\moderation\models.py:16
+msgid "Resolved"
+msgstr "Шешілді"
+
+#: .\moderation\models.py:17
+msgid "Dismissed"
+msgstr "Жұмыстан шығарылды"
+
+#: .\moderation\views.py:48
+msgid "Invalid action."
+msgstr "Жарамсыз әрекет."
+
+#: .\moderation\views.py:53
+msgid "Moderation action applied."
+msgstr "Модерация әрекеті қолданылды."
+
+#: .\moderation\views.py:67
+msgid "Invalid report target."
+msgstr "Жарамсыз есеп мақсаты."
+
+#: .\moderation\views.py:71
+msgid "Invalid report payload."
+msgstr "Жарамсыз есеп жүктемесі."
+
+#: .\moderation\views.py:80
+msgid "Report submitted."
+msgstr "Есеп жіберілді."
+
+#: .\search\views.py:49 .\templates\threads\thread_list.html:16
+#: .\threads\forms.py:12
+msgid "Person"
+msgstr "Тұлға"
+
+#: .\templates\accounts\login.html:3 .\templates\accounts\login.html:7
+#: .\templates\accounts\login.html:12 .\templates\base.html:66
+msgid "Login"
+msgstr "Кіру"
+
+#: .\templates\accounts\login.html:13
+msgid "Forgot Password"
+msgstr "Құпия сөзді ұмыттыңыз"
+
+#: .\templates\accounts\password_change.html:3
+msgid "Password Change"
+msgstr "Құпия сөзді өзгерту"
+
+#: .\templates\accounts\password_change.html:7
+#: .\templates\accounts\profile.html:23
+msgid "Change Password"
+msgstr "Құпия сөзді өзгерту"
+
+#: .\templates\accounts\password_change.html:11
+msgid "Update"
+msgstr "Жаңарту"
+
+#: .\templates\accounts\password_change_done.html:3
+msgid "Password Changed"
+msgstr "Құпия сөз өзгертілді"
+
+#: .\templates\accounts\password_change_done.html:7
+msgid "Password Updated"
+msgstr "Құпия сөз жаңартылды"
+
+#: .\templates\accounts\password_change_done.html:8
+msgid "Password changed successfully."
+msgstr "Құпия сөз сәтті өзгертілді."
+
+#: .\templates\accounts\password_reset.html:3
+msgid "Password Reset"
+msgstr "Құпия сөзді қалпына келтіру"
+
+#: .\templates\accounts\password_reset.html:7
+msgid "Reset Password"
+msgstr "Құпия сөзді қалпына келтіру"
+
+#: .\templates\accounts\password_reset.html:11
+msgid "Send"
+msgstr "Жіберу"
+
+#: .\templates\accounts\password_reset_complete.html:3
+msgid "Password Reset Complete"
+msgstr "Құпия сөзді қалпына келтіру аяқталды"
+
+#: .\templates\accounts\password_reset_complete.html:7
+msgid "Reset Complete"
+msgstr "Қалпына келтіру аяқталды"
+
+#: .\templates\accounts\password_reset_complete.html:8
+msgid "Password reset complete. You can login now."
+msgstr "Құпия сөзді қалпына келтіру аяқталды. Сіз қазір кіре аласыз."
+
+#: .\templates\accounts\password_reset_confirm.html:3
+#: .\templates\accounts\password_reset_confirm.html:7
+msgid "Set New Password"
+msgstr "Жаңа құпия сөзді орнату"
+
+#: .\templates\accounts\password_reset_confirm.html:11
+#: .\templates\accounts\profile_edit.html:14
+#: .\templates\threads\thread_detail.html:29
+#: .\templates\threads\thread_detail.html:32
+msgid "Save"
+msgstr "Сақтау"
+
+#: .\templates\accounts\password_reset_done.html:3
+msgid "Reset Email Sent"
+msgstr "Жіберілген электрондық поштаны қалпына келтіру"
+
+#: .\templates\accounts\password_reset_done.html:7
+msgid "Email Sent"
+msgstr "Электрондық пошта жіберілді"
+
+#: .\templates\accounts\password_reset_done.html:8
+msgid "Password reset instructions have been sent."
+msgstr "Құпия сөзді қалпына келтіру нұсқаулары жіберілді."
+
+#: .\templates\accounts\profile.html:3 .\templates\accounts\profile.html:7
+#: .\templates\base.html:53
+msgid "Profile"
+msgstr "Профиль"
+
+#: .\templates\accounts\profile.html:11
+msgid "Profile avatar"
+msgstr "Профиль аватары"
+
+#: .\templates\accounts\profile.html:13
+msgid "No avatar yet"
+msgstr "Әзірге аватар жоқ"
+
+#: .\templates\accounts\profile.html:16
+msgid "Username:"
+msgstr "Пайдаланушы аты:"
+
+#: .\templates\accounts\profile.html:17
+msgid "Name:"
+msgstr "Аты:"
+
+#: .\templates\accounts\profile.html:18
+msgid "Display name:"
+msgstr "Көрсетілетін атау:"
+
+#: .\templates\accounts\profile.html:19
+msgid "Email:"
+msgstr "Электрондық пошта:"
+
+#: .\templates\accounts\profile.html:20
+msgid "Reputation:"
+msgstr "Бедел:"
+
+#: .\templates\accounts\profile.html:22
+#: .\templates\accounts\profile_edit.html:3
+#: .\templates\accounts\profile_edit.html:7
+msgid "Edit Profile"
+msgstr "Профильді өңдеу"
+
+#: .\templates\accounts\register.html:3 .\templates\accounts\register.html:11
+#: .\templates\base.html:67
+msgid "Register"
+msgstr "Тіркелу"
+
+#: .\templates\accounts\register.html:7 .\templates\core\home.html:82
+msgid "Create Account"
+msgstr "Аккаунт ашу"
+
+#: .\templates\base.html:7
+msgid "PersonaVerse"
+msgstr "PersonaVerse"
+
+#: .\templates\base.html:22
+msgid "Main navigation"
+msgstr "Негізгі навигация"
+
+#: .\templates\base.html:25 .\templates\core\home.html:3
+msgid "Feed"
+msgstr "Таспа"
+
+#: .\templates\base.html:28 .\templates\base.html:150
+#: .\templates\people\person_list.html:3
+#: .\templates\search\search_page.html:22
+msgid "People"
+msgstr "Тұлғалар"
+
+#: .\templates\base.html:31 .\templates\base.html:149
+#: .\templates\search\search_page.html:40
+#: .\templates\threads\thread_list.html:3
+#: .\templates\threads\thread_list.html:7
+msgid "Threads"
+msgstr "Талқылаулар"
+
+#: .\templates\base.html:34 .\templates\search\search_page.html:3
+#: .\templates\search\search_page.html:7
+#: .\templates\search\search_page.html:14
+#: .\templates\threads\thread_list.html:12
+msgid "Search"
+msgstr "Іздеу"
+
+#: .\templates\base.html:41
+msgid "Staff"
+msgstr "Қызметкерлер"
+
+#: .\templates\base.html:43 .\templates\moderation\panel.html:3
+msgid "Moderation"
+msgstr "Модерация"
+
+#: .\templates\base.html:44 .\templates\dashboard\panel.html:3
+msgid "Dashboard"
+msgstr "Басқару панелі"
+
+#: .\templates\base.html:50 .\templates\base.html:64
+msgid "Account"
+msgstr "Тіркелгі"
+
+#: .\templates\base.html:52 .\templates\engagement\bookmark_list.html:3
+msgid "Bookmarks"
+msgstr "Бетбелгілер"
+
+#: .\templates\base.html:57
+msgid "Logout"
+msgstr "Шығу"
+
+#: .\templates\base.html:76 .\templates\base.html:110
+msgid "Language"
+msgstr "Тіл"
+
+#: .\templates\base.html:84 .\templates\base.html:117
+msgid "Theme"
+msgstr "Тақырып"
+
+#: .\templates\base.html:86 .\templates\base.html:119
+msgid "Template"
+msgstr "Үлгі"
+
+#: .\templates\base.html:87 .\templates\base.html:120
+msgid "Dark"
+msgstr "Қараңғы"
+
+#: .\templates\base.html:94
+msgid "focused discussions about public personalities"
+msgstr "қоғамдық тұлғалар туралы пікірталастар болды"
+
+#: .\templates\base.html:95
+msgid "Threads, comments, votes, bookmarks, moderation"
+msgstr "Тақырыптар, пікірлер, дауыстар, бетбелгілер, модерация"
+
+#: .\templates\base.html:97
+msgid "Start Thread"
+msgstr "Тақырыпты бастау"
+
+#: .\templates\base.html:99
+msgid "Join Community"
+msgstr "Қауымдастыққа қосылыңыз"
+
+#: .\templates\base.html:141
+msgid "Community platform for public personality discussions."
+msgstr "Қоғамдық тұлғаны талқылауға арналған қауымдастық платформасы."
+
+#: .\templates\base.html:146
+msgid "Navigation"
+msgstr "Навигация"
+
+#: .\templates\base.html:156
+msgid "Technical"
+msgstr "Техникалық"
+
+#: .\templates\base.html:160
+msgid "ZeroFour Template"
+msgstr "ZeroFour үлгісі"
+
+#: .\templates\base.html:168
+msgid "Design"
+msgstr "Дизайн"
+
+#: .\templates\base.html:168
+msgid "HTML5 UP ZeroFour (adapted)"
+msgstr "HTML5 UP ZeroFour (бейімделген)"
+
+#: .\templates\comments\reply_form.html:6
+msgid "Reply to comment"
+msgstr "Пікірге жауап беру"
+
+#: .\templates\comments\reply_form.html:7
+msgid "Thread:"
+msgstr "Тақырып:"
+
+#: .\templates\comments\reply_form.html:12
+msgid "Post reply"
+msgstr "Жауапты жариялау"
+
+#: .\templates\core\404.html:8
+msgid "Page not found."
+msgstr "Бет табылмады."
+
+#: .\templates\core\404.html:9 .\templates\core\500.html:9
+msgid "Back to feed"
+msgstr "Арнаға оралу"
+
+#: .\templates\core\500.html:8
+msgid "Server error."
+msgstr "Сервер қатесі."
+
+#: .\templates\core\about.html:8
+msgid "About PersonaVerse"
+msgstr "PersonaVerse туралы"
+
+#: .\templates\core\about.html:9
+msgid ""
+"PersonaVerse is a discussion platform where communities talk about public "
+"personalities in focused threads."
+msgstr ""
+"PersonaVerse - қауымдастықтар фокусталған тақырыптарда қоғамдық тұлғалар "
+"туралы айтатын пікірталас алаңы."
+
+#: .\templates\core\about.html:11
+msgid "Create threads linked to a person profile."
+msgstr "Адам профиліне байланыстырылған ағындарды жасаңыз."
+
+#: .\templates\core\about.html:12
+msgid "Reply in nested comments."
+msgstr "Кірістірілген түсініктемелерде жауап беріңіз."
+
+#: .\templates\core\about.html:13
+msgid "Vote, bookmark, rate, and report content for moderation."
+msgstr ""
+"Модерация үшін дауыс беру, бетбелгі қою, бағалау және мазмұнды хабарлау."
+
+#: .\templates\core\home.html:10
+msgid "Community Feed | PersonaVerse"
+msgstr "Қауымдастық арнасы | PersonaVerse"
+
+#: .\templates\core\home.html:17 .\templates\engagement\bookmark_list.html:10
+#: .\templates\threads\thread_detail.html:9
+#: .\templates\threads\thread_list.html:53
+msgid "Person:"
+msgstr "Адам:"
+
+#: .\templates\core\home.html:20 .\templates\people\person_detail.html:34
+#: .\templates\threads\thread_detail.html:10
+#: .\templates\threads\thread_list.html:54
+#, python-format
+msgid "By %(username)s"
+msgstr "Авторы %(username)s"
+
+#: .\templates\core\home.html:21 .\templates\people\person_detail.html:35
+#: .\templates\threads\thread_list.html:55
+#, python-format
+msgid "Score %(score)s"
+msgstr "Ұпай %(score)s"
+
+#: .\templates\core\home.html:22 .\templates\threads\thread_list.html:56
+#, python-format
+msgid "%(count)s comments"
+msgstr "%(count)s пікірлер"
+
+#: .\templates\core\home.html:25
+msgid "Read Discussion"
+msgstr "Талқылауды оқу"
+
+#: .\templates\core\home.html:27
+msgid "Start New Thread"
+msgstr "Жаңа ағынды бастау"
+
+#: .\templates\core\home.html:29
+msgid "Login to Post"
+msgstr "Постқа кіру"
+
+#: .\templates\core\home.html:34
+msgid "Feed ordering"
+msgstr "Тамаққа тапсырыс беру"
+
+#: .\templates\core\home.html:35 .\templates\threads\thread_list.html:27
+msgid "Hot"
+msgstr "Ыстық"
+
+#: .\templates\core\home.html:36 .\templates\threads\thread_list.html:28
+msgid "New"
+msgstr "Жаңа"
+
+#: .\templates\core\home.html:37 .\templates\threads\thread_list.html:29
+msgid "Top"
+msgstr "Жоғарғы"
+
+#: .\templates\core\home.html:42
+msgid "Trending Discussions"
+msgstr "Трендті талқылаулар"
+
+#: .\templates\core\home.html:49
+#, python-format
+msgid "Score %(score)s | %(count)s comments"
+msgstr "Ұпай %(score)s | %(count)s пікірлер"
+
+#: .\templates\core\home.html:53
+msgid "No additional discussions yet. Create one and set the tone."
+msgstr "Қосымша талқылаулар әлі жоқ. Біреуін жасап, үнді орнатыңыз."
+
+#: .\templates\core\home.html:59
+msgid "Latest Posts"
+msgstr "Соңғы хабарламалар"
+
+#: .\templates\core\home.html:64
+#, python-format
+msgid "%(created)s | %(username)s"
+msgstr "%(created)s | %(username)s"
+
+#: .\templates\core\home.html:67
+msgid "No latest posts yet."
+msgstr "Соңғы жазбалар әлі жоқ."
+
+#: .\templates\core\home.html:75
+msgid "No discussions yet"
+msgstr "Әзірге талқылаулар жоқ"
+
+#: .\templates\core\home.html:76
+msgid ""
+"PersonaVerse is ready. Publish the first thread to start the community "
+"timeline."
+msgstr ""
+"PersonaVerse дайын. Қауымдастық хронологиясын бастау үшін бірінші ағынды "
+"жариялаңыз."
+
+#: .\templates\core\home.html:79
+msgid "Start First Thread"
+msgstr "Бірінші ағынды бастау"
+
+#: .\templates\core\home.html:81
+msgid "Login to Start"
+msgstr "Бастау үшін жүйеге кіріңіз"
+
+#: .\templates\core\home.html:90
+msgid "People Spotlight"
+msgstr "Адамдардың назары"
+
+#: .\templates\core\home.html:102 .\templates\people\person_detail.html:15
+#: .\templates\people\person_list.html:27
+msgid "Verified"
+msgstr "Тексерілді"
+
+#: .\templates\core\home.html:104
+#, python-format
+msgid "%(count)s active discussions"
+msgstr "%(count)s белсенді талқылаулар"
+
+#: .\templates\core\home.html:108
+msgid "No spotlight personalities yet."
+msgstr "Әлі назар аударатын тұлғалар жоқ."
+
+#: .\templates\core\home.html:114
+msgid "Community At A Glance"
+msgstr "Бір қарағанда қауымдастық"
+
+#: .\templates\core\home.html:118
+msgid "Published Threads"
+msgstr "Жарияланған тақырыптар"
+
+#: .\templates\core\home.html:122
+msgid "Published Comments"
+msgstr "Жарияланған пікірлер"
+
+#: .\templates\core\home.html:126
+msgid "Tracked Personalities"
+msgstr "Бақыланатын тұлғалар"
+
+#: .\templates\dashboard\panel.html:7
+msgid "Admin Dashboard"
+msgstr "Әкімші бақылау тақтасы"
+
+#: .\templates\dashboard\panel.html:9
+msgid "Total Threads"
+msgstr "Жалпы ағындар"
+
+#: .\templates\dashboard\panel.html:10
+msgid "Total Comments"
+msgstr "Жалпы пікірлер"
+
+#: .\templates\dashboard\panel.html:11
+msgid "Total People"
+msgstr "Жалпы адам"
+
+#: .\templates\dashboard\panel.html:16
+msgid "Top People by Threads"
+msgstr "Тақырыптар бойынша үздік адамдар"
+
+#: .\templates\dashboard\panel.html:21
+msgid "No data."
+msgstr "Деректер жоқ."
+
+#: .\templates\engagement\bookmark_list.html:6
+msgid "My Bookmarks"
+msgstr "Менің бетбелгілерім"
+
+#: .\templates\engagement\bookmark_list.html:11
+#, python-format
+msgid "Saved %(created)s"
+msgstr "Сақталған %(created)s"
+
+#: .\templates\engagement\bookmark_list.html:14
+msgid "You have no bookmarks yet."
+msgstr "Сізде әлі бетбелгілер жоқ."
+
+#: .\templates\includes\breadcrumbs.html:3
+msgid "Breadcrumbs"
+msgstr "Нан үгінділері"
+
+#: .\templates\includes\pagination.html:6
+msgid "Prev"
+msgstr "Алдыңғы"
+
+#: .\templates\includes\pagination.html:8
+#, python-format
+msgid "Page %(number)s / %(total)s"
+msgstr "Бет %(number)s / %(total)s"
+
+#: .\templates\includes\pagination.html:10
+msgid "Next"
+msgstr "Келесі"
+
+#: .\templates\moderation\panel.html:7
+msgid "Moderation Queue"
+msgstr "Модерация кезегі"
+
+#: .\templates\moderation\panel.html:11
+msgid "reason:"
+msgstr "себебі:"
+
+#: .\templates\moderation\panel.html:12
+#, python-format
+msgid "reported by %(username)s at %(created)s"
+msgstr "%(username)s хабарлаған: %(created)s"
+
+#: .\templates\moderation\panel.html:16
+msgid "Hide"
+msgstr "Жасыру"
+
+#: .\templates\moderation\panel.html:17
+#: .\templates\threads\thread_form.html:10
+msgid "Publish"
+msgstr "Жариялау"
+
+#: .\templates\moderation\panel.html:18
+msgid "Dismiss"
+msgstr "Бас тарту"
+
+#: .\templates\moderation\panel.html:23
+msgid "No open reports."
+msgstr "Ашық есептер жоқ."
+
+#: .\templates\moderation\panel.html:29
+msgid "Recent Resolved"
+msgstr "Жақында шешілді"
+
+#: .\templates\moderation\panel.html:34
+msgid "No resolved reports yet."
+msgstr "Әлі шешілген есептер жоқ."
+
+#: .\templates\people\person_detail.html:22
+#: .\templates\people\person_list.html:32
+#: .\templates\search\search_page.html:30
+msgid "No bio yet."
+msgstr "Био әлі жоқ."
+
+#: .\templates\people\person_detail.html:25
+msgid "Start thread about this person"
+msgstr "Осы адам туралы тақырыпты бастаңыз"
+
+#: .\templates\people\person_detail.html:40
+msgid "No discussions yet."
+msgstr "Әзірге талқылаулар жоқ."
+
+#: .\templates\people\person_list.html:7
+msgid "People Directory"
+msgstr "Адамдар каталогы"
+
+#: .\templates\people\person_list.html:10
+msgid "Search person"
+msgstr "Адамды іздеу"
+
+#: .\templates\people\person_list.html:11
+msgid "Name"
+msgstr "Аты"
+
+#: .\templates\people\person_list.html:37
+msgid "No people found."
+msgstr "Адамдар табылмады."
+
+#: .\templates\search\search_page.html:10
+msgid "Find people and threads"
+msgstr "Адамдар мен тақырыптарды табыңыз"
+
+#: .\templates\search\search_page.html:11
+msgid "Type a person or discussion title"
+msgstr "Адамды немесе талқылау тақырыбын теріңіз"
+
+#: .\templates\search\search_page.html:34
+msgid "No matching people."
+msgstr "Сәйкес адамдар жоқ."
+
+#: .\templates\search\search_page.html:45
+#, python-format
+msgid "About %(person)s by %(username)s"
+msgstr "%(username)s бойынша %(person)s туралы"
+
+#: .\templates\search\search_page.html:49
+msgid "No matching threads."
+msgstr "Сәйкес ағындар жоқ."
+
+#: .\templates\threads\thread_detail.html:11
+msgid "Score"
+msgstr "Ұпай"
+
+#: .\templates\threads\thread_detail.html:14
+msgid "Average rating:"
+msgstr "Орташа рейтинг:"
+
+#: .\templates\threads\thread_detail.html:21
+msgid "Upvote"
+msgstr "Дауыс беру"
+
+#: .\templates\threads\thread_detail.html:22
+msgid "Downvote"
+msgstr "Теріс дауыс беру"
+
+#: .\templates\threads\thread_detail.html:28
+#: .\templates\threads\thread_detail.html:32
+msgid "Bookmarked"
+msgstr "Бетбелгі қойылған"
+
+#: .\templates\threads\thread_detail.html:37
+msgid "Your rating"
+msgstr "Сіздің рейтингіңіз"
+
+#: .\templates\threads\thread_detail.html:44
+msgid "Save rating"
+msgstr "Бағаны сақтау"
+
+#: .\templates\threads\thread_detail.html:53
+#: .\templates\threads\thread_detail.html:79
+msgid "Report reason"
+msgstr "Себебін хабарлау"
+
+#: .\templates\threads\thread_detail.html:54
+msgid "Reason"
+msgstr "Себеп"
+
+#: .\templates\threads\thread_detail.html:56
+msgid "Report thread"
+msgstr "Тізбекті хабарлау"
+
+#: .\templates\threads\thread_detail.html:62
+msgid "Comments"
+msgstr "Пікірлер"
+
+#: .\templates\threads\thread_detail.html:65
+#, python-format
+msgid "score %(score)s"
+msgstr "ұпай %(score)s"
+
+#: .\templates\threads\thread_detail.html:81
+msgid "Report comment"
+msgstr "Пікір туралы хабарлау"
+
+#: .\templates\threads\thread_detail.html:92
+msgid "No comments yet."
+msgstr "Пікірлер әлі жоқ."
+
+#: .\templates\threads\thread_detail.html:98
+msgid "Add comment"
+msgstr "Пікір қосу"
+
+#: .\templates\threads\thread_detail.html:102
+msgid "Post comment"
+msgstr "Пікір қалдыру"
+
+#: .\templates\threads\thread_form.html:3
+#: .\templates\threads\thread_form.html:6
+#: .\templates\threads\thread_list.html:43
+msgid "Create Thread"
+msgstr "Тақырып құру"
+
+#: .\templates\threads\thread_list.html:8
+msgid "Editorial feed of discussions"
+msgstr "Пікірталастардың редакциялық арнасы"
+
+#: .\templates\threads\thread_list.html:13
+msgid "Title or text"
+msgstr "Тақырып немесе мәтін"
+
+#: .\templates\threads\thread_list.html:18
+msgid "All"
+msgstr "Барлығы"
+
+#: .\templates\threads\thread_list.html:25
+msgid "Ordering"
+msgstr "Тапсырыс беру"
+
+#: .\templates\threads\thread_list.html:33
+msgid "Created after"
+msgstr "Кейін жасалған"
+
+#: .\templates\threads\thread_list.html:37
+msgid "Min score"
+msgstr "Минималды ұпай"
+
+#: .\templates\threads\thread_list.html:42
+msgid "Apply"
+msgstr "Қолдану"
+
+#: .\templates\threads\thread_list.html:61
+msgid "No threads found."
+msgstr "Жіптер табылмады."
+
+#: .\threads\forms.py:13
+msgid "Title"
+msgstr "Тақырып"
+
+#: .\threads\forms.py:14
+msgid "Body"
+msgstr "Дене"
+
+#: .\threads\views.py:126
+msgid "Thread created."
+msgstr "Жіп құрылды."
+
+#: .\threads\views.py:146
+msgid "Comment posted."
+msgstr "Пікір жарияланды."
+
+#: .\threads\views.py:148
+msgid "Comment is invalid."
+msgstr "Пікір жарамсыз."

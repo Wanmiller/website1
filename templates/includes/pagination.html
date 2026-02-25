@@ -1,12 +1,13 @@
+{% load i18n %}
 {% if page_obj.has_other_pages %}
-<div class="cv-section">
+<div class="cv-section box">
   <ul class="pagination">
     {% if page_obj.has_previous %}
-      <li><a href="?page={{ page_obj.previous_page_number }}&q={{ filters.q }}&genre={{ filters.genre }}&year={{ filters.year }}&ordering={{ filters.ordering }}" class="button style2 small">Prev</a></li>
+      <li><a href="?page={{ page_obj.previous_page_number }}&q={{ filters.q|default:'' }}&person={{ filters.person|default:'' }}&ordering={{ filters.ordering|default:'' }}&created_after={{ filters.created_after|default:'' }}&score_min={{ filters.score_min|default:'' }}" class="button style2 small">{% trans "Prev" %}</a></li>
     {% endif %}
-    <li><span class="page-meta">Page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span></li>
+    <li><span class="page-meta">{% blocktranslate with number=page_obj.number total=page_obj.paginator.num_pages %}Page {{ number }} / {{ total }}{% endblocktranslate %}</span></li>
     {% if page_obj.has_next %}
-      <li><a href="?page={{ page_obj.next_page_number }}&q={{ filters.q }}&genre={{ filters.genre }}&year={{ filters.year }}&ordering={{ filters.ordering }}" class="button style2 small">Next</a></li>
+      <li><a href="?page={{ page_obj.next_page_number }}&q={{ filters.q|default:'' }}&person={{ filters.person|default:'' }}&ordering={{ filters.ordering|default:'' }}&created_after={{ filters.created_after|default:'' }}&score_min={{ filters.score_min|default:'' }}" class="button style2 small">{% trans "Next" %}</a></li>
     {% endif %}
   </ul>
 </div>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Delete Thread" %} | PersonaVerse{% endblock %}
+{% block content %}
+<div class="pv-nx-page">
+  {% include 'includes/breadcrumbs.html' with items=breadcrumb_items %}
+  <section class="cv-section box feature2">
+    <header class="style1"><h2>{% trans "Delete Thread" %}</h2></header>
+    <p>{% blocktranslate with title=thread.title %}Are you sure you want to delete "{{ title }}"?{% endblocktranslate %}</p>
+    <p>{% trans "This action cannot be undone." %}</p>
+    <form method="post" data-submit-lock data-confirm-message="{% trans 'Delete this thread permanently?' %}">
+      {% csrf_token %}
+      <ul class="actions">
+        <li>
+          <button class="button style3" type="submit" data-loading-text="{% trans 'Deleting...' %}">
+            {% trans "Delete" %}
+          </button>
+        </li>
+        <li><a class="button style2" href="{% url 'threads:detail' thread.slug %}">{% trans "Cancel" %}</a></li>
+      </ul>
+    </form>
+  </section>
+</div>
+{% endblock %}

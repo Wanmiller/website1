@@ -1,41 +1,34 @@
-﻿from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
-from movies.models import AgeRating, Country, Language, Movie, Studio
+from people.models import Person
+from threads.models import Thread
 
 
 class CoreViewsTests(TestCase):
     def setUp(self):
-        country = Country.objects.create(name="SmokeCountry", code="SC")
-        lang = Language.objects.create(name="SmokeLang", code="sl")
-        age = AgeRating.objects.create(code="13+", description="smoke")
-        studio = Studio.objects.create(name="SmokeStudio", country=country)
-        self.movie = Movie.objects.create(
-            title="Smoke Film",
-            synopsis="smoke",
-            release_year=2024,
-            duration_minutes=98,
-            age_rating=age,
-            studio=studio,
-            country=country,
-            language=lang,
-            is_featured=True,
+        self.user = User.objects.create_user(username="core_user", password="Pass12345!")
+        self.person = Person.objects.create(full_name="Core Person", bio="Bio", is_verified=True)
+        self.thread = Thread.objects.create(
+            author=self.user,
+            person=self.person,
+            title="Core thread",
+            body="Thread body",
         )
-        self.user = User.objects.create_user(username="smokeuser", password="Pass12345!")
+        self.client.cookies["django_language"] = "en"
 
     def test_home_page(self):
         response = self.client.get(reverse("core:home"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'id="wrapper"')
+        self.assertContains(response, "Community Feed")
 
-    def test_movies_list_page(self):
-        response = self.client.get(reverse("movies:list"))
+    def test_thread_list_page(self):
+        response = self.client.get(reverse("threads:list"))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'id="movie-filter-form"')
+        self.assertContains(response, "Threads")
 
-    def test_movie_detail_actions_for_authenticated_user(self):
-        self.client.login(username="smokeuser", password="Pass12345!")
-        response = self.client.get(reverse("movies:detail", kwargs={"slug": self.movie.slug}))
+    def test_thread_detail_page(self):
+        response = self.client.get(reverse("threads:detail", kwargs={"slug": self.thread.slug}))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "data-favorite-toggle")
+        self.assertContains(response, self.thread.title)

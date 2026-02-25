@@ -1,8 +1,8 @@
-# Render Deployment Guide (CineVerse)
+# Render Deployment Guide (PersonaVerse)
 
 ## 1) Create services
 1. Push repository to GitHub/GitLab.
-2. In Render, create PostgreSQL database `cineverse-db`.
+2. In Render, create PostgreSQL database service.
 3. Create web service from this repository.
 4. You can import `render.yaml` or set values manually.
 
@@ -34,14 +34,16 @@
 ## 5) Smoke checks
 - Open:
   - `/`
-  - `/movies/`
-  - `/movies/<slug>/`
+  - `/threads/`
+  - `/people/`
+  - `/search/`
   - `/about/`
-  - `/api/v1/movies/`
-  - `/api/v1/search/?q=test`
+  - `/api/v1/threads/`
+  - `/api/v1/persons/?q=test`
 - Validate auth flow: register/login/logout/password reset.
-- Validate staff-only write on movies API.
+- Validate anonymous/user/staff permission matrix.
 - Validate static and media loading (no 404).
+- Validate bookmark/rating actions.
 
 ## 6) Logs and restart
 - Logs: Render service -> Logs tab.
@@ -51,8 +53,8 @@
 - Linux/macOS:
   - `export DATABASE_URL='postgres://...'`
   - `bash scripts/db_backup.sh`
-  - `bash scripts/db_restore.sh backups/cineverse_xxx.sql.gz`
+  - `bash scripts/db_restore.sh backups/personaverse_xxx.sql.gz`
 - Windows PowerShell:
   - `$env:DATABASE_URL='postgres://...'`
   - `./scripts/db_backup.ps1`
-  - `./scripts/db_restore.ps1 -InFile backups/cineverse_xxx.sql`
+  - `./scripts/db_restore.ps1 -InFile backups/personaverse_xxx.sql`

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Reply" %} | PersonaVerse{% endblock %}
+{% block content %}
+<div class="cv-section box feature2">
+  <header class="style1"><h2>{% trans "Reply to comment" %}</h2></header>
+  <p>{% trans "Thread:" %} <a href="{% url 'threads:detail' thread.slug %}">{{ thread.title }}</a></p>
+  <div class="box"><p>{{ parent.body }}</p></div>
+  <form method="post">
+    {% csrf_token %}
+    <div class="fields">{% include 'includes/form_fields.html' with form=form %}</div>
+    <ul class="actions"><li><button class="button style1" type="submit">{% trans "Post reply" %}</button></li></ul>
+  </form>
+</div>
+{% endblock %}

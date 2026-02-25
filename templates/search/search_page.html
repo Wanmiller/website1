@@ -1,12 +1,55 @@
 {% extends 'base.html' %}
-{% block title %}Search | CineVerse{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Search" %} | PersonaVerse{% endblock %}
 {% block content %}
-<div class="cv-section">
-  <header class="style1"><h2>Live Search</h2></header>
-  <div class="field">
-    <label for="live-search-input">Movie title</label>
-    <input id="live-search-input" type="text" placeholder="Type movie name" />
-  </div>
-  <ul id="live-search-results"></ul>
+<div class="pv-nx-page">
+  <section class="cv-section box feature2">
+    <header class="style1"><h2>{% trans "Search" %}</h2></header>
+    <form method="get" action="{% url 'search:page' %}">
+      <div class="field">
+        <label for="live-search-input">{% trans "Find people and threads" %}</label>
+        <input id="live-search-input" type="text" name="q" value="{{ q }}" placeholder="{% trans 'Type a person or discussion title' %}" autocomplete="off" />
+      </div>
+      <ul class="actions">
+        <li><button class="button style1" type="submit">{% trans "Search" %}</button></li>
+      </ul>
+      <ul id="live-search-results" class="cv-search-suggestions"></ul>
+    </form>
+  </section>
+
+  {% if q %}
+    <section class="cv-section box article-list">
+      <header class="style1"><h3>{% trans "People" %}</h3></header>
+      <div class="pv-nx-search-grid">
+        {% for person in people %}
+          <article class="box pv-nx-article excerpt">
+            <h4><a href="{% url 'people:detail' person.slug %}">{{ person.full_name }}</a></h4>
+            {% if person.bio %}
+              <p>{{ person.bio|truncatechars:140 }}</p>
+            {% else %}
+              <p>{% trans "No bio yet." %}</p>
+            {% endif %}
+          </article>
+        {% empty %}
+          <p>{% trans "No matching people." %}</p>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="cv-section box article-list">
+      <header class="style1"><h3>{% trans "Threads" %}</h3></header>
+      <div class="pv-nx-search-grid">
+        {% for thread in threads %}
+          <article class="box pv-nx-article excerpt">
+            <h4><a href="{% url 'threads:detail' thread.slug %}">{{ thread.title }}</a></h4>
+            <p>{% blocktranslate with person=thread.person.full_name username=thread.author.username %}About {{ person }} by {{ username }}{% endblocktranslate %}</p>
+            <p>{{ thread.body|truncatechars:160 }}</p>
+          </article>
+        {% empty %}
+          <p>{% trans "No matching threads." %}</p>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
 </div>
 {% endblock %}

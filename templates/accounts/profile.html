@@ -1,25 +1,78 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block title %}Profile | CineVerse{% endblock %}
+{% load static i18n %}
+{% block title %}{% trans "Profile" %} | PersonaVerse{% endblock %}
 {% block content %}
-<div class="cv-section">
-  <header class="style1"><h2>Profile</h2></header>
-  <div class="box profile-box">
-    <div class="profile-avatar-wrap">
-      {% if profile_obj.avatar %}
-        <img class="profile-avatar" src="{{ profile_obj.avatar.url }}" alt="Profile avatar">
-      {% else %}
-        <img class="profile-avatar" src="{% static 'img/placeholder.svg' %}" alt="No avatar yet">
-      {% endif %}
+<div class="pv-nx-page">
+  {% include 'includes/breadcrumbs.html' with items=breadcrumb_items %}
+  <section class="cv-section box">
+    <header class="style1"><h2>{% trans "Profile" %}</h2></header>
+    <div class="box profile-box">
+      <div class="profile-avatar-wrap">
+        {% if profile_obj.avatar %}
+          <img class="profile-avatar" src="{{ profile_obj.avatar.url }}" alt="{% trans 'Profile avatar' %}">
+        {% else %}
+          <img class="profile-avatar" src="{% static 'img/placeholder.svg' %}" alt="{% trans 'No avatar yet' %}">
+        {% endif %}
+      </div>
+      <p><strong>{% trans "Username:" %}</strong> {{ request.user.username }}</p>
+      <p><strong>{% trans "Name:" %}</strong> {{ request.user.first_name }} {{ request.user.last_name }}</p>
+      <p><strong>{% trans "Display name:" %}</strong> {{ profile_obj.display_name|default:'-' }}</p>
+      <p><strong>{% trans "Email:" %}</strong> {{ request.user.email }}</p>
+      <p><strong>{% trans "Reputation:" %}</strong> {{ profile_obj.reputation }}</p>
+      <ul class="actions">
+        <li><a class="button style1" href="{% url 'accounts:profile_edit' %}">{% trans "Edit Profile" %}</a></li>
+        <li><a class="button style2" href="{% url 'accounts:password_change' %}">{% trans "Change Password" %}</a></li>
+      </ul>
     </div>
-    <p><strong>Username:</strong> {{ request.user.username }}</p>
-    <p><strong>Name:</strong> {{ request.user.first_name }} {{ request.user.last_name }}</p>
-    <p><strong>Display name:</strong> {{ profile_obj.display_name|default:'-' }}</p>
-    <p><strong>Email:</strong> {{ request.user.email }}</p>
-    <ul class="actions">
-      <li><a class="button style1" href="{% url 'accounts:profile_edit' %}">Edit Profile</a></li>
-      <li><a class="button style2" href="{% url 'accounts:password_change' %}">Change Password</a></li>
-    </ul>
-  </div>
+  </section>
+
+  <section class="cv-section box article-list">
+    <header class="style1"><h3>{% trans "My Activity" %}</h3></header>
+    <div class="pv-nx-dashboard-grid">
+      <article class="box pv-nx-status-card">
+        <h4>{% trans "My Threads" %}</h4>
+        <ul>
+          {% for item in my_threads %}
+            <li><a href="{% url 'threads:detail' item.slug %}">{{ item.title }}</a></li>
+          {% empty %}
+            <li>{% trans "No threads yet." %}</li>
+          {% endfor %}
+        </ul>
+      </article>
+      <article class="box pv-nx-status-card">
+        <h4>{% trans "My Comments" %}</h4>
+        <ul>
+          {% for item in my_comments %}
+            <li><a href="{% url 'threads:detail' item.thread.slug %}">{{ item.thread.title }}</a></li>
+          {% empty %}
+            <li>{% trans "No comments yet." %}</li>
+          {% endfor %}
+        </ul>
+      </article>
+      <article class="box pv-nx-status-card">
+        <h4>{% trans "My Bookmarks" %}</h4>
+        <ul>
+          {% for item in my_bookmarks %}
+            <li><a href="{% url 'threads:detail' item.thread.slug %}">{{ item.thread.title }}</a></li>
+          {% empty %}
+            <li>{% trans "No bookmarks yet." %}</li>
+          {% endfor %}
+        </ul>
+      </article>
+      <article class="box pv-nx-status-card">
+        <h4>{% trans "My Ratings" %}</h4>
+        <ul>
+          {% for item in my_ratings %}
+            <li>
+              <a href="{% url 'threads:detail' item.thread.slug %}">{{ item.thread.title }}</a>
+              ({{ item.value }}/5)
+            </li>
+          {% empty %}
+            <li>{% trans "No ratings yet." %}</li>
+          {% endfor %}
+        </ul>
+      </article>
+    </div>
+  </section>
 </div>
 {% endblock %}

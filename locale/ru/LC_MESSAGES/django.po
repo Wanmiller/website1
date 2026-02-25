@@ -1,0 +1,879 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-25 12:30+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: RU\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\accounts\forms.py:10 .\accounts\forms.py:23
+msgid "Email"
+msgstr "Электронная почта"
+
+#: .\accounts\forms.py:22
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: .\accounts\forms.py:24
+msgid "First name"
+msgstr "Имя"
+
+#: .\accounts\forms.py:25
+msgid "Last name"
+msgstr "Фамилия"
+
+#: .\accounts\forms.py:34
+msgid "Display name"
+msgstr "Отображаемое имя"
+
+#: .\accounts\forms.py:35
+msgid "Bio"
+msgstr "Био"
+
+#: .\accounts\forms.py:36
+msgid "Avatar"
+msgstr "Аватар"
+
+#: .\accounts\views.py:30
+msgid "Registration successful."
+msgstr "Регистрация прошла успешно."
+
+#: .\accounts\views.py:32
+msgid "Please correct the errors below."
+msgstr "Пожалуйста, исправьте ошибки ниже."
+
+#: .\accounts\views.py:53
+msgid "Profile updated."
+msgstr "Профиль обновлен."
+
+#: .\accounts\views.py:69
+msgid "You have been logged out."
+msgstr "Вы вышли из системы."
+
+#: .\api\exceptions.py:10
+msgid "Request failed."
+msgstr "Запрос не выполнен."
+
+#: .\api\serializers.py:94
+msgid "Provide exactly one target: thread or comment."
+msgstr "Укажите ровно одну цель: ветку или комментарий."
+
+#: .\api\serializers.py:96
+msgid "Value must be -1 or 1."
+msgstr "Значение должно быть -1 или 1."
+
+#: .\comments\forms.py:11 .\engagement\models.py:100 .\moderation\models.py:9
+msgid "Comment"
+msgstr "Комментарий"
+
+#: .\comments\models.py:10 .\threads\models.py:11
+msgid "Published"
+msgstr "Опубликовано"
+
+#: .\comments\models.py:11 .\threads\models.py:12
+msgid "Hidden"
+msgstr "Скрытый"
+
+#: .\comments\views.py:25
+msgid "Reply posted."
+msgstr "Ответ опубликован."
+
+#: .\core\templatetags\core_extras.py:12
+msgid "N/A"
+msgstr "Н/Д"
+
+#: .\core\templatetags\core_extras.py:14 .\core\templatetags\core_extras.py:16
+#: .\core\templatetags\core_extras.py:17
+#, python-format
+msgid "%(level)s (%(rating).1f)"
+msgstr "%(level)s (%(rating).1f)"
+
+#: .\core\templatetags\core_extras.py:14
+msgid "Excellent"
+msgstr "Отличный"
+
+#: .\core\templatetags\core_extras.py:16
+msgid "Good"
+msgstr "Хороший"
+
+#: .\core\templatetags\core_extras.py:17
+msgid "Needs work"
+msgstr "Нужна работа"
+
+#: .\core\validators.py:17
+msgid "File size must be less than or equal to 3MB."
+msgstr "Размер файла должен быть меньше или равен 3 МБ."
+
+#: .\core\views.py:83
+msgid "Home"
+msgstr "Главная"
+
+#: .\core\views.py:83 .\templates\base.html:37 .\templates\base.html:148
+#: .\templates\core\about.html:3
+msgid "About"
+msgstr "О проекте"
+
+#: .\engagement\models.py:101 .\templates\comments\reply_form.html:3
+#: .\templates\threads\thread_detail.html:69
+msgid "Reply"
+msgstr "Отвечать"
+
+#: .\engagement\models.py:102
+msgid "Report"
+msgstr "Отчет"
+
+#: .\engagement\views.py:41
+msgid "Invalid rating"
+msgstr "Неверный рейтинг"
+
+#: .\engagement\views.py:44
+msgid "Rating must be between 1 and 5"
+msgstr "Оценка должна быть от 1 до 5."
+
+#: .\moderation\models.py:9 .\search\views.py:58
+msgid "Thread"
+msgstr "Тема"
+
+#: .\moderation\models.py:15
+msgid "Open"
+msgstr "Открыть"
+
+#: .\moderation\models.py:16
+msgid "Resolved"
+msgstr "Решено"
+
+#: .\moderation\models.py:17
+msgid "Dismissed"
+msgstr "Уволен"
+
+#: .\moderation\views.py:48
+msgid "Invalid action."
+msgstr "Недопустимое действие."
+
+#: .\moderation\views.py:53
+msgid "Moderation action applied."
+msgstr "Применено действие модерации."
+
+#: .\moderation\views.py:67
+msgid "Invalid report target."
+msgstr "Недопустимая цель отчета."
+
+#: .\moderation\views.py:71
+msgid "Invalid report payload."
+msgstr "Недопустимая полезная нагрузка отчета."
+
+#: .\moderation\views.py:80
+msgid "Report submitted."
+msgstr "Отчет отправлен."
+
+#: .\search\views.py:49 .\templates\threads\thread_list.html:16
+#: .\threads\forms.py:12
+msgid "Person"
+msgstr "Персона"
+
+#: .\templates\accounts\login.html:3 .\templates\accounts\login.html:7
+#: .\templates\accounts\login.html:12 .\templates\base.html:66
+msgid "Login"
+msgstr "Вход"
+
+#: .\templates\accounts\login.html:13
+msgid "Forgot Password"
+msgstr "Забыли пароль"
+
+#: .\templates\accounts\password_change.html:3
+msgid "Password Change"
+msgstr "Изменение пароля"
+
+#: .\templates\accounts\password_change.html:7
+#: .\templates\accounts\profile.html:23
+msgid "Change Password"
+msgstr "Изменить пароль"
+
+#: .\templates\accounts\password_change.html:11
+msgid "Update"
+msgstr "Обновлять"
+
+#: .\templates\accounts\password_change_done.html:3
+msgid "Password Changed"
+msgstr "Пароль изменен"
+
+#: .\templates\accounts\password_change_done.html:7
+msgid "Password Updated"
+msgstr "Пароль обновлен"
+
+#: .\templates\accounts\password_change_done.html:8
+msgid "Password changed successfully."
+msgstr "Пароль успешно изменен."
+
+#: .\templates\accounts\password_reset.html:3
+msgid "Password Reset"
+msgstr "Сброс пароля"
+
+#: .\templates\accounts\password_reset.html:7
+msgid "Reset Password"
+msgstr "Сбросить пароль"
+
+#: .\templates\accounts\password_reset.html:11
+msgid "Send"
+msgstr "Отправлять"
+
+#: .\templates\accounts\password_reset_complete.html:3
+msgid "Password Reset Complete"
+msgstr "Сброс пароля завершен"
+
+#: .\templates\accounts\password_reset_complete.html:7
+msgid "Reset Complete"
+msgstr "Сброс завершен"
+
+#: .\templates\accounts\password_reset_complete.html:8
+msgid "Password reset complete. You can login now."
+msgstr "Сброс пароля завершен. Вы можете войти в систему сейчас."
+
+#: .\templates\accounts\password_reset_confirm.html:3
+#: .\templates\accounts\password_reset_confirm.html:7
+msgid "Set New Password"
+msgstr "Установить новый пароль"
+
+#: .\templates\accounts\password_reset_confirm.html:11
+#: .\templates\accounts\profile_edit.html:14
+#: .\templates\threads\thread_detail.html:29
+#: .\templates\threads\thread_detail.html:32
+msgid "Save"
+msgstr "Сохранять"
+
+#: .\templates\accounts\password_reset_done.html:3
+msgid "Reset Email Sent"
+msgstr "Сбросить отправленное письмо"
+
+#: .\templates\accounts\password_reset_done.html:7
+msgid "Email Sent"
+msgstr "Письмо отправлено"
+
+#: .\templates\accounts\password_reset_done.html:8
+msgid "Password reset instructions have been sent."
+msgstr "Инструкции по сбросу пароля отправлены."
+
+#: .\templates\accounts\profile.html:3 .\templates\accounts\profile.html:7
+#: .\templates\base.html:53
+msgid "Profile"
+msgstr "Профиль"
+
+#: .\templates\accounts\profile.html:11
+msgid "Profile avatar"
+msgstr "Аватар профиля"
+
+#: .\templates\accounts\profile.html:13
+msgid "No avatar yet"
+msgstr "Аватара пока нет"
+
+#: .\templates\accounts\profile.html:16
+msgid "Username:"
+msgstr "Имя пользователя:"
+
+#: .\templates\accounts\profile.html:17
+msgid "Name:"
+msgstr "Имя:"
+
+#: .\templates\accounts\profile.html:18
+msgid "Display name:"
+msgstr "Отображаемое имя:"
+
+#: .\templates\accounts\profile.html:19
+msgid "Email:"
+msgstr "Электронная почта:"
+
+#: .\templates\accounts\profile.html:20
+msgid "Reputation:"
+msgstr "Репутация:"
+
+#: .\templates\accounts\profile.html:22
+#: .\templates\accounts\profile_edit.html:3
+#: .\templates\accounts\profile_edit.html:7
+msgid "Edit Profile"
+msgstr "Редактировать профиль"
+
+#: .\templates\accounts\register.html:3 .\templates\accounts\register.html:11
+#: .\templates\base.html:67
+msgid "Register"
+msgstr "Регистрация"
+
+#: .\templates\accounts\register.html:7 .\templates\core\home.html:82
+msgid "Create Account"
+msgstr "Зарегистрироваться"
+
+#: .\templates\base.html:7
+msgid "PersonaVerse"
+msgstr "ПерсонаСтих"
+
+#: .\templates\base.html:22
+msgid "Main navigation"
+msgstr "Основная навигация"
+
+#: .\templates\base.html:25 .\templates\core\home.html:3
+msgid "Feed"
+msgstr "Лента"
+
+#: .\templates\base.html:28 .\templates\base.html:150
+#: .\templates\people\person_list.html:3
+#: .\templates\search\search_page.html:22
+msgid "People"
+msgstr "Люди"
+
+#: .\templates\base.html:31 .\templates\base.html:149
+#: .\templates\search\search_page.html:40
+#: .\templates\threads\thread_list.html:3
+#: .\templates\threads\thread_list.html:7
+msgid "Threads"
+msgstr "Темы"
+
+#: .\templates\base.html:34 .\templates\search\search_page.html:3
+#: .\templates\search\search_page.html:7
+#: .\templates\search\search_page.html:14
+#: .\templates\threads\thread_list.html:12
+msgid "Search"
+msgstr "Поиск"
+
+#: .\templates\base.html:41
+msgid "Staff"
+msgstr "Персонал"
+
+#: .\templates\base.html:43 .\templates\moderation\panel.html:3
+msgid "Moderation"
+msgstr "Модерация"
+
+#: .\templates\base.html:44 .\templates\dashboard\panel.html:3
+msgid "Dashboard"
+msgstr "Панель управления"
+
+#: .\templates\base.html:50 .\templates\base.html:64
+msgid "Account"
+msgstr "Аккаунт"
+
+#: .\templates\base.html:52 .\templates\engagement\bookmark_list.html:3
+msgid "Bookmarks"
+msgstr "Закладки"
+
+#: .\templates\base.html:57
+msgid "Logout"
+msgstr "Выход"
+
+#: .\templates\base.html:76 .\templates\base.html:110
+msgid "Language"
+msgstr "Язык"
+
+#: .\templates\base.html:84 .\templates\base.html:117
+msgid "Theme"
+msgstr "Тема"
+
+#: .\templates\base.html:86 .\templates\base.html:119
+msgid "Template"
+msgstr "Шаблон"
+
+#: .\templates\base.html:87 .\templates\base.html:120
+msgid "Dark"
+msgstr "Тёмная"
+
+#: .\templates\base.html:94
+msgid "focused discussions about public personalities"
+msgstr "целенаправленные дискуссии об публичных личностях"
+
+#: .\templates\base.html:95
+msgid "Threads, comments, votes, bookmarks, moderation"
+msgstr "Темы, комментарии, голоса, закладки, модерация"
+
+#: .\templates\base.html:97
+msgid "Start Thread"
+msgstr "Начать тему"
+
+#: .\templates\base.html:99
+msgid "Join Community"
+msgstr "Присоединяйтесь к сообществу"
+
+#: .\templates\base.html:141
+msgid "Community platform for public personality discussions."
+msgstr "Общественная платформа для дискуссий о публичных личностях."
+
+#: .\templates\base.html:146
+msgid "Navigation"
+msgstr "Навигация"
+
+#: .\templates\base.html:156
+msgid "Technical"
+msgstr "Технический"
+
+#: .\templates\base.html:160
+msgid "ZeroFour Template"
+msgstr "Шаблон ZeroFour"
+
+#: .\templates\base.html:168
+msgid "Design"
+msgstr "Дизайн"
+
+#: .\templates\base.html:168
+msgid "HTML5 UP ZeroFour (adapted)"
+msgstr "HTML5 UP ZeroFour (адаптированный)"
+
+#: .\templates\comments\reply_form.html:6
+msgid "Reply to comment"
+msgstr "Ответ на комментарий"
+
+#: .\templates\comments\reply_form.html:7
+msgid "Thread:"
+msgstr "Нить:"
+
+#: .\templates\comments\reply_form.html:12
+msgid "Post reply"
+msgstr "Опубликовать ответ"
+
+#: .\templates\core\404.html:8
+msgid "Page not found."
+msgstr "Страница не найдена."
+
+#: .\templates\core\404.html:9 .\templates\core\500.html:9
+msgid "Back to feed"
+msgstr "Вернуться к ленте"
+
+#: .\templates\core\500.html:8
+msgid "Server error."
+msgstr "Ошибка сервера."
+
+#: .\templates\core\about.html:8
+msgid "About PersonaVerse"
+msgstr "О ПерсонаВерс"
+
+#: .\templates\core\about.html:9
+msgid ""
+"PersonaVerse is a discussion platform where communities talk about public "
+"personalities in focused threads."
+msgstr ""
+"PersonaVerse — это дискуссионная платформа, где сообщества обсуждают "
+"публичных личностей в тематических темах."
+
+#: .\templates\core\about.html:11
+msgid "Create threads linked to a person profile."
+msgstr "Создавайте темы, связанные с профилем человека."
+
+#: .\templates\core\about.html:12
+msgid "Reply in nested comments."
+msgstr "Ответ во вложенных комментариях."
+
+#: .\templates\core\about.html:13
+msgid "Vote, bookmark, rate, and report content for moderation."
+msgstr ""
+"Голосуйте, добавляйте в закладки, оценивайте и сообщайте о контенте на "
+"модерацию."
+
+#: .\templates\core\home.html:10
+msgid "Community Feed | PersonaVerse"
+msgstr "Лента сообщества | ПерсонаСтих"
+
+#: .\templates\core\home.html:17 .\templates\engagement\bookmark_list.html:10
+#: .\templates\threads\thread_detail.html:9
+#: .\templates\threads\thread_list.html:53
+msgid "Person:"
+msgstr "Человек:"
+
+#: .\templates\core\home.html:20 .\templates\people\person_detail.html:34
+#: .\templates\threads\thread_detail.html:10
+#: .\templates\threads\thread_list.html:54
+#, python-format
+msgid "By %(username)s"
+msgstr "автор %(username)s"
+
+#: .\templates\core\home.html:21 .\templates\people\person_detail.html:35
+#: .\templates\threads\thread_list.html:55
+#, python-format
+msgid "Score %(score)s"
+msgstr "Оценка %(score)s"
+
+#: .\templates\core\home.html:22 .\templates\threads\thread_list.html:56
+#, python-format
+msgid "%(count)s comments"
+msgstr "%(count)s комментариев"
+
+#: .\templates\core\home.html:25
+msgid "Read Discussion"
+msgstr "Читать обсуждение"
+
+#: .\templates\core\home.html:27
+msgid "Start New Thread"
+msgstr "Начать новую тему"
+
+#: .\templates\core\home.html:29
+msgid "Login to Post"
+msgstr "Войдите, чтобы опубликовать"
+
+#: .\templates\core\home.html:34
+msgid "Feed ordering"
+msgstr "Заказ корма"
+
+#: .\templates\core\home.html:35 .\templates\threads\thread_list.html:27
+msgid "Hot"
+msgstr "Горячий"
+
+#: .\templates\core\home.html:36 .\templates\threads\thread_list.html:28
+msgid "New"
+msgstr "Новый"
+
+#: .\templates\core\home.html:37 .\templates\threads\thread_list.html:29
+msgid "Top"
+msgstr "Вершина"
+
+#: .\templates\core\home.html:42
+msgid "Trending Discussions"
+msgstr "Тенденции обсуждений"
+
+#: .\templates\core\home.html:49
+#, python-format
+msgid "Score %(score)s | %(count)s comments"
+msgstr "Оценка %(score)s | %(count)s комментариев"
+
+#: .\templates\core\home.html:53
+msgid "No additional discussions yet. Create one and set the tone."
+msgstr "Дополнительных обсуждений пока нет. Создайте его и задайте тон."
+
+#: .\templates\core\home.html:59
+msgid "Latest Posts"
+msgstr "Последние сообщения"
+
+#: .\templates\core\home.html:64
+#, python-format
+msgid "%(created)s | %(username)s"
+msgstr "%(created)s | %(username)s"
+
+#: .\templates\core\home.html:67
+msgid "No latest posts yet."
+msgstr "Свежих сообщений пока нет."
+
+#: .\templates\core\home.html:75
+msgid "No discussions yet"
+msgstr "Пока нет обсуждений"
+
+#: .\templates\core\home.html:76
+msgid ""
+"PersonaVerse is ready. Publish the first thread to start the community "
+"timeline."
+msgstr ""
+"ПерсонаВерс готова. Опубликуйте первую ветку, чтобы начать хронологию "
+"сообщества."
+
+#: .\templates\core\home.html:79
+msgid "Start First Thread"
+msgstr "Начать первую тему"
+
+#: .\templates\core\home.html:81
+msgid "Login to Start"
+msgstr "Войдите, чтобы начать"
+
+#: .\templates\core\home.html:90
+msgid "People Spotlight"
+msgstr "Люди в центре внимания"
+
+#: .\templates\core\home.html:102 .\templates\people\person_detail.html:15
+#: .\templates\people\person_list.html:27
+msgid "Verified"
+msgstr "Проверено"
+
+#: .\templates\core\home.html:104
+#, python-format
+msgid "%(count)s active discussions"
+msgstr "%(count)s активные обсуждения"
+
+#: .\templates\core\home.html:108
+msgid "No spotlight personalities yet."
+msgstr "Ярких личностей пока нет."
+
+#: .\templates\core\home.html:114
+msgid "Community At A Glance"
+msgstr "Обзор сообщества"
+
+#: .\templates\core\home.html:118
+msgid "Published Threads"
+msgstr "Опубликованные темы"
+
+#: .\templates\core\home.html:122
+msgid "Published Comments"
+msgstr "Опубликованные комментарии"
+
+#: .\templates\core\home.html:126
+msgid "Tracked Personalities"
+msgstr "Отслеживаемые личности"
+
+#: .\templates\dashboard\panel.html:7
+msgid "Admin Dashboard"
+msgstr "Панель администратора"
+
+#: .\templates\dashboard\panel.html:9
+msgid "Total Threads"
+msgstr "Всего потоков"
+
+#: .\templates\dashboard\panel.html:10
+msgid "Total Comments"
+msgstr "Всего комментариев"
+
+#: .\templates\dashboard\panel.html:11
+msgid "Total People"
+msgstr "Всего людей"
+
+#: .\templates\dashboard\panel.html:16
+msgid "Top People by Threads"
+msgstr "Лучшие люди по темам"
+
+#: .\templates\dashboard\panel.html:21
+msgid "No data."
+msgstr "Нет данных."
+
+#: .\templates\engagement\bookmark_list.html:6
+msgid "My Bookmarks"
+msgstr "Мои закладки"
+
+#: .\templates\engagement\bookmark_list.html:11
+#, python-format
+msgid "Saved %(created)s"
+msgstr "Сохранено %(created)s"
+
+#: .\templates\engagement\bookmark_list.html:14
+msgid "You have no bookmarks yet."
+msgstr "У вас пока нет закладок."
+
+#: .\templates\includes\breadcrumbs.html:3
+msgid "Breadcrumbs"
+msgstr "Панировочные сухари"
+
+#: .\templates\includes\pagination.html:6
+msgid "Prev"
+msgstr "Предыдущий"
+
+#: .\templates\includes\pagination.html:8
+#, python-format
+msgid "Page %(number)s / %(total)s"
+msgstr "Страница %(number)s / %(total)s"
+
+#: .\templates\includes\pagination.html:10
+msgid "Next"
+msgstr "Следующий"
+
+#: .\templates\moderation\panel.html:7
+msgid "Moderation Queue"
+msgstr "Очередь на модерацию"
+
+#: .\templates\moderation\panel.html:11
+msgid "reason:"
+msgstr "причина:"
+
+#: .\templates\moderation\panel.html:12
+#, python-format
+msgid "reported by %(username)s at %(created)s"
+msgstr "сообщил %(username)s в %(created)s"
+
+#: .\templates\moderation\panel.html:16
+msgid "Hide"
+msgstr "Скрывать"
+
+#: .\templates\moderation\panel.html:17
+#: .\templates\threads\thread_form.html:10
+msgid "Publish"
+msgstr "Публиковать"
+
+#: .\templates\moderation\panel.html:18
+msgid "Dismiss"
+msgstr "Увольнять"
+
+#: .\templates\moderation\panel.html:23
+msgid "No open reports."
+msgstr "Нет открытых отчетов."
+
+#: .\templates\moderation\panel.html:29
+msgid "Recent Resolved"
+msgstr "Последние решенные"
+
+#: .\templates\moderation\panel.html:34
+msgid "No resolved reports yet."
+msgstr "Решенных отчетов пока нет."
+
+#: .\templates\people\person_detail.html:22
+#: .\templates\people\person_list.html:32
+#: .\templates\search\search_page.html:30
+msgid "No bio yet."
+msgstr "Биографии пока нет."
+
+#: .\templates\people\person_detail.html:25
+msgid "Start thread about this person"
+msgstr "Начать тему об этом человеке"
+
+#: .\templates\people\person_detail.html:40
+msgid "No discussions yet."
+msgstr "Обсуждений пока нет."
+
+#: .\templates\people\person_list.html:7
+msgid "People Directory"
+msgstr "Каталог людей"
+
+#: .\templates\people\person_list.html:10
+msgid "Search person"
+msgstr "Поиск человека"
+
+#: .\templates\people\person_list.html:11
+msgid "Name"
+msgstr "Имя"
+
+#: .\templates\people\person_list.html:37
+msgid "No people found."
+msgstr "Людей не найдено."
+
+#: .\templates\search\search_page.html:10
+msgid "Find people and threads"
+msgstr "Находите людей и темы"
+
+#: .\templates\search\search_page.html:11
+msgid "Type a person or discussion title"
+msgstr "Введите имя человека или название обсуждения"
+
+#: .\templates\search\search_page.html:34
+msgid "No matching people."
+msgstr "Нет подходящих людей."
+
+#: .\templates\search\search_page.html:45
+#, python-format
+msgid "About %(person)s by %(username)s"
+msgstr "О %(person)s от %(username)s"
+
+#: .\templates\search\search_page.html:49
+msgid "No matching threads."
+msgstr "Нет подходящих тем."
+
+#: .\templates\threads\thread_detail.html:11
+msgid "Score"
+msgstr "Счет"
+
+#: .\templates\threads\thread_detail.html:14
+msgid "Average rating:"
+msgstr "Средний рейтинг:"
+
+#: .\templates\threads\thread_detail.html:21
+msgid "Upvote"
+msgstr "Проголосовать за"
+
+#: .\templates\threads\thread_detail.html:22
+msgid "Downvote"
+msgstr "Понизить голос"
+
+#: .\templates\threads\thread_detail.html:28
+#: .\templates\threads\thread_detail.html:32
+msgid "Bookmarked"
+msgstr "В закладках"
+
+#: .\templates\threads\thread_detail.html:37
+msgid "Your rating"
+msgstr "Ваш рейтинг"
+
+#: .\templates\threads\thread_detail.html:44
+msgid "Save rating"
+msgstr "Сохранить оценку"
+
+#: .\templates\threads\thread_detail.html:53
+#: .\templates\threads\thread_detail.html:79
+msgid "Report reason"
+msgstr "Сообщить о причине"
+
+#: .\templates\threads\thread_detail.html:54
+msgid "Reason"
+msgstr "Причина"
+
+#: .\templates\threads\thread_detail.html:56
+msgid "Report thread"
+msgstr "Пожаловаться на тему"
+
+#: .\templates\threads\thread_detail.html:62
+msgid "Comments"
+msgstr "Комментарии"
+
+#: .\templates\threads\thread_detail.html:65
+#, python-format
+msgid "score %(score)s"
+msgstr "оценка %(score)s"
+
+#: .\templates\threads\thread_detail.html:81
+msgid "Report comment"
+msgstr "Пожаловаться на комментарий"
+
+#: .\templates\threads\thread_detail.html:92
+msgid "No comments yet."
+msgstr "Комментариев пока нет."
+
+#: .\templates\threads\thread_detail.html:98
+msgid "Add comment"
+msgstr "Добавить комментарий"
+
+#: .\templates\threads\thread_detail.html:102
+msgid "Post comment"
+msgstr "Оставить комментарий"
+
+#: .\templates\threads\thread_form.html:3
+#: .\templates\threads\thread_form.html:6
+#: .\templates\threads\thread_list.html:43
+msgid "Create Thread"
+msgstr "Создать тему"
+
+#: .\templates\threads\thread_list.html:8
+msgid "Editorial feed of discussions"
+msgstr "Редакционная лента обсуждений"
+
+#: .\templates\threads\thread_list.html:13
+msgid "Title or text"
+msgstr "Название или текст"
+
+#: .\templates\threads\thread_list.html:18
+msgid "All"
+msgstr "Все"
+
+#: .\templates\threads\thread_list.html:25
+msgid "Ordering"
+msgstr "Заказ"
+
+#: .\templates\threads\thread_list.html:33
+msgid "Created after"
+msgstr "Создано после"
+
+#: .\templates\threads\thread_list.html:37
+msgid "Min score"
+msgstr "Мин. оценка"
+
+#: .\templates\threads\thread_list.html:42
+msgid "Apply"
+msgstr "Применять"
+
+#: .\templates\threads\thread_list.html:61
+msgid "No threads found."
+msgstr "Ни одной темы не найдено."
+
+#: .\threads\forms.py:13
+msgid "Title"
+msgstr "Заголовок"
+
+#: .\threads\forms.py:14
+msgid "Body"
+msgstr "Тело"
+
+#: .\threads\views.py:126
+msgid "Thread created."
+msgstr "Тема создана."
+
+#: .\threads\views.py:146
+msgid "Comment posted."
+msgstr "Комментарий опубликован."
+
+#: .\threads\views.py:148
+msgid "Comment is invalid."
+msgstr "Комментарий недействителен."

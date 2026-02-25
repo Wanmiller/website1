@@ -1,105 +1,176 @@
-﻿from django.db.models import Avg, Q
-from rest_framework import filters, generics, permissions
+from django.db.models import Avg, Count, IntegerField, Q, Sum, Value
+from django.db.models.functions import Coalesce
+from django.utils.dateparse import parse_date, parse_datetime
+from django.utils.timezone import is_naive, make_aware
+from rest_framework import generics, permissions, status
+from rest_framework.response import Response
 
-from favorites.models import Favorite
-from movies.models import Movie
-from reviews.models import Review
+from comments.models import Comment
+from engagement.models import Bookmark, Rating
+from moderation.models import Report
+from people.models import Person
+from threads.models import Thread
+from votes.models import Vote
 
 from .serializers import (
-    FavoriteSerializer,
-    MovieDetailSerializer,
-    MovieSerializer,
-    MovieWriteSerializer,
-    ReviewSerializer,
+    BookmarkSerializer,
+    CommentSerializer,
+    PersonSerializer,
+    RatingSerializer,
+    ReportSerializer,
+    ThreadSerializer,
+    VoteSerializer,
 )
 
 
-class IsStaffOrReadOnly(permissions.BasePermission):
-    def has_permission(self, request, view):
-        if request.method in permissions.SAFE_METHODS:
-            return True
-        return request.user and request.user.is_staff
+def _annotated_threads_queryset():
+    return Thread.objects.select_related("author", "person").annotate(
+        vote_score=Coalesce(Sum("votes__value"), Value(0), output_field=IntegerField()),
+        avg_rating=Coalesce(Avg("ratings__value"), Value(0.0)),
+        comments_count=Count(
+            "comments",
+            filter=Q(comments__status=Comment.STATUS_PUBLISHED),
+            distinct=True,
+        ),
+    )
 
 
-class MovieListCreateAPIView(generics.ListCreateAPIView):
-    filter_backends = [filters.OrderingFilter]
-    ordering_fields = ["title", "release_year"]
-
-    def get_serializer_class(self):
-        if self.request.method == "POST":
-            return MovieWriteSerializer
-        return MovieSerializer
-
-    def get_permissions(self):
-        if self.request.method == "POST":
-            return [IsStaffOrReadOnly()]
-        return [permissions.AllowAny()]
+class PersonListAPIView(generics.ListAPIView):
+    serializer_class = PersonSerializer
 
     def get_queryset(self):
-        qs = (
-            Movie.objects.prefetch_related("genres")
-            .annotate(avg_rating=Avg("reviews__rating"))
-            .all()
-        )
-        q = self.request.GET.get("q")
-        genre = self.request.GET.get("genre")
-        year = self.request.GET.get("year")
-        rating_min = self.request.GET.get("rating_min")
-
+        q = self.request.GET.get("q", "").strip()
+        qs = Person.objects.all()
         if q:
-            qs = qs.filter(Q(title__icontains=q) | Q(synopsis__icontains=q))
-        if genre:
-            qs = qs.filter(genres__slug=genre)
-        if year:
-            qs = qs.filter(release_year=year)
-        if rating_min:
-            qs = qs.filter(reviews__rating__gte=rating_min)
-
-        return qs.distinct()
+            qs = qs.filter(full_name__icontains=q)
+        return qs
 
 
-class MovieDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Movie.objects.prefetch_related("genres", "trailers")
-    lookup_field = "slug"
-
-    def get_serializer_class(self):
-        if self.request.method in permissions.SAFE_METHODS:
-            return MovieDetailSerializer
-        return MovieWriteSerializer
-
-    def get_permissions(self):
-        if self.request.method in permissions.SAFE_METHODS:
-            return [permissions.AllowAny()]
-        return [IsStaffOrReadOnly()]
-
-
-class ReviewListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Review.objects.select_related("movie", "user")
-    serializer_class = ReviewSerializer
+class ThreadListCreateAPIView(generics.ListCreateAPIView):
+    serializer_class = ThreadSerializer
 
     def get_permissions(self):
         if self.request.method == "POST":
             return [permissions.IsAuthenticated()]
         return [permissions.AllowAny()]
 
+    def get_queryset(self):
+        q = self.request.GET.get("q", "").strip()
+        person_slug = self.request.GET.get("person", "").strip()
+        ordering = self.request.GET.get("ordering", "hot").strip() or "hot"
+        created_after = self.request.GET.get("created_after", "").strip()
+        score_min = self.request.GET.get("score_min", "").strip()
+
+        qs = _annotated_threads_queryset().filter(status=Thread.STATUS_PUBLISHED)
+        if q:
+            qs = qs.filter(Q(title__icontains=q) | Q(body__icontains=q))
+        if person_slug:
+            qs = qs.filter(person__slug=person_slug)
+
+        if created_after:
+            date_value = parse_date(created_after)
+            if date_value is not None:
+                qs = qs.filter(created_at__date__gte=date_value)
+            else:
+                dt_value = parse_datetime(created_after)
+                if dt_value is not None:
+                    if is_naive(dt_value):
+                        dt_value = make_aware(dt_value)
+                    qs = qs.filter(created_at__gte=dt_value)
+
+        if score_min:
+            try:
+                qs = qs.filter(vote_score__gte=int(score_min))
+            except ValueError:
+                pass
+
+        if ordering == "new":
+            qs = qs.order_by("-created_at")
+        elif ordering == "top":
+            qs = qs.order_by("-vote_score", "-created_at")
+        else:
+            qs = qs.order_by("-vote_score", "-comments_count", "-created_at")
+        return qs
+
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(author=self.request.user)
 
 
-class FavoriteListCreateAPIView(generics.ListCreateAPIView):
-    serializer_class = FavoriteSerializer
+class ThreadDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = ThreadSerializer
+    lookup_field = "slug"
+
+    def get_permissions(self):
+        if self.request.method in permissions.SAFE_METHODS:
+            return [permissions.AllowAny()]
+        return [permissions.IsAdminUser()]
+
+    def get_queryset(self):
+        qs = _annotated_threads_queryset()
+        if self.request.method in permissions.SAFE_METHODS and not self.request.user.is_staff:
+            qs = qs.filter(status=Thread.STATUS_PUBLISHED)
+        return qs
+
+
+class CommentCreateAPIView(generics.CreateAPIView):
+    serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def get_queryset(self):
-        return Favorite.objects.filter(user=self.request.user).select_related("movie")
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+
+class VoteCreateAPIView(generics.CreateAPIView):
+    serializer_class = VoteSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        instance, _ = Vote.objects.update_or_create(
+            user=request.user,
+            thread=serializer.validated_data.get("thread"),
+            comment=serializer.validated_data.get("comment"),
+            defaults={"value": serializer.validated_data["value"]},
+        )
+        output = self.get_serializer(instance)
+        return Response(output.data, status=status.HTTP_200_OK)
+
+
+class BookmarkCreateAPIView(generics.CreateAPIView):
+    serializer_class = BookmarkSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        instance, _ = Bookmark.objects.get_or_create(
+            user=request.user,
+            thread=serializer.validated_data["thread"],
+        )
+        output = self.get_serializer(instance)
+        return Response(output.data, status=status.HTTP_200_OK)
+
+
+class RatingCreateAPIView(generics.CreateAPIView):
+    serializer_class = RatingSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        instance, _ = Rating.objects.update_or_create(
+            user=request.user,
+            thread=serializer.validated_data["thread"],
+            defaults={"value": serializer.validated_data["value"]},
+        )
+        output = self.get_serializer(instance)
+        return Response(output.data, status=status.HTTP_200_OK)
+
+
+class ReportCreateAPIView(generics.CreateAPIView):
+    serializer_class = ReportSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
-
-class SearchAPIView(generics.ListAPIView):
-    serializer_class = MovieSerializer
-
-    def get_queryset(self):
-        q = self.request.GET.get("q", "")
-        return Movie.objects.filter(title__icontains=q).prefetch_related("genres")[:20]
+        serializer.save(reporter=self.request.user)

@@ -1,6 +1,6 @@
 # Production Execution Checklist (Render)
 
-This file is the actionable checklist to close remaining requirements from local-ready to submission-ready.
+This checklist closes remaining requirements from local-ready to submission-ready.
 
 ## 1) Repository readiness
 - [ ] Code pushed to `main` in GitHub/GitLab
@@ -11,7 +11,7 @@ This file is the actionable checklist to close remaining requirements from local
 - [ ] `pytest -q` passes
 
 ## 2) Render infrastructure
-- [ ] PostgreSQL service `cineverse-db` created
+- [ ] PostgreSQL service created
 - [ ] Web service created from repository
 - [ ] Build command set: `pip install -r requirements.txt`
 - [ ] Start command set: `python manage.py migrate && python manage.py collectstatic --noinput && gunicorn cineverse.wsgi:application`
@@ -45,14 +45,16 @@ This file is the actionable checklist to close remaining requirements from local
 
 ## 6) Smoke checks
 - [ ] `/`
-- [ ] `/movies/`
-- [ ] `/movies/<slug>/`
+- [ ] `/threads/`
+- [ ] `/people/`
+- [ ] `/search/`
 - [ ] `/about/`
-- [ ] `/api/v1/movies/`
-- [ ] `/api/v1/search/?q=test`
+- [ ] `/api/v1/threads/`
+- [ ] `/api/v1/persons/?q=test`
 - [ ] Auth flow (register/login/logout/password reset)
 - [ ] Staff-only write rules validated
 - [ ] Static/media no 404
+- [ ] Bookmark + rating flows validated
 
 ### Automated smoke helper
 Run:
@@ -72,5 +74,5 @@ Generated report:
 - [ ] `README.md` updated with real domain/render links
 - [ ] `README.md` checklist marked Pass/Fail
 - [ ] `docs/SUBMISSION_REPORT_TEMPLATE.md` filled
-- [ ] Screenshots attached (home, catalog, detail, profile, admin, SSL/domain)
+- [ ] Screenshots attached (home, threads, person, profile, admin, SSL/domain)
 - [ ] Final deadline check: project online before **2026-06-01**

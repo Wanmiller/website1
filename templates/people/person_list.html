@@ -1,14 +1,43 @@
 {% extends 'base.html' %}
-{% block title %}People | CineVerse{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "People" %} | PersonaVerse{% endblock %}
 {% block content %}
-<div class="cv-section">
-  <header class="style1"><h2>People</h2></header>
-  <ul>
+<div class="pv-nx-page">
+  <section class="cv-section box feature2">
+    <header class="style1"><h2>{% trans "People Directory" %}</h2></header>
+    <form method="get">
+      <div class="field">
+        <label for="q">{% trans "Search person" %}</label>
+        <input id="q" name="q" type="text" value="{{ q }}" placeholder="{% trans 'Name' %}" />
+      </div>
+    </form>
+  </section>
+
+  <section class="pv-nx-person-grid">
     {% for person in people %}
-      <li><a href="{% url 'people:detail' person.pk %}">{{ person.full_name }}</a></li>
+      <article class="box pv-person-row excerpt">
+        <div class="pv-person-thumb" aria-hidden="{% if person.avatar %}false{% else %}true{% endif %}">
+          {% if person.avatar %}
+            <img class="pv-person-avatar" src="{{ person.avatar.url }}" alt="{{ person.full_name }}" loading="lazy" />
+          {% else %}
+            <span class="pv-person-fallback pv-person-avatar">{{ person.full_name|slice:":1"|upper }}</span>
+          {% endif %}
+        </div>
+        <div class="pv-person-meta">
+          <h3>
+            <a href="{% url 'people:detail' person.slug %}">{{ person.full_name }}</a>
+            {% if person.is_verified %}<span class="chip">{% trans "Verified" %}</span>{% endif %}
+          </h3>
+          {% if person.bio %}
+            <p>{{ person.bio|truncatechars:100 }}</p>
+          {% else %}
+            <p>{% trans "No bio yet." %}</p>
+          {% endif %}
+        </div>
+      </article>
     {% empty %}
-      <li>No people.</li>
+      <p>{% trans "No people found." %}</p>
     {% endfor %}
-  </ul>
+  </section>
 </div>
 {% endblock %}

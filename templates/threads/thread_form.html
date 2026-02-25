@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% if is_edit %}{% trans "Edit Thread" %}{% else %}{% trans "Create Thread" %}{% endif %} | PersonaVerse{% endblock %}
+{% block content %}
+<div class="pv-nx-page">
+  {% include 'includes/breadcrumbs.html' with items=breadcrumb_items %}
+  <div class="cv-section box feature2">
+    <header class="style1">
+      <h2>{% if is_edit %}{% trans "Edit Thread" %}{% else %}{% trans "Create Thread" %}{% endif %}</h2>
+    </header>
+    <form method="post" data-submit-lock data-client-validate>
+      {% csrf_token %}
+      <div class="fields">{% include 'includes/form_fields.html' with form=form %}</div>
+      <ul class="actions">
+        <li>
+          <button class="button style1" type="submit" data-loading-text="{% trans 'Saving...' %}">
+            {% if is_edit %}{% trans "Save Changes" %}{% else %}{% trans "Publish" %}{% endif %}
+          </button>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>
+{% endblock %}

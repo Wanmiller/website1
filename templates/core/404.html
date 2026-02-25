@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
-{% block title %}404 | CineVerse{% endblock %}
+{% load i18n %}
+{% block title %}404 | PersonaVerse{% endblock %}
 {% block content %}
-<div class="cv-section">
-  <header class="style1"><h2>404</h2></header>
-  <p>Page not found.</p>
+<div class="pv-nx-page">
+  <section class="cv-section box feature2">
+    <header class="style1"><h2>404</h2></header>
+    <p>{% trans "Page not found." %}</p>
+    <ul class="actions"><li><a class="button style1" href="{% url 'core:home' %}">{% trans "Back to feed" %}</a></li></ul>
+  </section>
 </div>
 {% endblock %}

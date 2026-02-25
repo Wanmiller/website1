@@ -1,0 +1,876 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-25 12:30+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: EN\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\accounts\forms.py:10 .\accounts\forms.py:23
+msgid "Email"
+msgstr "Email"
+
+#: .\accounts\forms.py:22
+msgid "Username"
+msgstr "Username"
+
+#: .\accounts\forms.py:24
+msgid "First name"
+msgstr "First name"
+
+#: .\accounts\forms.py:25
+msgid "Last name"
+msgstr "Last name"
+
+#: .\accounts\forms.py:34
+msgid "Display name"
+msgstr "Display name"
+
+#: .\accounts\forms.py:35
+msgid "Bio"
+msgstr "Bio"
+
+#: .\accounts\forms.py:36
+msgid "Avatar"
+msgstr "Avatar"
+
+#: .\accounts\views.py:30
+msgid "Registration successful."
+msgstr "Registration successful."
+
+#: .\accounts\views.py:32
+msgid "Please correct the errors below."
+msgstr "Please correct the errors below."
+
+#: .\accounts\views.py:53
+msgid "Profile updated."
+msgstr "Profile updated."
+
+#: .\accounts\views.py:69
+msgid "You have been logged out."
+msgstr "You have been logged out."
+
+#: .\api\exceptions.py:10
+msgid "Request failed."
+msgstr "Request failed."
+
+#: .\api\serializers.py:94
+msgid "Provide exactly one target: thread or comment."
+msgstr "Provide exactly one target: thread or comment."
+
+#: .\api\serializers.py:96
+msgid "Value must be -1 or 1."
+msgstr "Value must be -1 or 1."
+
+#: .\comments\forms.py:11 .\engagement\models.py:100 .\moderation\models.py:9
+msgid "Comment"
+msgstr "Comment"
+
+#: .\comments\models.py:10 .\threads\models.py:11
+msgid "Published"
+msgstr "Published"
+
+#: .\comments\models.py:11 .\threads\models.py:12
+msgid "Hidden"
+msgstr "Hidden"
+
+#: .\comments\views.py:25
+msgid "Reply posted."
+msgstr "Reply posted."
+
+#: .\core\templatetags\core_extras.py:12
+msgid "N/A"
+msgstr "N/A"
+
+#: .\core\templatetags\core_extras.py:14 .\core\templatetags\core_extras.py:16
+#: .\core\templatetags\core_extras.py:17
+#, python-format
+msgid "%(level)s (%(rating).1f)"
+msgstr "%(level)s (%(rating).1f)"
+
+#: .\core\templatetags\core_extras.py:14
+msgid "Excellent"
+msgstr "Excellent"
+
+#: .\core\templatetags\core_extras.py:16
+msgid "Good"
+msgstr "Good"
+
+#: .\core\templatetags\core_extras.py:17
+msgid "Needs work"
+msgstr "Needs work"
+
+#: .\core\validators.py:17
+msgid "File size must be less than or equal to 3MB."
+msgstr "File size must be less than or equal to 3MB."
+
+#: .\core\views.py:83
+msgid "Home"
+msgstr "Home"
+
+#: .\core\views.py:83 .\templates\base.html:37 .\templates\base.html:148
+#: .\templates\core\about.html:3
+msgid "About"
+msgstr "About"
+
+#: .\engagement\models.py:101 .\templates\comments\reply_form.html:3
+#: .\templates\threads\thread_detail.html:69
+msgid "Reply"
+msgstr "Reply"
+
+#: .\engagement\models.py:102
+msgid "Report"
+msgstr "Report"
+
+#: .\engagement\views.py:41
+msgid "Invalid rating"
+msgstr "Invalid rating"
+
+#: .\engagement\views.py:44
+msgid "Rating must be between 1 and 5"
+msgstr "Rating must be between 1 and 5"
+
+#: .\moderation\models.py:9 .\search\views.py:58
+msgid "Thread"
+msgstr "Thread"
+
+#: .\moderation\models.py:15
+msgid "Open"
+msgstr "Open"
+
+#: .\moderation\models.py:16
+msgid "Resolved"
+msgstr "Resolved"
+
+#: .\moderation\models.py:17
+msgid "Dismissed"
+msgstr "Dismissed"
+
+#: .\moderation\views.py:48
+msgid "Invalid action."
+msgstr "Invalid action."
+
+#: .\moderation\views.py:53
+msgid "Moderation action applied."
+msgstr "Moderation action applied."
+
+#: .\moderation\views.py:67
+msgid "Invalid report target."
+msgstr "Invalid report target."
+
+#: .\moderation\views.py:71
+msgid "Invalid report payload."
+msgstr "Invalid report payload."
+
+#: .\moderation\views.py:80
+msgid "Report submitted."
+msgstr "Report submitted."
+
+#: .\search\views.py:49 .\templates\threads\thread_list.html:16
+#: .\threads\forms.py:12
+msgid "Person"
+msgstr "Person"
+
+#: .\templates\accounts\login.html:3 .\templates\accounts\login.html:7
+#: .\templates\accounts\login.html:12 .\templates\base.html:66
+msgid "Login"
+msgstr "Login"
+
+#: .\templates\accounts\login.html:13
+msgid "Forgot Password"
+msgstr "Forgot Password"
+
+#: .\templates\accounts\password_change.html:3
+msgid "Password Change"
+msgstr "Password Change"
+
+#: .\templates\accounts\password_change.html:7
+#: .\templates\accounts\profile.html:23
+msgid "Change Password"
+msgstr "Change Password"
+
+#: .\templates\accounts\password_change.html:11
+msgid "Update"
+msgstr "Update"
+
+#: .\templates\accounts\password_change_done.html:3
+msgid "Password Changed"
+msgstr "Password Changed"
+
+#: .\templates\accounts\password_change_done.html:7
+msgid "Password Updated"
+msgstr "Password Updated"
+
+#: .\templates\accounts\password_change_done.html:8
+msgid "Password changed successfully."
+msgstr "Password changed successfully."
+
+#: .\templates\accounts\password_reset.html:3
+msgid "Password Reset"
+msgstr "Password Reset"
+
+#: .\templates\accounts\password_reset.html:7
+msgid "Reset Password"
+msgstr "Reset Password"
+
+#: .\templates\accounts\password_reset.html:11
+msgid "Send"
+msgstr "Send"
+
+#: .\templates\accounts\password_reset_complete.html:3
+msgid "Password Reset Complete"
+msgstr "Password Reset Complete"
+
+#: .\templates\accounts\password_reset_complete.html:7
+msgid "Reset Complete"
+msgstr "Reset Complete"
+
+#: .\templates\accounts\password_reset_complete.html:8
+msgid "Password reset complete. You can login now."
+msgstr "Password reset complete. You can login now."
+
+#: .\templates\accounts\password_reset_confirm.html:3
+#: .\templates\accounts\password_reset_confirm.html:7
+msgid "Set New Password"
+msgstr "Set New Password"
+
+#: .\templates\accounts\password_reset_confirm.html:11
+#: .\templates\accounts\profile_edit.html:14
+#: .\templates\threads\thread_detail.html:29
+#: .\templates\threads\thread_detail.html:32
+msgid "Save"
+msgstr "Save"
+
+#: .\templates\accounts\password_reset_done.html:3
+msgid "Reset Email Sent"
+msgstr "Reset Email Sent"
+
+#: .\templates\accounts\password_reset_done.html:7
+msgid "Email Sent"
+msgstr "Email Sent"
+
+#: .\templates\accounts\password_reset_done.html:8
+msgid "Password reset instructions have been sent."
+msgstr "Password reset instructions have been sent."
+
+#: .\templates\accounts\profile.html:3 .\templates\accounts\profile.html:7
+#: .\templates\base.html:53
+msgid "Profile"
+msgstr "Profile"
+
+#: .\templates\accounts\profile.html:11
+msgid "Profile avatar"
+msgstr "Profile avatar"
+
+#: .\templates\accounts\profile.html:13
+msgid "No avatar yet"
+msgstr "No avatar yet"
+
+#: .\templates\accounts\profile.html:16
+msgid "Username:"
+msgstr "Username:"
+
+#: .\templates\accounts\profile.html:17
+msgid "Name:"
+msgstr "Name:"
+
+#: .\templates\accounts\profile.html:18
+msgid "Display name:"
+msgstr "Display name:"
+
+#: .\templates\accounts\profile.html:19
+msgid "Email:"
+msgstr "Email:"
+
+#: .\templates\accounts\profile.html:20
+msgid "Reputation:"
+msgstr "Reputation:"
+
+#: .\templates\accounts\profile.html:22
+#: .\templates\accounts\profile_edit.html:3
+#: .\templates\accounts\profile_edit.html:7
+msgid "Edit Profile"
+msgstr "Edit Profile"
+
+#: .\templates\accounts\register.html:3 .\templates\accounts\register.html:11
+#: .\templates\base.html:67
+msgid "Register"
+msgstr "Register"
+
+#: .\templates\accounts\register.html:7 .\templates\core\home.html:82
+msgid "Create Account"
+msgstr "Create Account"
+
+#: .\templates\base.html:7
+msgid "PersonaVerse"
+msgstr "PersonaVerse"
+
+#: .\templates\base.html:22
+msgid "Main navigation"
+msgstr "Main navigation"
+
+#: .\templates\base.html:25 .\templates\core\home.html:3
+msgid "Feed"
+msgstr "Feed"
+
+#: .\templates\base.html:28 .\templates\base.html:150
+#: .\templates\people\person_list.html:3
+#: .\templates\search\search_page.html:22
+msgid "People"
+msgstr "People"
+
+#: .\templates\base.html:31 .\templates\base.html:149
+#: .\templates\search\search_page.html:40
+#: .\templates\threads\thread_list.html:3
+#: .\templates\threads\thread_list.html:7
+msgid "Threads"
+msgstr "Threads"
+
+#: .\templates\base.html:34 .\templates\search\search_page.html:3
+#: .\templates\search\search_page.html:7
+#: .\templates\search\search_page.html:14
+#: .\templates\threads\thread_list.html:12
+msgid "Search"
+msgstr "Search"
+
+#: .\templates\base.html:41
+msgid "Staff"
+msgstr "Staff"
+
+#: .\templates\base.html:43 .\templates\moderation\panel.html:3
+msgid "Moderation"
+msgstr "Moderation"
+
+#: .\templates\base.html:44 .\templates\dashboard\panel.html:3
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: .\templates\base.html:50 .\templates\base.html:64
+msgid "Account"
+msgstr "Account"
+
+#: .\templates\base.html:52 .\templates\engagement\bookmark_list.html:3
+msgid "Bookmarks"
+msgstr "Bookmarks"
+
+#: .\templates\base.html:57
+msgid "Logout"
+msgstr "Logout"
+
+#: .\templates\base.html:76 .\templates\base.html:110
+msgid "Language"
+msgstr "Language"
+
+#: .\templates\base.html:84 .\templates\base.html:117
+msgid "Theme"
+msgstr "Theme"
+
+#: .\templates\base.html:86 .\templates\base.html:119
+msgid "Template"
+msgstr "Template"
+
+#: .\templates\base.html:87 .\templates\base.html:120
+msgid "Dark"
+msgstr "Dark"
+
+#: .\templates\base.html:94
+msgid "focused discussions about public personalities"
+msgstr "focused discussions about public personalities"
+
+#: .\templates\base.html:95
+msgid "Threads, comments, votes, bookmarks, moderation"
+msgstr "Threads, comments, votes, bookmarks, moderation"
+
+#: .\templates\base.html:97
+msgid "Start Thread"
+msgstr "Start Thread"
+
+#: .\templates\base.html:99
+msgid "Join Community"
+msgstr "Join Community"
+
+#: .\templates\base.html:141
+msgid "Community platform for public personality discussions."
+msgstr "Community platform for public personality discussions."
+
+#: .\templates\base.html:146
+msgid "Navigation"
+msgstr "Navigation"
+
+#: .\templates\base.html:156
+msgid "Technical"
+msgstr "Technical"
+
+#: .\templates\base.html:160
+msgid "ZeroFour Template"
+msgstr "ZeroFour Template"
+
+#: .\templates\base.html:168
+msgid "Design"
+msgstr "Design"
+
+#: .\templates\base.html:168
+msgid "HTML5 UP ZeroFour (adapted)"
+msgstr "HTML5 UP ZeroFour (adapted)"
+
+#: .\templates\comments\reply_form.html:6
+msgid "Reply to comment"
+msgstr "Reply to comment"
+
+#: .\templates\comments\reply_form.html:7
+msgid "Thread:"
+msgstr "Thread:"
+
+#: .\templates\comments\reply_form.html:12
+msgid "Post reply"
+msgstr "Post reply"
+
+#: .\templates\core\404.html:8
+msgid "Page not found."
+msgstr "Page not found."
+
+#: .\templates\core\404.html:9 .\templates\core\500.html:9
+msgid "Back to feed"
+msgstr "Back to feed"
+
+#: .\templates\core\500.html:8
+msgid "Server error."
+msgstr "Server error."
+
+#: .\templates\core\about.html:8
+msgid "About PersonaVerse"
+msgstr "About PersonaVerse"
+
+#: .\templates\core\about.html:9
+msgid ""
+"PersonaVerse is a discussion platform where communities talk about public "
+"personalities in focused threads."
+msgstr ""
+"PersonaVerse is a discussion platform where communities talk about public "
+"personalities in focused threads."
+
+#: .\templates\core\about.html:11
+msgid "Create threads linked to a person profile."
+msgstr "Create threads linked to a person profile."
+
+#: .\templates\core\about.html:12
+msgid "Reply in nested comments."
+msgstr "Reply in nested comments."
+
+#: .\templates\core\about.html:13
+msgid "Vote, bookmark, rate, and report content for moderation."
+msgstr "Vote, bookmark, rate, and report content for moderation."
+
+#: .\templates\core\home.html:10
+msgid "Community Feed | PersonaVerse"
+msgstr "Community Feed | PersonaVerse"
+
+#: .\templates\core\home.html:17 .\templates\engagement\bookmark_list.html:10
+#: .\templates\threads\thread_detail.html:9
+#: .\templates\threads\thread_list.html:53
+msgid "Person:"
+msgstr "Person:"
+
+#: .\templates\core\home.html:20 .\templates\people\person_detail.html:34
+#: .\templates\threads\thread_detail.html:10
+#: .\templates\threads\thread_list.html:54
+#, python-format
+msgid "By %(username)s"
+msgstr "By %(username)s"
+
+#: .\templates\core\home.html:21 .\templates\people\person_detail.html:35
+#: .\templates\threads\thread_list.html:55
+#, python-format
+msgid "Score %(score)s"
+msgstr "Score %(score)s"
+
+#: .\templates\core\home.html:22 .\templates\threads\thread_list.html:56
+#, python-format
+msgid "%(count)s comments"
+msgstr "%(count)s comments"
+
+#: .\templates\core\home.html:25
+msgid "Read Discussion"
+msgstr "Read Discussion"
+
+#: .\templates\core\home.html:27
+msgid "Start New Thread"
+msgstr "Start New Thread"
+
+#: .\templates\core\home.html:29
+msgid "Login to Post"
+msgstr "Login to Post"
+
+#: .\templates\core\home.html:34
+msgid "Feed ordering"
+msgstr "Feed ordering"
+
+#: .\templates\core\home.html:35 .\templates\threads\thread_list.html:27
+msgid "Hot"
+msgstr "Hot"
+
+#: .\templates\core\home.html:36 .\templates\threads\thread_list.html:28
+msgid "New"
+msgstr "New"
+
+#: .\templates\core\home.html:37 .\templates\threads\thread_list.html:29
+msgid "Top"
+msgstr "Top"
+
+#: .\templates\core\home.html:42
+msgid "Trending Discussions"
+msgstr "Trending Discussions"
+
+#: .\templates\core\home.html:49
+#, python-format
+msgid "Score %(score)s | %(count)s comments"
+msgstr "Score %(score)s | %(count)s comments"
+
+#: .\templates\core\home.html:53
+msgid "No additional discussions yet. Create one and set the tone."
+msgstr "No additional discussions yet. Create one and set the tone."
+
+#: .\templates\core\home.html:59
+msgid "Latest Posts"
+msgstr "Latest Posts"
+
+#: .\templates\core\home.html:64
+#, python-format
+msgid "%(created)s | %(username)s"
+msgstr "%(created)s | %(username)s"
+
+#: .\templates\core\home.html:67
+msgid "No latest posts yet."
+msgstr "No latest posts yet."
+
+#: .\templates\core\home.html:75
+msgid "No discussions yet"
+msgstr "No discussions yet"
+
+#: .\templates\core\home.html:76
+msgid ""
+"PersonaVerse is ready. Publish the first thread to start the community "
+"timeline."
+msgstr ""
+"PersonaVerse is ready. Publish the first thread to start the community "
+"timeline."
+
+#: .\templates\core\home.html:79
+msgid "Start First Thread"
+msgstr "Start First Thread"
+
+#: .\templates\core\home.html:81
+msgid "Login to Start"
+msgstr "Login to Start"
+
+#: .\templates\core\home.html:90
+msgid "People Spotlight"
+msgstr "People Spotlight"
+
+#: .\templates\core\home.html:102 .\templates\people\person_detail.html:15
+#: .\templates\people\person_list.html:27
+msgid "Verified"
+msgstr "Verified"
+
+#: .\templates\core\home.html:104
+#, python-format
+msgid "%(count)s active discussions"
+msgstr "%(count)s active discussions"
+
+#: .\templates\core\home.html:108
+msgid "No spotlight personalities yet."
+msgstr "No spotlight personalities yet."
+
+#: .\templates\core\home.html:114
+msgid "Community At A Glance"
+msgstr "Community At A Glance"
+
+#: .\templates\core\home.html:118
+msgid "Published Threads"
+msgstr "Published Threads"
+
+#: .\templates\core\home.html:122
+msgid "Published Comments"
+msgstr "Published Comments"
+
+#: .\templates\core\home.html:126
+msgid "Tracked Personalities"
+msgstr "Tracked Personalities"
+
+#: .\templates\dashboard\panel.html:7
+msgid "Admin Dashboard"
+msgstr "Admin Dashboard"
+
+#: .\templates\dashboard\panel.html:9
+msgid "Total Threads"
+msgstr "Total Threads"
+
+#: .\templates\dashboard\panel.html:10
+msgid "Total Comments"
+msgstr "Total Comments"
+
+#: .\templates\dashboard\panel.html:11
+msgid "Total People"
+msgstr "Total People"
+
+#: .\templates\dashboard\panel.html:16
+msgid "Top People by Threads"
+msgstr "Top People by Threads"
+
+#: .\templates\dashboard\panel.html:21
+msgid "No data."
+msgstr "No data."
+
+#: .\templates\engagement\bookmark_list.html:6
+msgid "My Bookmarks"
+msgstr "My Bookmarks"
+
+#: .\templates\engagement\bookmark_list.html:11
+#, python-format
+msgid "Saved %(created)s"
+msgstr "Saved %(created)s"
+
+#: .\templates\engagement\bookmark_list.html:14
+msgid "You have no bookmarks yet."
+msgstr "You have no bookmarks yet."
+
+#: .\templates\includes\breadcrumbs.html:3
+msgid "Breadcrumbs"
+msgstr "Breadcrumbs"
+
+#: .\templates\includes\pagination.html:6
+msgid "Prev"
+msgstr "Prev"
+
+#: .\templates\includes\pagination.html:8
+#, python-format
+msgid "Page %(number)s / %(total)s"
+msgstr "Page %(number)s / %(total)s"
+
+#: .\templates\includes\pagination.html:10
+msgid "Next"
+msgstr "Next"
+
+#: .\templates\moderation\panel.html:7
+msgid "Moderation Queue"
+msgstr "Moderation Queue"
+
+#: .\templates\moderation\panel.html:11
+msgid "reason:"
+msgstr "reason:"
+
+#: .\templates\moderation\panel.html:12
+#, python-format
+msgid "reported by %(username)s at %(created)s"
+msgstr "reported by %(username)s at %(created)s"
+
+#: .\templates\moderation\panel.html:16
+msgid "Hide"
+msgstr "Hide"
+
+#: .\templates\moderation\panel.html:17
+#: .\templates\threads\thread_form.html:10
+msgid "Publish"
+msgstr "Publish"
+
+#: .\templates\moderation\panel.html:18
+msgid "Dismiss"
+msgstr "Dismiss"
+
+#: .\templates\moderation\panel.html:23
+msgid "No open reports."
+msgstr "No open reports."
+
+#: .\templates\moderation\panel.html:29
+msgid "Recent Resolved"
+msgstr "Recent Resolved"
+
+#: .\templates\moderation\panel.html:34
+msgid "No resolved reports yet."
+msgstr "No resolved reports yet."
+
+#: .\templates\people\person_detail.html:22
+#: .\templates\people\person_list.html:32
+#: .\templates\search\search_page.html:30
+msgid "No bio yet."
+msgstr "No bio yet."
+
+#: .\templates\people\person_detail.html:25
+msgid "Start thread about this person"
+msgstr "Start thread about this person"
+
+#: .\templates\people\person_detail.html:40
+msgid "No discussions yet."
+msgstr "No discussions yet."
+
+#: .\templates\people\person_list.html:7
+msgid "People Directory"
+msgstr "People Directory"
+
+#: .\templates\people\person_list.html:10
+msgid "Search person"
+msgstr "Search person"
+
+#: .\templates\people\person_list.html:11
+msgid "Name"
+msgstr "Name"
+
+#: .\templates\people\person_list.html:37
+msgid "No people found."
+msgstr "No people found."
+
+#: .\templates\search\search_page.html:10
+msgid "Find people and threads"
+msgstr "Find people and threads"
+
+#: .\templates\search\search_page.html:11
+msgid "Type a person or discussion title"
+msgstr "Type a person or discussion title"
+
+#: .\templates\search\search_page.html:34
+msgid "No matching people."
+msgstr "No matching people."
+
+#: .\templates\search\search_page.html:45
+#, python-format
+msgid "About %(person)s by %(username)s"
+msgstr "About %(person)s by %(username)s"
+
+#: .\templates\search\search_page.html:49
+msgid "No matching threads."
+msgstr "No matching threads."
+
+#: .\templates\threads\thread_detail.html:11
+msgid "Score"
+msgstr "Score"
+
+#: .\templates\threads\thread_detail.html:14
+msgid "Average rating:"
+msgstr "Average rating:"
+
+#: .\templates\threads\thread_detail.html:21
+msgid "Upvote"
+msgstr "Upvote"
+
+#: .\templates\threads\thread_detail.html:22
+msgid "Downvote"
+msgstr "Downvote"
+
+#: .\templates\threads\thread_detail.html:28
+#: .\templates\threads\thread_detail.html:32
+msgid "Bookmarked"
+msgstr "Bookmarked"
+
+#: .\templates\threads\thread_detail.html:37
+msgid "Your rating"
+msgstr "Your rating"
+
+#: .\templates\threads\thread_detail.html:44
+msgid "Save rating"
+msgstr "Save rating"
+
+#: .\templates\threads\thread_detail.html:53
+#: .\templates\threads\thread_detail.html:79
+msgid "Report reason"
+msgstr "Report reason"
+
+#: .\templates\threads\thread_detail.html:54
+msgid "Reason"
+msgstr "Reason"
+
+#: .\templates\threads\thread_detail.html:56
+msgid "Report thread"
+msgstr "Report thread"
+
+#: .\templates\threads\thread_detail.html:62
+msgid "Comments"
+msgstr "Comments"
+
+#: .\templates\threads\thread_detail.html:65
+#, python-format
+msgid "score %(score)s"
+msgstr "score %(score)s"
+
+#: .\templates\threads\thread_detail.html:81
+msgid "Report comment"
+msgstr "Report comment"
+
+#: .\templates\threads\thread_detail.html:92
+msgid "No comments yet."
+msgstr "No comments yet."
+
+#: .\templates\threads\thread_detail.html:98
+msgid "Add comment"
+msgstr "Add comment"
+
+#: .\templates\threads\thread_detail.html:102
+msgid "Post comment"
+msgstr "Post comment"
+
+#: .\templates\threads\thread_form.html:3
+#: .\templates\threads\thread_form.html:6
+#: .\templates\threads\thread_list.html:43
+msgid "Create Thread"
+msgstr "Create Thread"
+
+#: .\templates\threads\thread_list.html:8
+msgid "Editorial feed of discussions"
+msgstr "Editorial feed of discussions"
+
+#: .\templates\threads\thread_list.html:13
+msgid "Title or text"
+msgstr "Title or text"
+
+#: .\templates\threads\thread_list.html:18
+msgid "All"
+msgstr "All"
+
+#: .\templates\threads\thread_list.html:25
+msgid "Ordering"
+msgstr "Ordering"
+
+#: .\templates\threads\thread_list.html:33
+msgid "Created after"
+msgstr "Created after"
+
+#: .\templates\threads\thread_list.html:37
+msgid "Min score"
+msgstr "Min score"
+
+#: .\templates\threads\thread_list.html:42
+msgid "Apply"
+msgstr "Apply"
+
+#: .\templates\threads\thread_list.html:61
+msgid "No threads found."
+msgstr "No threads found."
+
+#: .\threads\forms.py:13
+msgid "Title"
+msgstr "Title"
+
+#: .\threads\forms.py:14
+msgid "Body"
+msgstr "Body"
+
+#: .\threads\views.py:126
+msgid "Thread created."
+msgstr "Thread created."
+
+#: .\threads\views.py:146
+msgid "Comment posted."
+msgstr "Comment posted."
+
+#: .\threads\views.py:148
+msgid "Comment is invalid."
+msgstr "Comment is invalid."

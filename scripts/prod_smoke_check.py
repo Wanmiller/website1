@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Simple production smoke-check for CineVerse.
+"""Simple production smoke-check for PersonaVerse.
 
 Usage:
   python scripts/prod_smoke_check.py --base-url https://example.com \
@@ -28,19 +28,20 @@ class CheckResult:
     detail: str
 
 
-def fetch(url: str, timeout: int = 20) -> tuple[int, bytes, str]:
-    req = Request(url, headers={"User-Agent": "CineVerseSmoke/1.0"})
+def fetch(url: str, timeout: int = 20) -> tuple[int, bytes, str, str]:
+    req = Request(url, headers={"User-Agent": "PersonaVerseSmoke/1.0"})
     with urlopen(req, timeout=timeout) as response:  # nosec B310
         code = response.getcode()
         body = response.read()
         content_type = response.headers.get("Content-Type", "")
-        return code, body, content_type
+        final_url = response.geturl()
+        return code, body, content_type, final_url
 
 
 def check_url(name: str, base_url: str, path: str) -> CheckResult:
     url = urljoin(base_url.rstrip("/") + "/", path.lstrip("/"))
     try:
-        code, _, _ = fetch(url)
+        code, _, _, _ = fetch(url)
         ok = 200 <= code < 400
         return CheckResult(name=name, url=url, ok=ok, detail=f"HTTP {code}")
     except HTTPError as exc:
@@ -59,7 +60,7 @@ def check_json(name: str, base_url: str, path: str) -> CheckResult:
         return result
 
     try:
-        code, body, content_type = fetch(result.url)
+        code, body, content_type, _ = fetch(result.url)
         if "json" not in content_type.lower():
             return CheckResult(
                 name=name,
@@ -88,15 +89,13 @@ def check_http_redirect(http_url: str | None) -> CheckResult:
         )
 
     try:
-        code, _, _ = fetch(http_url)
-        # If request followed redirect automatically, final code is typically 200.
-        # We still treat it as pass and ask user to verify browser lock icon manually.
-        ok = 200 <= code < 400
+        code, _, _, final_url = fetch(http_url)
+        ok = final_url.startswith("https://")
         return CheckResult(
             name="HTTP -> HTTPS redirect",
             url=http_url,
             ok=ok,
-            detail=f"HTTP {code} (verify final URL is HTTPS)",
+            detail=f"HTTP {code}, final URL: {final_url}",
         )
     except HTTPError as exc:
         return CheckResult(
@@ -130,15 +129,16 @@ def render_markdown(base_url: str, results: List[CheckResult]) -> str:
         "|---|---|---|---|",
     ]
 
-    for r in results:
-        status = "PASS" if r.ok else "FAIL"
-        lines.append(f"| {r.name} | `{r.url}` | {status} | {r.detail} |")
+    for result in results:
+        status = "PASS" if result.ok else "FAIL"
+        lines.append(f"| {result.name} | `{result.url}` | {status} | {result.detail} |")
 
     lines += [
         "",
         "## Manual checks still required",
         "- Login/logout/register/password reset flow",
-        "- Staff-only write access (`POST /api/v1/movies/`)",
+        "- Anonymous/user/staff permission matrix",
+        "- Bookmark + rating flows",
         "- Media upload/open",
         "- SSL certificate lock icon in browser",
     ]
@@ -147,7 +147,7 @@ def render_markdown(base_url: str, results: List[CheckResult]) -> str:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run production smoke checks for CineVerse")
+    parser = argparse.ArgumentParser(description="Run production smoke checks for PersonaVerse")
     parser.add_argument(
         "--base-url", required=True, help="HTTPS base URL, e.g. https://example.com"
     )
@@ -163,25 +163,27 @@ def main() -> int:
 
     checks: List[CheckResult] = [
         check_url("Home page", base_url, "/"),
-        check_url("Movies list", base_url, "/movies/"),
+        check_url("Threads list", base_url, "/threads/"),
+        check_url("People list", base_url, "/people/"),
+        check_url("Search page", base_url, "/search/"),
         check_url("About page", base_url, "/about/"),
-        check_json("API movies", base_url, "/api/v1/movies/"),
-        check_json("API search", base_url, "/api/v1/search/?q=test"),
-        check_url("Static CSS", base_url, "/static/css/cineverse-forty.css"),
+        check_json("API threads", base_url, "/api/v1/threads/"),
+        check_json("API persons", base_url, "/api/v1/persons/?q=test"),
+        check_url("Static CSS", base_url, "/static/css/personaverse-zerofour.css"),
         check_http_redirect(args.http_url.strip() or None),
     ]
 
     report = render_markdown(base_url.rstrip("/"), checks)
-    with open(args.output, "w", encoding="utf-8") as f:
-        f.write(report)
+    with open(args.output, "w", encoding="utf-8") as file:
+        file.write(report)
 
     print(f"Saved smoke report to: {args.output}")
 
-    failed = [c for c in checks if not c.ok]
+    failed = [check for check in checks if not check.ok]
     if failed:
         print("Some checks failed:")
-        for c in failed:
-            print(f"- {c.name}: {c.detail}")
+        for check in failed:
+            print(f"- {check.name}: {check.detail}")
         return 1
 
     print("All automated checks passed.")

@@ -1,19 +1,27 @@
 {% extends 'base.html' %}
-{% block title %}Dashboard | CineVerse{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Dashboard" %} | PersonaVerse{% endblock %}
 {% block content %}
-<div class="cv-section">
-  <header class="style1"><h2>Dashboard</h2></header>
-  <div class="cv-grid">
-    <div class="box"><h3>Total Movies</h3><p>{{ movies_total }}</p></div>
-    <div class="box"><h3>Total Reviews</h3><p>{{ reviews_total }}</p></div>
-  </div>
-  <h3>Top Genres</h3>
-  <ul>
-    {% for g in top_genres %}
-      <li>{{ g.genres__name|default:'No Genre' }} - {{ g.total }}</li>
-    {% empty %}
-      <li>No data.</li>
-    {% endfor %}
-  </ul>
+<div class="pv-nx-page">
+  {% include 'includes/breadcrumbs.html' with items=breadcrumb_items %}
+  <section class="cv-section box">
+    <header class="style1"><h2>{% trans "Admin Dashboard" %}</h2></header>
+    <div class="pv-nx-dashboard-grid">
+      <article class="box pv-nx-status-card"><h3>{% trans "Total Threads" %}</h3><p>{{ threads_total }}</p></article>
+      <article class="box pv-nx-status-card"><h3>{% trans "Total Comments" %}</h3><p>{{ comments_total }}</p></article>
+      <article class="box pv-nx-status-card"><h3>{% trans "Total People" %}</h3><p>{{ people_total }}</p></article>
+    </div>
+  </section>
+
+  <section class="cv-section box article-list">
+    <header class="style1"><h3>{% trans "Top People by Threads" %}</h3></header>
+    <ul>
+      {% for item in top_people %}
+        <li>{{ item.person__full_name }} - {{ item.total }}</li>
+      {% empty %}
+        <li>{% trans "No data." %}</li>
+      {% endfor %}
+    </ul>
+  </section>
 </div>
 {% endblock %}
